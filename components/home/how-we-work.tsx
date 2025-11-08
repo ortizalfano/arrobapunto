@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lightbulb, Code2, Rocket } from "lucide-react";
 import { fadeUp, scaleIn, stagger } from "@/lib/motion";
 

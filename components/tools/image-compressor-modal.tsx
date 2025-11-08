@@ -62,7 +62,7 @@ export function ImageCompressorModal({ open, onClose }: ImageCompressorModalProp
   const locale = useLocale();
   const isEnglish = locale === "en";
   const [preset, setPreset] = useState<QualityPresetId>("medium");
-  const [quality, setQuality] = useState(
+  const [quality, setQuality] = useState<number>(
     QUALITY_PRESETS.find((item) => item.id === "medium")?.quality ?? 55
   );
   const [format, setFormat] = useState<ImageFormat>("image/jpeg");

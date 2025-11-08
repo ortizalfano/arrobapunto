@@ -36,7 +36,7 @@ export function Analytics() {
 
 declare global {
   interface Window {
-    plausible?: (event: string, props?: Record<string, any>) => void;
+    plausible?: (event: string, props?: Record<string, unknown>) => void;
   }
 }
 

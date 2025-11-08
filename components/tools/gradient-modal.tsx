@@ -243,7 +243,7 @@ border: ${glass.border}px solid rgba(255,255,255,0.3);`;
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label className="text-white/80">{copy.stopsLabel}</Label>
-                  <Button size="xs" variant="outline" className="border-white/20 text-white" onClick={addStop}>
+                  <Button size="sm" variant="outline" className="border-white/20 text-white" onClick={addStop}>
                     {copy.addStop}
                   </Button>
                 </div>

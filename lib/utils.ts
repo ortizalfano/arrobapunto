@@ -6,7 +6,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatCurrency(amount: number, locale: string = "es-ES"): string {
-  const currency = locale === "es" ? "EUR" : "USD";
   const symbol = locale === "es" ? "€" : "$";
   return `${symbol}${amount.toLocaleString(locale)}`;
 }

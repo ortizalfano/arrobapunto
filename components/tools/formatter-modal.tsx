@@ -22,7 +22,6 @@ export function FormatterModal({ open, onClose }: FormatterModalProps) {
   const isEnglish = locale === "en";
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [language] = useState<FormatterLanguage>("auto");
   const [useMinify, setUseMinify] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);

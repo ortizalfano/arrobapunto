@@ -63,8 +63,6 @@ export async function POST(request: NextRequest) {
 
       // Procesar con Sharp
       let processed;
-      const metadata = await sharp(buffer).metadata();
-
       if (targetFormat === "jpeg" || targetFormat === "jpg") {
         processed = await sharp(buffer).rotate().jpeg({ quality }).toBuffer();
       } else if (targetFormat === "png") {
@@ -98,9 +96,13 @@ export async function POST(request: NextRequest) {
         zip.file(names[index], image);
       });
 
-      const zipBuffer = await zip.generateAsync({ type: "nodebuffer" });
+      const zipData = await zip.generateAsync({ type: "uint8array" });
+      const zipArrayBuffer = zipData.buffer.slice(
+        zipData.byteOffset,
+        zipData.byteOffset + zipData.byteLength
+      ) as ArrayBuffer;
 
-      return new NextResponse(zipBuffer, {
+      return new Response(zipArrayBuffer, {
         headers: {
           "Content-Type": "application/zip",
           "Content-Disposition": 'attachment; filename="images.zip"',
@@ -110,7 +112,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Si es un solo archivo, devolverlo directo
-    return new NextResponse(processedImages[0], {
+    const singleBuffer = processedImages[0];
+    const singleArrayBuffer = singleBuffer.buffer.slice(
+      singleBuffer.byteOffset,
+      singleBuffer.byteOffset + singleBuffer.byteLength
+    ) as ArrayBuffer;
+
+    return new Response(singleArrayBuffer, {
       headers: {
         "Content-Type": `image/${targetFormat}`,
         "Content-Disposition": `attachment; filename="${names[0]}"`,

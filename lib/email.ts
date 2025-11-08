@@ -27,7 +27,7 @@ function ensureConfig(template: TemplateKey) {
   return { serviceId: SERVICE_ID, publicKey: PUBLIC_KEY, templateId };
 }
 
-export async function sendEmail(template: TemplateKey, variables: Record<string, any>) {
+export async function sendEmail(template: TemplateKey, variables: Record<string, unknown>) {
   const { serviceId, publicKey, templateId } = ensureConfig(template);
 
   return emailjs.send(serviceId, templateId, variables, {

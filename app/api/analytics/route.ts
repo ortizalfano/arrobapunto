@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const dataDir = path.join(process.cwd(), "data");
     const eventsPath = path.join(dataDir, "events.log");

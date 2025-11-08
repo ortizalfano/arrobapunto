@@ -25,7 +25,11 @@ export function BriefExpress() {
   const isEnglish = locale === 'en';
   const { open } = useContactModal();
 
-  const sectorOptions = isEnglish
+  type SectorValue = BriefFormData["sector"];
+  type PriorityValue = BriefFormData["priority"];
+  type TimelineValue = BriefFormData["timeline"];
+
+  const sectorOptions: Array<{ value: SectorValue; label: string }> = isEnglish
     ? [
         { value: "tech", label: "Tech / SaaS" },
         { value: "retail", label: "Retail / E-commerce" },
@@ -41,7 +45,7 @@ export function BriefExpress() {
         { value: "other", label: "Otro" },
       ];
 
-  const timelineOptions = isEnglish
+  const timelineOptions: Array<{ value: TimelineValue; label: string }> = isEnglish
     ? [
         { value: "urgent", label: "Urgent (< 1 month)" },
         { value: "1-3months", label: "1-3 months" },
@@ -55,7 +59,7 @@ export function BriefExpress() {
         { value: "flexible", label: "Flexible" },
       ];
 
-  const priorityOptions = isEnglish
+  const priorityOptions: Array<{ value: PriorityValue; label: string; desc: string }> = isEnglish
     ? [
         { value: "brand", label: "Marketing website", desc: "Showcase your business and generate leads" },
         { value: "web", label: "Online store", desc: "Sell products and manage orders" },
@@ -213,7 +217,7 @@ export function BriefExpress() {
                     key={opt.value}
                   type="button"
                   onClick={() => {
-                      setValue("sector", opt.value as any, { shouldValidate: true });
+                      setValue("sector", opt.value, { shouldValidate: true });
                       setTimeout(nextStep, 300);
                   }}
                   className={cn(
@@ -241,7 +245,7 @@ export function BriefExpress() {
                     key={opt.value}
                     type="button"
                     onClick={() => {
-                      setValue("priority", opt.value as any, { shouldValidate: true });
+                      setValue("priority", opt.value, { shouldValidate: true });
                       setTimeout(nextStep, 300);
                     }}
                     className={cn(
@@ -270,7 +274,7 @@ export function BriefExpress() {
                     key={opt.value}
                     type="button"
                     onClick={() => {
-                      setValue("timeline", opt.value as any, { shouldValidate: true });
+                      setValue("timeline", opt.value, { shouldValidate: true });
                       setTimeout(nextStep, 300);
                     }}
                     className={cn(

@@ -181,7 +181,7 @@ export default async function WorkPage({
       <section className="py-8 sm:py-12 pattern-dots">
         <div className="container max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
+            {projects.map((project) => (
               <div key={project.id}>
                 <Card className="h-full group overflow-hidden border-accent/10">
                   {/* Image placeholder with gradient */}

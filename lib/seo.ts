@@ -1,4 +1,4 @@
-import { locales, defaultLocale } from "./locales";
+import { locales } from "./locales";
 
 const FALLBACK_SITE_URL = "https://arrobapunto.com";
 

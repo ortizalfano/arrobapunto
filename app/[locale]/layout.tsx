@@ -1,6 +1,6 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { locales } from "@/lib/locales";
+import { locales, type Locale } from "@/lib/locales";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ContactModalProvider } from "@/components/contact/contact-modal-provider";
@@ -13,9 +13,10 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  
-  // Validate locale
-  if (!locales.includes(locale as any)) {
+
+  const isLocale = (value: string): value is Locale => locales.includes(value as Locale);
+
+  if (!isLocale(locale)) {
     return null;
   }
 

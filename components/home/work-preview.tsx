@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink, TrendingUp, Zap, TrendingDown, Eye } from "lucide-react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { fadeUp, stagger, scaleIn } from "@/lib/motion";
 

@@ -1,6 +1,6 @@
 // Analytics event tracking
 
-export function trackEvent(eventName: string, props?: Record<string, any>) {
+export function trackEvent(eventName: string, props?: Record<string, unknown>) {
   if (typeof window === "undefined") return;
   
   // Plausible
@@ -24,7 +24,7 @@ export function trackEvent(eventName: string, props?: Record<string, any>) {
         body: JSON.stringify(logEntry),
       }).catch(console.error);
     }
-  } catch (error) {
+  } catch {
     // Silent fail
   }
 }

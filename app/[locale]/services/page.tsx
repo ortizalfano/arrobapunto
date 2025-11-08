@@ -172,7 +172,7 @@ export default async function ServicesPage({
       <section className="py-8 sm:py-12 bg-[#0D1217]">
         <div className="container max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {services.map((service, index) => {
+            {services.map((service) => {
               const Icon = service.icon;
               return (
                 <div key={service.title}>

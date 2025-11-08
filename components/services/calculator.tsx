@@ -126,7 +126,7 @@ const customMin = { price: 2500, weeks: 2 };
 export function Calculator() {
   const [currentStep, setCurrentStep] = useState(0);
   const [state, setState] = useState<CalculatorState>({});
-  const { openContact } = useContactModal();
+  const { open } = useContactModal();
   const [shareForm, setShareForm] = useState({ name: "", email: "" });
   const [shareStatus, setShareStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const pathname = usePathname();
@@ -318,7 +318,7 @@ export function Calculator() {
           )}
 
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button className="flex-1" onClick={() => openContact()}>
+            <Button className="flex-1" onClick={() => open()}>
               Solicitar presupuesto exacto
             </Button>
             <Button variant="ghost" className="flex-1" onClick={reset}>
@@ -377,7 +377,7 @@ export function Calculator() {
             <Button
               variant="outline"
               className="w-full border-accent2/40 text-accent2 hover:bg-accent2/10"
-              onClick={() => openContact()}
+              onClick={() => open()}
             >
               Tengo un presupuesto ajustado
             </Button>

@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { fadeUp, scaleIn } from "@/lib/motion";
+import { scaleIn } from "@/lib/motion";
 
 export function BriefExpress() {
   const pathname = usePathname();

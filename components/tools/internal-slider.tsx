@@ -1,10 +1,12 @@
 "use client";
 
-import type * as React from "react";
+import type { InputHTMLAttributes } from "react";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
-export interface SliderProps extends React.InputHTMLAttributes<HTMLInputElement> {
+type SliderPrimitiveProps = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "defaultValue" | "onChange">;
+
+export interface SliderProps extends SliderPrimitiveProps {
   value: number[];
   min?: number;
   max?: number;

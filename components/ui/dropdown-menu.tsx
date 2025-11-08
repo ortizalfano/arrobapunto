@@ -9,7 +9,7 @@ export function DropdownMenu({ children }: DropdownMenuProps) {
   return <div className="relative">{children}</div>;
 }
 
-export interface DropdownMenuContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+type DropdownMenuContentProps = React.HTMLAttributes<HTMLDivElement>;
 
 export function DropdownMenuContent({ className, children, ...props }: DropdownMenuContentProps) {
   return (
@@ -25,7 +25,7 @@ export function DropdownMenuContent({ className, children, ...props }: DropdownM
   );
 }
 
-export interface DropdownMenuItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+type DropdownMenuItemProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function DropdownMenuItem({ className, ...props }: DropdownMenuItemProps) {
   return (

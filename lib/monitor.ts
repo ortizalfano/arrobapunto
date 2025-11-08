@@ -19,7 +19,6 @@ async function runLighthouseAudit(url: string): Promise<LighthouseMetrics> {
   try {
     console.log(`🔍 Running Lighthouse audit for ${url}...`);
     
-    const chromePath = process.env.CHROME_PATH || "google-chrome-stable";
     const output = execSync(
       `lighthouse ${url} --output=json --chrome-flags="--headless" --quiet`,
       { encoding: "utf-8" }

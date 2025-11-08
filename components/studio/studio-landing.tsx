@@ -197,7 +197,9 @@ export function StudioLanding({ locale }: { locale: string }) {
                   un sitio web debe ser tanto una obra de arte visual como una máquina de conversión perfectamente optimizada.
                 </p>
                 <p>Trabajamos con proyectos selectos, dando a cada uno el tiempo y atención que merece.</p>
-                <p className="text-accent2 text-sm mt-6">"El diseño no es lo que ves, es lo que sientes."</p>
+                <p className="text-accent2 text-sm mt-6">
+                  &ldquo;El diseño no es lo que ves, es lo que sientes.&rdquo;
+                </p>
               </div>
             </CardContent>
           </Card>

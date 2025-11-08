@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, AlertCircle, CheckCircle2, TrendingUp } from "lucide-react";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 
 interface Metrics {
   performance: number;
@@ -15,7 +15,7 @@ interface Metrics {
 
 interface Event {
   event: string;
-  props?: Record<string, any>;
+  props?: Record<string, unknown>;
   timestamp: string;
 }
 
@@ -41,7 +41,7 @@ export default function DashboardPage() {
       const dashboardData = await res.json();
       setData(dashboardData);
       setError("");
-    } catch (err) {
+    } catch {
       setError("Failed to load dashboard");
     }
   };
@@ -77,12 +77,12 @@ export default function DashboardPage() {
   }
 
   const metrics = data.metrics;
-  const metricsStatus = metrics ? (
-    metrics.performance >= 95 &&
-    metrics.accessibility >= 95 &&
-    metrics["best-practices"] >= 95 &&
-    metrics.seo >= 95
-  ) : null;
+  const metricsStatus = metrics
+    ? metrics.performance >= 95 &&
+      metrics.accessibility >= 95 &&
+      metrics["best-practices"] >= 95 &&
+      metrics.seo >= 95
+    : null;
 
   return (
     <div className="min-h-screen bg-bg py-12 px-4">
