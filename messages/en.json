@@ -1,0 +1,19 @@
+{
+  "Home": {
+    "title": "Premium Web Design and Development Agency",
+    "description": "Websites that sell. Boutique design with world-class performance.",
+    "cta1": "Calculate project",
+    "cta2": "Contact us"
+  },
+  "Navigation": {
+    "work": "Work",
+    "services": "Services",
+    "calculator": "Calculator",
+    "plugins": "Plugins",
+    "studio": "Studio",
+    "blog": "Blog",
+    "contact": "Contact",
+    "play": "Play",
+    "tools": "Tools"
+  }
+}

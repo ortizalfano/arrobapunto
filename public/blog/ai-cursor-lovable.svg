@@ -1,0 +1,39 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="1280" y2="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A101A" />
+      <stop offset="50%" stop-color="#12324F" />
+      <stop offset="100%" stop-color="#7FB1FF" />
+    </linearGradient>
+    <radialGradient id="glowLeft" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(320 520) scale(360)">
+      <stop stop-color="#88D7FF" stop-opacity="0.6" />
+      <stop offset="1" stop-color="#0A101A" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowRight" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(980 220) scale(420)">
+      <stop stop-color="#9F80FF" stop-opacity="0.6" />
+      <stop offset="1" stop-color="#0A101A" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" rx="48" fill="url(#gradient)" />
+  <rect width="1280" height="720" rx="48" fill="url(#glowLeft)" />
+  <rect width="1280" height="720" rx="48" fill="url(#glowRight)" />
+  <g opacity="0.25">
+    <rect x="260" y="220" width="320" height="220" rx="24" stroke="#88D7FF" stroke-width="4" />
+    <rect x="700" y="180" width="320" height="260" rx="24" stroke="#9F80FF" stroke-width="4" />
+    <path d="M420 460L720 520" stroke="#C5E4FF" stroke-width="6" stroke-linecap="round" stroke-dasharray="18 14" />
+  </g>
+  <rect x="320" y="240" width="220" height="160" rx="20" fill="#0E1928" stroke="#88D7FF" stroke-width="4" />
+  <rect x="760" y="220" width="220" height="180" rx="20" fill="#120F26" stroke="#B59BFF" stroke-width="4" />
+  <path d="M360 300H500" stroke="#88D7FF" stroke-width="8" stroke-linecap="round" />
+  <path d="M360 340H480" stroke="#88D7FF" stroke-width="6" stroke-linecap="round" />
+  <path d="M800 280H940" stroke="#B59BFF" stroke-width="8" stroke-linecap="round" />
+  <path d="M800 320H920" stroke="#B59BFF" stroke-width="6" stroke-linecap="round" />
+  <rect x="560" y="380" width="160" height="160" rx="24" fill="#102137" stroke="#C5E4FF" stroke-width="4" />
+  <path d="M600 440L680 520" stroke="#C5E4FF" stroke-width="6" stroke-linecap="round" />
+  <path d="M600 520L680 440" stroke="#C5E4FF" stroke-width="6" stroke-linecap="round" />
+  <circle cx="840" cy="440" r="78" fill="#121E31" stroke="#9F80FF" stroke-width="6" />
+  <path d="M840 394L866 440H814L840 486" stroke="#CBB6FF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="640" y="140" font-family="'Inter', 'Arial', sans-serif" font-weight="700" font-size="56" fill="#F5FAFF" text-anchor="middle">Cursor + Lovable + IA</text>
+  <text x="640" y="188" font-family="'Inter', 'Arial', sans-serif" font-weight="400" font-size="24" fill="#DDEBFF" text-anchor="middle">Automatiza pair programming y despliegues asistidos</text>
+</svg>
+

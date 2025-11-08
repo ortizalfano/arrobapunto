@@ -1,0 +1,30 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="1280" y2="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B1424" />
+      <stop offset="50%" stop-color="#1C355C" />
+      <stop offset="100%" stop-color="#6DDDD3" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(980 160) scale(420)">
+      <stop stop-color="#9BF5E8" stop-opacity="0.8" />
+      <stop offset="1" stop-color="#0B1424" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" rx="48" fill="url(#gradient)" />
+  <rect width="1280" height="720" rx="48" fill="url(#glow)" />
+  <g opacity="0.2">
+    <path d="M280 160L1000 160" stroke="#9BF5E8" stroke-width="2" stroke-dasharray="12 12" />
+    <path d="M240 280L960 280" stroke="#E8DCC7" stroke-width="2" stroke-dasharray="10 10" />
+    <path d="M220 400L940 400" stroke="#B7A57A" stroke-width="2" stroke-dasharray="8 8" />
+  </g>
+  <circle cx="360" cy="260" r="120" fill="#111D33" stroke="#6DDDD3" stroke-width="6" />
+  <path d="M320 260C320 232.386 342.386 210 370 210H390C417.614 210 440 232.386 440 260C440 287.614 417.614 310 390 310H370C342.386 310 320 287.614 320 260Z" fill="#182B47" />
+  <path d="M350 260C350 245.641 361.641 234 376 234H384C398.359 234 410 245.641 410 260C410 274.359 398.359 286 384 286H376C361.641 286 350 274.359 350 260Z" fill="#2B4A7A" />
+  <rect x="340" y="332" width="200" height="22" rx="11" fill="#0B1424" stroke="#6DDDD3" stroke-width="2" />
+  <circle cx="624" cy="520" r="160" fill="#111D33" stroke="#E8DCC7" stroke-width="6" />
+  <path d="M520 520H728" stroke="#9BF5E8" stroke-width="8" stroke-linecap="round" />
+  <path d="M624 416V624" stroke="#9BF5E8" stroke-width="8" stroke-linecap="round" />
+  <text x="640" y="140" font-family="'Inter', 'Arial', sans-serif" font-weight="700" font-size="64" fill="#F2F5FA" text-anchor="middle">IA + Desarrollo</text>
+  <text x="640" y="196" font-family="'Inter', 'Arial', sans-serif" font-weight="400" font-size="24" fill="#DDE5F2" text-anchor="middle">Automatiza, analiza y entrega mejor software</text>
+</svg>
+

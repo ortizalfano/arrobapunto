@@ -1,0 +1,19 @@
+{
+  "Home": {
+    "title": "Agencia de Diseño y Desarrollo Web Premium",
+    "description": "Webs que venden. Diseño boutique con rendimiento de clase mundial.",
+    "cta1": "Calcular proyecto",
+    "cta2": "Contactar"
+  },
+  "Navigation": {
+    "work": "Trabajos",
+    "services": "Servicios",
+    "calculator": "Calculadora",
+    "plugins": "Plugins",
+    "studio": "Estudio",
+    "blog": "Blog",
+    "contact": "Contacto",
+    "play": "Play",
+    "tools": "Herramientas"
+  }
+}
