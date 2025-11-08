@@ -62,14 +62,10 @@ arroba-new-web/
 │   ├── tools/                 # Componentes herramientas
 │   └── play/                  # Brief express
 ├── lib/
-│   ├── prisma.ts              # Client Prisma
 │   ├── utils.ts               # Utilidades
 │   ├── validations.ts         # Schemas Zod
-│   ├── rate-limit.ts          # Rate limiting
-│   └── seo.tsx                 # Schema.org
-├── prisma/
-│   ├── schema.prisma           # Schema DB
-│   └── seed.ts                # Seed data
+│   ├── seo.ts                 # utilidades SEO
+│   └── monitor.ts             # scripts de auditoría
 ├── public/
 │   ├── manifest.json           # PWA manifest
 │   └── icons/                  # Favicons y PWA icons
@@ -81,8 +77,7 @@ arroba-new-web/
 ## 🛠️ Instalación y Setup
 
 ### Requisitos Previos
-- Node.js 18+ 
-- PostgreSQL database (Neon, Railway, o local)
+- Node.js 18+
 
 ### Pasos de Instalación
 
@@ -96,11 +91,8 @@ npm install
 cp .env.example .env.local
 ```
 
-Edita `.env.local` con:
+Edita `.env.local` con (puedes omitir los bloques que no necesites):
 ```env
-# Database
-DATABASE_URL="postgresql://user:password@host:5432/dbname"
-
 # Analytics (opcional)
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN="arrobapunto.com"
 # o
@@ -110,31 +102,12 @@ NEXT_PUBLIC_UMAMI_WEBSITE_ID="your-id"
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 NEXT_PUBLIC_BASE_URL="https://arrobapunto.com"
 
-# SMTP (opcional - para emails internos)
-SMTP_HOST="smtp.example.com"
-SMTP_PORT="587"
-SMTP_USER="your-email"
-SMTP_PASS="your-password"
-BRIEF_INBOX="contacto@arrobapunto.com"
-
 # EmailJS (nuevo flujo de formularios)
 NEXT_PUBLIC_EMAILJS_SERVICE_ID="service_xxx"
 NEXT_PUBLIC_EMAILJS_PUBLIC_KEY="public_xxx"
 NEXT_PUBLIC_EMAILJS_TEMPLATE_CONTACT="template_contact"
 NEXT_PUBLIC_EMAILJS_TEMPLATE_BRIEF="template_brief"
 NEXT_PUBLIC_EMAILJS_TEMPLATE_CALCULATOR="template_calculator"
-```
-
-3. **Setup de base de datos**
-```bash
-# Generar Prisma client
-npm run postinstall
-
-# Ejecutar migraciones
-npm run db:migrate
-
-# (Opcional) Seed de datos
-npm run db:seed
 ```
 
 4. **Ejecutar en desarrollo**

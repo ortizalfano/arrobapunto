@@ -1,7 +1,6 @@
 import { execSync } from "child_process";
 import * as fs from "fs";
 import * as path from "path";
-import { sendBriefEmail } from "../lib/mailer.ts";
 
 const HIGH_CVE_THRESHOLD = 7;
 
@@ -43,34 +42,6 @@ function analyzeVulnerabilities(audit) {
   return highCVEs;
 }
 
-async function sendAlert(vulnerabilities) {
-  const inbox = process.env.BRIEF_INBOX;
-  if (!inbox) {
-    console.log("⚠️ BRIEF_INBOX not set, skipping email notification");
-    return;
-  }
-
-  const subject = "Security Alert: High CVE Detected";
-  const message = `Found ${vulnerabilities.length} high/critical vulnerabilities:\n\n${vulnerabilities.map(v => 
-    `- ${v.name}: ${v.severity}\n  ${v.title}`
-  ).join("\n")}`;
-
-  try {
-    await sendBriefEmail({
-      name: "Security Monitor",
-      email: "security@arrobapunto.com",
-      answers: {
-        subject,
-        message,
-      },
-      estimate: 0,
-    });
-    console.log("📧 Alert email sent");
-  } catch (error) {
-    console.error("❌ Failed to send alert:", error.message);
-  }
-}
-
 async function main() {
   console.log("🔒 Running security scan...\n");
 
@@ -92,8 +63,6 @@ async function main() {
         console.log(`    ${v.title}`);
         console.log(`    ${v.url}\n`);
       });
-
-      await sendAlert(vulnerabilities);
 
       console.log("💡 Run 'npm audit fix' to attempt automatic fixes");
       process.exit(1);

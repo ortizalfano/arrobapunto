@@ -1,7 +1,6 @@
 import { execSync } from "child_process";
 import * as fs from "fs";
 import * as path from "path";
-import { sendBriefEmail } from "./mailer";
 
 interface LighthouseMetrics {
   performance: number;
@@ -95,19 +94,6 @@ async function checkThresholds(metrics: LighthouseMetrics): Promise<boolean> {
     lowScores.forEach(score => console.warn(`  - ${score}`));
 
     // Send notification
-    const inbox = process.env.BRIEF_INBOX;
-    if (inbox) {
-      await sendBriefEmail({
-        name: "System Alert",
-        email: "monitor@arrobapunto.com",
-        answers: {
-          subject: "Lighthouse Metrics Alert",
-          message: `The following metrics are below ${THRESHOLD}:\n${lowScores.join("\n")}`,
-        },
-        estimate: 0,
-      }).catch(console.error);
-    }
-
     return false;
   }
 
