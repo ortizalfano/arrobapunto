@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 
 // Carga logos nombrados como /public/logos/logo1.png, logo2.png, ...
 const LOGO_COUNT = 6; // ajusta este número si añades más logos
@@ -12,10 +11,6 @@ const clients = Array.from({ length: LOGO_COUNT }, (_, i) => ({
 }));
 
 export function TrustBar() {
-  const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'es';
-  const isEnglish = locale === 'en';
-
   return (
     <section className="py-12 bg-white text-black">
       <div className="container px-4">
@@ -26,9 +21,9 @@ export function TrustBar() {
           transition={{ duration: 0.5 }}
           className="text-center text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-10"
         >
-          <span className="text-black">{isEnglish ? "Trusted " : "Confían "}</span>
+          <span className="text-black">Confían </span>
           <span className="bg-gradient-to-r from-accent via-accent2 to-accent bg-clip-text text-transparent">
-            {isEnglish ? "by leading teams" : "en nosotros"}
+            en nosotros
           </span>
         </motion.h2>
         <div className="flex flex-wrap items-center justify-center gap-12">

@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useContactModal } from "@/components/contact/contact-modal-provider";
 import { sendEmail, isEmailJsReady } from "@/lib/email";
-import { usePathname } from "next/navigation";
 
 type Option = {
   id: string;
@@ -19,28 +18,28 @@ type Option = {
 const projectOptions: Option[] = [
   {
     id: "marketing",
-    label: "Marketing website",
+    label: "Sitio de marketing",
     description: "Sitio informativo con foco en conversiones",
     price: 300,
     weeks: 1.5,
   },
   {
     id: "ecommerce",
-    label: "E-commerce store",
+    label: "Tienda en línea",
     description: "Catálogo, checkout y pasarela de pago",
     price: 500,
     weeks: 2,
   },
   {
     id: "mobile",
-    label: "Mobile app",
+    label: "Aplicación móvil",
     description: "Experiencia completa para iOS/Android",
     price: 1500,
     weeks: 4,
   },
   {
     id: "custom",
-    label: "Custom build",
+    label: "Desarrollo a medida",
     description: "Integraciones y lógica a medida",
     price: 700,
     weeks: 2,
@@ -129,9 +128,7 @@ export function Calculator() {
   const { open } = useContactModal();
   const [shareForm, setShareForm] = useState({ name: "", email: "" });
   const [shareStatus, setShareStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const pathname = usePathname();
-  const locale = pathname.split("/")[1] || "es";
-  const isEnglish = locale === "en";
+  const locale = "es";
 
   const progress = ((currentStep + 1) / steps.length) * 100;
 
@@ -219,13 +216,12 @@ export function Calculator() {
     setShareStatus("sending");
     try {
       await sendEmail("calculator", {
-        name: shareForm.name || (isEnglish ? "No name" : "Sin nombre"),
+        name: shareForm.name || "Sin nombre",
         email: shareForm.email,
-        selections: summarySelections || (isEnglish ? "No selections" : "Sin selecciones"),
+        selections: summarySelections || "Sin selecciones",
         total_price: totalPrice.toString(),
         total_weeks: totalWeeks.toString(),
-        project_type:
-          state.project?.label ?? state.project?.id ?? (isEnglish ? "No project type" : "Sin proyecto"),
+        project_type: state.project?.label ?? state.project?.id ?? "Sin proyecto",
         has_tight_budget: showTightBudget ? "true" : "false",
         locale,
       });
@@ -332,7 +328,7 @@ export function Calculator() {
               className="mt-4 grid gap-3 sm:grid-cols-[1fr_1fr_auto]"
             >
               <Input
-                placeholder={isEnglish ? "Your name" : "Tu nombre"}
+                placeholder="Tu nombre"
                 value={shareForm.name}
                 onChange={(event) =>
                   setShareForm((prev) => ({ ...prev, name: event.target.value }))
@@ -341,7 +337,7 @@ export function Calculator() {
               />
               <Input
                 type="email"
-                placeholder={isEnglish ? "you@email.com" : "tu@email.com"}
+                placeholder="tu@email.com"
                 value={shareForm.email}
                 onChange={(event) =>
                   setShareForm((prev) => ({ ...prev, email: event.target.value }))
@@ -354,20 +350,16 @@ export function Calculator() {
                 disabled={shareStatus === "sending"}
                 className="whitespace-nowrap bg-white/10 hover:bg-white/20 border border-white/10"
               >
-                {shareStatus === "sending"
-                  ? isEnglish ? "Sending..." : "Enviando..."
-                  : isEnglish ? "Send summary" : "Enviar resumen"}
+                {shareStatus === "sending" ? "Enviando..." : "Enviar resumen"}
               </Button>
               {shareStatus === "success" && (
                 <p className="sm:col-span-3 text-sm text-emerald-400">
-                  {isEnglish ? "Summary sent, check your inbox." : "Resumen enviado, revisa tu correo."}
+                  Resumen enviado, revisa tu correo.
                 </p>
               )}
               {shareStatus === "error" && (
                 <p className="sm:col-span-3 text-sm text-red-400">
-                  {isEnglish
-                    ? "We couldn't send the summary. Please try again."
-                    : "No pudimos enviar el resumen. Intenta de nuevo."}
+                  No pudimos enviar el resumen. Intenta de nuevo.
                 </p>
               )}
             </form>

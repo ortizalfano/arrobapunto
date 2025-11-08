@@ -2,7 +2,6 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useLocale } from "next-intl";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,10 +21,10 @@ type ContactModalProviderProps = {
 };
 
 const serviceOptions = [
-  { value: "web", labelEn: "Marketing website", labelEs: "Desarrollo web" },
-  { value: "ecommerce", labelEn: "E-commerce", labelEs: "E-commerce" },
-  { value: "custom", labelEn: "Custom development", labelEs: "Desarrollo personalizado" },
-  { value: "consulting", labelEn: "Strategy & consulting", labelEs: "Estrategia y consultoría" },
+  { value: "web", label: "Desarrollo web" },
+  { value: "ecommerce", label: "E-commerce" },
+  { value: "custom", label: "Desarrollo personalizado" },
+  { value: "consulting", label: "Estrategia y consultoría" },
 ];
 
 export function ContactModalProvider({ children }: ContactModalProviderProps) {
@@ -58,8 +57,7 @@ type ContactModalProps = {
 };
 
 function ContactModal({ isOpen, onClose }: ContactModalProps) {
-  const locale = useLocale();
-  const isEnglish = locale === "en";
+  const locale = "es";
   const [service, setService] = useState<string>(serviceOptions[0]?.value ?? "web");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasBudget, setHasBudget] = useState(false);
@@ -85,7 +83,7 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
       const payload = {
         name: String(formData.get("name") ?? ""),
         email: String(formData.get("email") ?? ""),
-        service: isEnglish ? selectedService?.labelEn ?? service : selectedService?.labelEs ?? service,
+        service: selectedService?.label ?? service,
         message: String(formData.get("message") ?? ""),
         hasBudget: hasBudget ? "Sí" : "No",
         budgetRange: hasBudget ? String(formData.get("budgetRange") ?? "") : "Sin presupuesto definido",
@@ -112,10 +110,10 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
         setIsSubmitting(false);
       }
     },
-    [hasBudget, isEnglish, locale, onClose, service]
+    [hasBudget, locale, onClose, service]
   );
 
-  const serviceLabel = useMemo(() => (isEnglish ? "Which service are you interested in?" : "¿Qué servicio te interesa?"), [isEnglish]);
+  const serviceLabel = useMemo(() => "¿Qué servicio te interesa?", []);
 
   return (
     <AnimatePresence>
@@ -136,14 +134,14 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
             onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-label={isEnglish ? "Contact form" : "Formulario de contacto"}
+            aria-label="Formulario de contacto"
           >
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-white/5 via-transparent to-white/5" />
             <button
               type="button"
               onClick={onClose}
               className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white/70 transition hover:bg-white/20 hover:text-white"
-              aria-label={isEnglish ? "Close" : "Cerrar"}
+              aria-label="Cerrar"
             >
               <X className="h-5 w-5" />
             </button>
@@ -151,15 +149,13 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
             <div className="relative p-8 space-y-6">
               <header className="text-center space-y-2">
                 <p className="inline-flex items-center gap-2 px-3 py-1 text-xs uppercase tracking-wider rounded-full border border-white/10 text-white/60">
-                  {isEnglish ? "Let's build together" : "Construyamos juntos"}
+                  Construyamos juntos
                 </p>
                 <h2 className="text-3xl font-semibold text-white">
-                  {isEnglish ? "Tell us about your idea" : "Cuéntanos sobre tu idea"}
+                  Cuéntanos sobre tu idea
                 </h2>
                 <p className="text-sm text-white/70 max-w-lg mx-auto">
-                  {isEnglish
-                    ? "Share a few details and we'll get back to you within one business day."
-                    : "Compártenos algunos detalles y te responderemos en menos de un día hábil."}
+                  Compártenos algunos detalles y te responderemos en menos de un día hábil.
                 </p>
               </header>
 
@@ -167,13 +163,13 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="contact-name" className="text-white/80">
-                      {isEnglish ? "Full name" : "Nombre completo"}
+                      Nombre completo
                     </Label>
                     <Input
                       id="contact-name"
                       name="name"
                       required
-                      placeholder={isEnglish ? "Jane Doe" : "Tu nombre"}
+                      placeholder="Tu nombre"
                       className="bg-white/5 border-white/10 text-white placeholder:text-white/40"
                     />
                   </div>
@@ -205,7 +201,7 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   >
                     {serviceOptions.map((option) => (
                       <option key={option.value} value={option.value} className="bg-[#0B0F14] text-white">
-                        {isEnglish ? option.labelEn : option.labelEs}
+                        {option.label}
                       </option>
                     ))}
                   </select>
@@ -220,7 +216,7 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       onChange={(event) => setHasBudget(event.target.checked)}
                       className="h-4 w-4 rounded border border-white/20 bg-white/10 text-accent focus:ring-accent"
                     />
-                    {isEnglish ? "Do you have a budget in mind?" : "¿Tienes un presupuesto pensado?"}
+                    ¿Tienes un presupuesto pensado?
                   </label>
 
                   {hasBudget && (
@@ -247,18 +243,14 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
                 <div className="space-y-2">
                   <Label htmlFor="contact-message" className="text-white/80">
-                    {isEnglish ? "Tell us about your project" : "Cuéntanos sobre tu proyecto"}
+                    Cuéntanos sobre tu proyecto
                   </Label>
                   <Textarea
                     id="contact-message"
                     rows={5}
                     name="message"
                     required
-                    placeholder={
-                      isEnglish
-                        ? "What do you want to build?"
-                        : "¿Qué te gustaría construir?"
-                    }
+                    placeholder="¿Qué te gustaría construir?"
                     className="bg-white/5 border-white/10 text-white placeholder:text-white/40"
                   />
                 </div>
@@ -268,20 +260,16 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   disabled={isSubmitting}
                   className="w-full bg-gradient-to-r from-accent via-accent2 to-accent hover:shadow-lg hover:shadow-accent2/30"
                 >
-                  {isSubmitting
-                    ? isEnglish ? "Sending..." : "Enviando..."
-                    : isEnglish ? "Send message" : "Enviar mensaje"}
+                  {isSubmitting ? "Enviando..." : "Enviar mensaje"}
                 </Button>
                 {submitStatus === "success" && (
                   <p className="text-sm text-emerald-400 text-center">
-                    {isEnglish ? "Message sent successfully." : "Mensaje enviado correctamente."}
+                    Mensaje enviado correctamente.
                   </p>
                 )}
                 {submitStatus === "error" && (
                   <p className="text-sm text-red-400 text-center">
-                    {isEnglish
-                      ? "We couldn’t send the message. Please try again."
-                      : "No pudimos enviar el mensaje. Inténtalo nuevamente."}
+                    No pudimos enviar el mensaje. Inténtalo nuevamente.
                   </p>
                 )}
               </form>

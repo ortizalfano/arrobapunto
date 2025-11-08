@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -18,8 +17,6 @@ interface FormatterModalProps {
 }
 
 export function FormatterModal({ open, onClose }: FormatterModalProps) {
-  const locale = useLocale();
-  const isEnglish = locale === "en";
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [useMinify, setUseMinify] = useState(false);
@@ -30,34 +27,28 @@ export function FormatterModal({ open, onClose }: FormatterModalProps) {
   const copy = useMemo(
     () => ({
       title: "Formatter Express",
-      description: isEnglish
-        ? "Clean and minify JSON, CSS or JavaScript in seconds using Prettier."
-        : "Limpia y minifica JSON, CSS o JavaScript en segundos usando Prettier.",
-      languageLabel: isEnglish ? "Language" : "Lenguaje",
-      modeLabel: isEnglish ? "Mode" : "Modo",
+      description: "Limpia y minifica JSON, CSS o JavaScript en segundos usando Prettier.",
+      languageLabel: "Lenguaje",
+      modeLabel: "Modo",
       autoLabel: "Auto",
-      autoDescription: isEnglish
-        ? "We detect the language automatically based on the content."
-        : "Detectamos el lenguaje automáticamente según el contenido.",
-      minifyDescription: isEnglish
-        ? "Minification removes line breaks and extra spaces."
-        : "La minificación elimina saltos de línea y espacios extra.",
-      formatButton: isEnglish ? "Format" : "Formatear",
-      minifyButton: isEnglish ? "Minify" : "Minificar",
-      actionButton: isEnglish ? "Format" : "Formatear",
-      actionProcessing: isEnglish ? "Processing..." : "Procesando...",
-      inputLabel: isEnglish ? "Input" : "Entrada",
-      inputPlaceholder: isEnglish ? "Paste your code here..." : "Pega tu código aquí...",
-      outputLabel: isEnglish ? "Output" : "Resultado",
-      copy: isEnglish ? "Copy" : "Copiar",
-      copied: isEnglish ? "Copied" : "Copiado",
+      autoDescription: "Detectamos el lenguaje automáticamente según el contenido.",
+      minifyDescription: "La minificación elimina saltos de línea y espacios extra.",
+      formatButton: "Formatear",
+      minifyButton: "Minificar",
+      actionButton: "Formatear",
+      actionProcessing: "Procesando...",
+      inputLabel: "Entrada",
+      inputPlaceholder: "Pega tu código aquí...",
+      outputLabel: "Resultado",
+      copy: "Copiar",
+      copied: "Copiado",
       errors: {
-        empty: isEnglish ? "Paste some code before formatting." : "Introduce un código antes de formatear",
-        format: isEnglish ? "Unable to format the code" : "No se pudo formatear el código",
-        copy: isEnglish ? "Could not copy. Try manually." : "No se pudo copiar. Intenta manualmente.",
+        empty: "Introduce un código antes de formatear",
+        format: "No se pudo formatear el código",
+        copy: "No se pudo copiar. Intenta manualmente.",
       },
     }),
-    [isEnglish]
+    []
   );
 
   useEffect(() => {

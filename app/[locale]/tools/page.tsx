@@ -9,23 +9,20 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const isEnglish = locale === "en";
   const canonicalUrl = createCanonical(locale, "/tools");
 
   return {
-    title: isEnglish ? "Free tools for creators" : "Herramientas gratuitas para creadores",
-    description: isEnglish
-      ? "Image compression, formatter, gradients and more utilities built for designers and developers."
-      : "Compresor de imágenes, formatter, generador de gradientes y más utilidades diseñadas para diseñadores y desarrolladores.",
+    title: "Herramientas gratuitas para creadores",
+    description:
+      "Compresor de imágenes, formatter, generador de gradientes y más utilidades diseñadas para diseñadores y desarrolladores.",
     alternates: {
       canonical: canonicalUrl,
       languages: buildAlternates("/tools"),
     },
     openGraph: {
-      title: isEnglish ? "Free tools for creators" : "Herramientas gratuitas para creadores",
-      description: isEnglish
-        ? "Zero cost utilities for your workflow: optimize images, format code and prototype gradients."
-        : "Utilidades gratuitas para tu flujo de trabajo: optimiza imágenes, formatea código y prototipa gradientes.",
+      title: "Herramientas gratuitas para creadores",
+      description:
+        "Utilidades gratuitas para tu flujo de trabajo: optimiza imágenes, formatea código y prototipa gradientes.",
       url: canonicalUrl,
     },
   };

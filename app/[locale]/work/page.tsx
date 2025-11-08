@@ -13,9 +13,9 @@ const projects = [
     description: "Tienda online de lujo con carrito avanzado y checkout optimizado",
     image: "🎨",
     metrics: [
-      { label: "Conversion", value: "+34%", icon: TrendingUp },
+      { label: "Conversión", value: "+34%", icon: TrendingUp },
       { label: "LCP", value: "0.8s", icon: Zap },
-      { label: "Bounce", value: "-22%", icon: TrendingDown },
+      { label: "Rebote", value: "-22%", icon: TrendingDown },
     ],
     color: "from-purple-500/20 to-pink-500/20",
     textColor: "text-purple-200",
@@ -28,9 +28,9 @@ const projects = [
     description: "Dashboard de analytics con visualizaciones en tiempo real",
     image: "🚀",
     metrics: [
-      { label: "Users", value: "+125%", icon: TrendingUp },
-      { label: "Retention", value: "89%", icon: Eye },
-      { label: "Speed", value: "0.9s", icon: Zap },
+      { label: "Usuarios", value: "+125%", icon: TrendingUp },
+      { label: "Retención", value: "89%", icon: Eye },
+      { label: "Velocidad", value: "0.9s", icon: Zap },
     ],
     color: "from-blue-500/20 to-cyan-500/20",
     textColor: "text-cyan-200",
@@ -43,9 +43,9 @@ const projects = [
     description: "Identidad visual completa con sistema de diseño modular",
     image: "✨",
     metrics: [
-      { label: "Brand Lift", value: "+67%", icon: TrendingUp },
+      { label: "Reconocimiento de marca", value: "+67%", icon: TrendingUp },
       { label: "Engagement", value: "4.2x", icon: Eye },
-      { label: "Recognition", value: "91%", icon: TrendingUp },
+      { label: "Recordación", value: "91%", icon: TrendingUp },
     ],
     color: "from-amber-500/20 to-orange-500/20",
     textColor: "text-orange-200",
@@ -88,9 +88,9 @@ const projects = [
     description: "Generación de contenido con IA integrada",
     image: "🤖",
     metrics: [
-      { label: "Content", value: "+890%", icon: TrendingUp },
-      { label: "Quality", value: "94%", icon: Eye },
-      { label: "Speed", value: "2min", icon: Zap },
+      { label: "Contenido generado", value: "+890%", icon: TrendingUp },
+      { label: "Calidad", value: "94%", icon: Eye },
+      { label: "Tiempo", value: "2 min", icon: Zap },
     ],
     color: "from-violet-500/20 to-purple-500/20",
     textColor: "text-violet-200",
@@ -104,23 +104,18 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const isEnglish = locale === "en";
   const canonicalUrl = createCanonical(locale, "/work");
 
   return {
-    title: isEnglish ? "Selected work" : "Casos de éxito",
-    description: isEnglish
-      ? "A curated selection of ecommerce, SaaS and AI-enabled products shipped by ArrobaPunto.com."
-      : "Selección de ecommerce, SaaS y plataformas impulsadas por IA creadas por ArrobaPunto.com.",
+    title: "Casos de éxito",
+    description: "Selección de ecommerce, SaaS y plataformas impulsadas por IA creadas por ArrobaPunto.com.",
     alternates: {
       canonical: canonicalUrl,
       languages: buildAlternates("/work"),
     },
     openGraph: {
-      title: isEnglish ? "Selected work" : "Casos de éxito",
-      description: isEnglish
-        ? "Projects that improved conversion, velocity and retention for our partners."
-        : "Proyectos que elevaron conversión, velocidad y retención para nuestros clientes.",
+      title: "Casos de éxito",
+      description: "Proyectos que elevaron conversión, velocidad y retención para nuestros clientes.",
       url: canonicalUrl,
     },
   };

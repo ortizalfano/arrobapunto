@@ -9,23 +9,19 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const isEnglish = locale === "en";
   const canonicalUrl = createCanonical(locale, "/studio");
 
   return {
-    title: isEnglish ? "About our boutique studio" : "Conoce nuestro estudio boutique",
-    description: isEnglish
-      ? "Meet the ArrobaPunto.com team: designers and developers crafting performance-first digital experiences."
-      : "Somos ArrobaPunto.com, un estudio boutique de diseño y desarrollo enfocado en experiencias digitales con rendimiento extremo.",
+    title: "Conoce nuestro estudio boutique",
+    description:
+      "Somos ArrobaPunto.com, un estudio boutique de diseño y desarrollo enfocado en experiencias digitales con rendimiento extremo.",
     alternates: {
       canonical: canonicalUrl,
       languages: buildAlternates("/studio"),
     },
     openGraph: {
-      title: isEnglish ? "About our boutique studio" : "Conoce nuestro estudio boutique",
-      description: isEnglish
-        ? "Culture, values and milestones from our distributed studio in Spain, Panamá and Portugal."
-        : "Cultura, valores e hitos de nuestro estudio distribuido en España, Panamá y Portugal.",
+      title: "Conoce nuestro estudio boutique",
+      description: "Cultura, valores e hitos de nuestro estudio distribuido en España, Panamá y Portugal.",
       url: canonicalUrl,
     },
   };

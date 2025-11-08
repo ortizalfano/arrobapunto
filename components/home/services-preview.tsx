@@ -4,53 +4,10 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2, Sparkles, Zap, TrendingUp } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { fadeUp, stagger, scaleIn } from "@/lib/motion";
 import { useContactModal } from "@/components/contact/contact-modal-provider";
 
-const servicesEn = [
-  {
-    title: "Marketing website",
-    icon: Zap,
-    description: "Modern, fast, and scalable websites.",
-    features: [
-      "Next.js 15 optimized",
-      "Full technical SEO setup",
-      "Performance scores 95+",
-      "PWA ready",
-    ],
-    price: "From $1,500",
-    gradient: "from-blue-500/10 to-cyan-500/10",
-  },
-  {
-    title: "E-commerce",
-    icon: TrendingUp,
-    description: "Stores built to convert.",
-    features: [
-      "Optimized checkout experience",
-      "Payments integration",
-      "Inventory management",
-      "Advanced analytics",
-    ],
-    price: "From $2,200",
-    gradient: "from-emerald-500/10 to-teal-500/10",
-  },
-  {
-    title: "Custom development",
-    icon: CheckCircle2,
-    description: "Tailored builds for unique requirements.",
-    features: [
-      "Personalized consulting",
-      "Custom feature development",
-      "Systems integration",
-      "Ongoing support",
-    ],
-    price: null,
-    gradient: "from-amber-500/10 to-orange-500/10",
-  },
-];
-
-const servicesEs = [
+const services = [
   {
     title: "Desarrollo web",
     icon: Zap,
@@ -93,16 +50,11 @@ const servicesEs = [
 ];
 
 export function ServicesPreview() {
-  const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'es';
-  const isEnglish = locale === 'en';
-  const services = isEnglish ? servicesEn : servicesEs;
-  const badgeText = isEnglish ? "Our services" : "Nuestros servicios";
-  const titlePrimary = isEnglish ? "Solutions" : "Soluciones";
-  const titleAccent = isEnglish ? "that scale" : "que escalan";
-  const subtitle = isEnglish
-    ? "Every service is designed to drive measurable results."
-    : "Cada servicio está diseñado para impulsar resultados medibles.";
+  const locale = "es";
+  const badgeText = "Nuestros servicios";
+  const titlePrimary = "Soluciones";
+  const titleAccent = "que escalan";
+  const subtitle = "Cada servicio está diseñado para impulsar resultados medibles.";
   const { open } = useContactModal();
   
   return (
@@ -185,14 +137,14 @@ export function ServicesPreview() {
                             onClick={open}
                             className="w-full px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-all border border-white/20 hover:border-white/40"
                           >
-                            {isEnglish ? "Request a quote" : "Solicitar presupuesto"}
+                            Solicitar presupuesto
                           </button>
                         ) : (
                         <Link
                             href={`/${locale}/play`}
                             className="block text-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-all border border-white/20 hover:border-white/40"
                         >
-                            {isEnglish ? "Start Brief Express" : "Crear Brief Express"}
+                            Crear Brief Express
                         </Link>
                         )}
                       </motion.div>

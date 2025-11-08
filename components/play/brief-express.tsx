@@ -11,7 +11,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, CheckCircle2, ArrowRight, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
 import { useContactModal } from "@/components/contact/contact-modal-provider";
 import { sendEmail } from "@/lib/email";
 
@@ -20,56 +19,33 @@ export function BriefExpress() {
   const [estimate, setEstimate] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'es';
-  const isEnglish = locale === 'en';
+  const locale = "es";
   const { open } = useContactModal();
 
   type SectorValue = BriefFormData["sector"];
   type PriorityValue = BriefFormData["priority"];
   type TimelineValue = BriefFormData["timeline"];
 
-  const sectorOptions: Array<{ value: SectorValue; label: string }> = isEnglish
-    ? [
-        { value: "tech", label: "Tech / SaaS" },
-        { value: "retail", label: "Retail / E-commerce" },
-        { value: "services", label: "Professional services" },
-        { value: "nonprofit", label: "Non-profit" },
-        { value: "other", label: "Other" },
-      ]
-    : [
-        { value: "tech", label: "Tech / SaaS" },
-        { value: "retail", label: "Retail / E-commerce" },
-        { value: "services", label: "Servicios" },
-        { value: "nonprofit", label: "Non-profit" },
-        { value: "other", label: "Otro" },
-      ];
+  const sectorOptions: Array<{ value: SectorValue; label: string }> = [
+    { value: "tech", label: "Tech / SaaS" },
+    { value: "retail", label: "Retail / E-commerce" },
+    { value: "services", label: "Servicios" },
+    { value: "nonprofit", label: "Non-profit" },
+    { value: "other", label: "Otro" },
+  ];
 
-  const timelineOptions: Array<{ value: TimelineValue; label: string }> = isEnglish
-    ? [
-        { value: "urgent", label: "Urgent (< 1 month)" },
-        { value: "1-3months", label: "1-3 months" },
-        { value: "3-6months", label: "3-6 months" },
-        { value: "flexible", label: "Flexible" },
-      ]
-    : [
-        { value: "urgent", label: "Urgente (< 1 mes)" },
-        { value: "1-3months", label: "1-3 meses" },
-        { value: "3-6months", label: "3-6 meses" },
-        { value: "flexible", label: "Flexible" },
-      ];
+  const timelineOptions: Array<{ value: TimelineValue; label: string }> = [
+    { value: "urgent", label: "Urgente (< 1 mes)" },
+    { value: "1-3months", label: "1-3 meses" },
+    { value: "3-6months", label: "3-6 meses" },
+    { value: "flexible", label: "Flexible" },
+  ];
 
-  const priorityOptions: Array<{ value: PriorityValue; label: string; desc: string }> = isEnglish
-    ? [
-        { value: "brand", label: "Marketing website", desc: "Showcase your business and generate leads" },
-        { value: "web", label: "Online store", desc: "Sell products and manage orders" },
-        { value: "performance", label: "Custom build", desc: "You already have specific functionality in mind" },
-      ]
-    : [
-        { value: "brand", label: "Una página web moderna", desc: "Muestra tu negocio y genera leads" },
-        { value: "web", label: "Una tienda online", desc: "Vende productos y gestiona pedidos" },
-        { value: "performance", label: "Algo personalizado", desc: "Ya tienes funcionalidades específicas en mente" },
-      ];
+  const priorityOptions: Array<{ value: PriorityValue; label: string; desc: string }> = [
+    { value: "brand", label: "Una página web moderna", desc: "Muestra tu negocio y genera leads" },
+    { value: "web", label: "Una tienda online", desc: "Vende productos y gestiona pedidos" },
+    { value: "performance", label: "Algo personalizado", desc: "Ya tienes funcionalidades específicas en mente" },
+  ];
 
   const {
     register,
@@ -126,11 +102,7 @@ export function BriefExpress() {
       setIsSubmitted(true);
     } catch (error) {
       console.error("Error submitting brief:", error);
-      alert(
-        isEnglish
-          ? "We couldn't send your brief. Please try again."
-          : "No pudimos enviar tu brief. Inténtalo de nuevo."
-      );
+      alert("No pudimos enviar tu brief. Inténtalo de nuevo.");
     } finally {
       setIsSubmitting(false);
     }
@@ -154,23 +126,21 @@ export function BriefExpress() {
             </div>
           </div>
           <CardTitle className="text-2xl text-content">
-            {isEnglish ? "Thanks for sharing your project!" : "¡Gracias por confiar en nosotros!"}
+            ¡Gracias por confiar en nosotros!
           </CardTitle>
           <CardDescription className="text-muted">
-            {isEnglish
-              ? "We received your brief and will reach out shortly."
-              : "Hemos recibido tu brief correctamente y te contactaremos pronto."}
+            Hemos recibido tu brief correctamente y te contactaremos pronto.
           </CardDescription>
         </CardHeader>
         <CardContent className="text-center space-y-6">
           <div>
             <div className="text-4xl font-bold text-accent2 mb-2">${estimate?.toLocaleString()}</div>
             <p className="text-sm text-muted">
-              {isEnglish ? "Indicative estimate generated" : "Estimación orientativa calculada"}
+              Estimación orientativa calculada
             </p>
           </div>
           <Button variant="gold" className="w-full" size="lg" type="button" onClick={open}>
-            {isEnglish ? "Contact us" : "Contactar con nosotros"}
+            Contactar con nosotros
           </Button>
         </CardContent>
       </Card>
@@ -182,7 +152,7 @@ export function BriefExpress() {
       <CardHeader>
         <div className="flex items-center justify-between mb-4">
           <span className="text-sm font-medium text-muted">
-            {isEnglish ? `Step ${step} of 5` : `Paso ${step} de 5`}
+            Paso {step} de 5
           </span>
           <div className="flex gap-1.5">
             {[1, 2, 3, 4, 5].map((s) => (
@@ -198,9 +168,7 @@ export function BriefExpress() {
         </div>
         <CardTitle className="text-2xl md:text-3xl">Brief Express</CardTitle>
         <CardDescription className="text-muted">
-          {isEnglish
-            ? "Get a quick estimate for your project in under two minutes."
-            : "Calcula una estimación rápida para tu proyecto en menos de 2 minutos."}
+          Calcula una estimación rápida para tu proyecto en menos de 2 minutos.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -209,7 +177,7 @@ export function BriefExpress() {
           {step === 1 && (
             <div className="space-y-4">
               <Label className="text-base">
-                {isEnglish ? "Which industry are you in?" : "¿En qué sector operas?"}
+                ¿En qué sector operas?
               </Label>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {sectorOptions.map((opt) => (
@@ -237,7 +205,7 @@ export function BriefExpress() {
           {step === 2 && (
           <div className="space-y-4">
               <Label className="text-base">
-                {isEnglish ? "What do you need exactly?" : "¿Qué necesitas exactamente?"}
+                ¿Qué necesitas exactamente?
               </Label>
               <div className="space-y-3">
                 {priorityOptions.map((opt) => (
@@ -266,7 +234,7 @@ export function BriefExpress() {
           {step === 3 && (
             <div className="space-y-4">
               <Label className="text-base">
-                {isEnglish ? "When do you need it ready?" : "¿Cuándo necesitas que esté listo?"}
+                ¿Cuándo necesitas que esté listo?
               </Label>
               <div className="grid grid-cols-1 gap-3">
                 {timelineOptions.map((opt) => (
@@ -290,61 +258,59 @@ export function BriefExpress() {
             </div>
           )}
 
-          {/* Step 4: Contact Info */}
-          {step === 4 && (
+        {/* Step 4: Contact Info */}
+        {step === 4 && (
+          <div className="space-y-4">
+            <Label className="text-base">
+              ¿Cómo podemos contactarte?
+            </Label>
             <div className="space-y-4">
-              <Label className="text-base">
-                {isEnglish ? "How can we contact you?" : "¿Cómo podemos contactarte?"}
-              </Label>
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">{isEnglish ? "Full name *" : "Nombre completo *"}</Label>
-                  <Input
-                    id="name"
-                    placeholder={isEnglish ? "Your name" : "Tu nombre"}
-                    {...register("name")}
-                    className={cn(errors.name && "border-red-500")}
-                  />
-                  {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
-            </div>
+              <div className="space-y-2">
+                <Label htmlFor="name">Nombre completo *</Label>
+                <Input
+                  id="name"
+                  placeholder="Tu nombre"
+                  {...register("name")}
+                  className={cn(errors.name && "border-red-500")}
+                />
+                {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
+              </div>
 
-            <div className="space-y-2">
-                  <Label htmlFor="email">Email *</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder={isEnglish ? "you@email.com" : "tu@email.com"}
-                    {...register("email")}
-                    className={cn(errors.email && "border-red-500")}
-                  />
-                  {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
-            </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Email *</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="tu@email.com"
+                  {...register("email")}
+                  className={cn(errors.email && "border-red-500")}
+                />
+                {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+              </div>
 
-            <div className="space-y-2">
-                  <Label htmlFor="phone">{isEnglish ? "Phone (optional)" : "Teléfono (opcional)"}</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder={isEnglish ? "+1 555 000 0000" : "+34 600 000 000"}
-                    {...register("phone")}
-                  />
-                </div>
+              <div className="space-y-2">
+                <Label htmlFor="phone">Teléfono (opcional)</Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="+34 600 000 000"
+                  {...register("phone")}
+                />
               </div>
             </div>
-          )}
+          </div>
+        )}
 
           {/* Step 5: Project Description */}
           {step === 5 && (
             <div className="space-y-4">
               <Label className="text-base">
-                {isEnglish ? "Tell us more about your project *" : "Cuéntanos más detalles sobre tu proyecto *"}
+                Cuéntanos más detalles sobre tu proyecto *
               </Label>
               <Textarea
                 id="objective"
                 rows={5}
-                placeholder={isEnglish
-                  ? "E.g. I run a clothing store and want to sell online. Customers should be able to browse products, add to cart, and pay easily..."
-                  : "Ej: Tengo una tienda de ropa y quiero vender online. Necesito que mis clientes puedan ver los productos, agregarlos al carrito y pagar fácilmente..."}
+                placeholder="Ej: Tengo una tienda de ropa y quiero vender online. Necesito que mis clientes puedan ver los productos, agregarlos al carrito y pagar fácilmente..."
                 {...register("objective")}
                 className={cn(errors.objective && "border-red-500")}
               />
@@ -352,7 +318,7 @@ export function BriefExpress() {
                 <p className="text-sm text-red-500">{errors.objective.message}</p>
               )}
               <p className="text-xs text-muted">
-                {isEnglish ? "Describe what you need in simple terms." : "Cuéntanos en palabras simples qué necesitas."}
+                Cuéntanos en palabras simples qué necesitas.
               </p>
             </div>
           )}
@@ -367,7 +333,7 @@ export function BriefExpress() {
                 className="flex-1"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                {isEnglish ? "Back" : "Atrás"}
+                Atrás
               </Button>
             )}
             {step < 5 && (
@@ -382,7 +348,7 @@ export function BriefExpress() {
                 }
                 className="flex-1 bg-accent2 hover:bg-accent2/90"
               >
-                {isEnglish ? "Next" : "Siguiente"}
+                Siguiente
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             )}
@@ -391,11 +357,11 @@ export function BriefExpress() {
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    {isEnglish ? "Calculating..." : "Calculando..."}
+                    Calculando...
               </>
             ) : (
                   <>
-                    {isEnglish ? "Get estimate" : "Calcular estimación"}
+                    Calcular estimación
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </>
             )}

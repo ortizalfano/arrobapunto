@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -52,8 +51,6 @@ const presets: GradientStop[][] = [
 ];
 
 export function GradientModal({ open, onClose }: GradientModalProps) {
-  const locale = useLocale();
-  const isEnglish = locale === "en";
   const [gradientType, setGradientType] = useState<GradientType>("linear");
   const [angle, setAngle] = useState(120);
   const [stops, setStops] = useState<GradientStop[]>(defaultStops);
@@ -63,42 +60,35 @@ export function GradientModal({ open, onClose }: GradientModalProps) {
 
   const copy = useMemo(
     () => ({
-      title: isEnglish ? "Gradient Generator" : "Generador de Gradients",
-      description: isEnglish
-        ? "Create modern gradients and glassmorphism effects with live preview."
-        : "Crea gradientes modernos y efectos glassmorphism con vista previa en vivo.",
-      typeLabel: isEnglish ? "Type" : "Tipo",
+      title: "Generador de gradientes",
+      description: "Crea gradientes modernos y efectos glassmorphism con vista previa en vivo.",
+      typeLabel: "Tipo",
       typeOptions: {
-        linear: isEnglish ? "Linear" : "Lineal",
-        radial: isEnglish ? "Radial" : "Radial",
+        linear: "Lineal",
+        radial: "Radial",
       },
-      angleLabel: (value: number) => (isEnglish ? `Angle (${value}°)` : `Ángulo (${value}°)`),
-      stopsLabel: isEnglish ? "Color stops" : "Color stops",
-      addStop: isEnglish ? "Add stop" : "Añadir stop",
-      positionLabel: (value: number) => (isEnglish ? `Position: ${value}%` : `Posición: ${value}%`),
-      glassLabel: isEnglish ? "Glassmorphism" : "Glassmorphism",
-      glassToggleActive: isEnglish ? "On" : "Activo",
-      glassToggleInactive: isEnglish ? "Off" : "Inactivo",
-      blurLabel: (value: number) => (isEnglish ? `Blur (${value}px)` : `Blur (${value}px)`),
-      opacityLabel: (value: number) =>
-        isEnglish ? `Opacity (${Math.round(value * 100)}%)` : `Opacidad (${Math.round(value * 100)}%)`,
-      borderLabel: (value: number) => (isEnglish ? `Border (${value}px)` : `Borde (${value}px)`),
-      randomPreset: isEnglish ? "Random preset" : "Preset aleatorio",
+      angleLabel: (value: number) => `Ángulo (${value}°)`,
+      stopsLabel: "Puntos de color",
+      addStop: "Añadir punto",
+      positionLabel: (value: number) => `Posición: ${value}%`,
+      glassLabel: "Glassmorphism",
+      glassToggleActive: "Activo",
+      glassToggleInactive: "Inactivo",
+      blurLabel: (value: number) => `Blur (${value}px)`,
+      opacityLabel: (value: number) => `Opacidad (${Math.round(value * 100)}%)`,
+      borderLabel: (value: number) => `Borde (${value}px)`,
+      randomPreset: "Preset aleatorio",
       preview: {
-        glassTitle: isEnglish ? "Gradient preview" : "Vista del gradiente",
-        glassDescription: isEnglish
-          ? "Adjust the values to design cards with glassmorphism effect."
-          : "Ajusta los valores para diseñar tarjetas con efecto glassmorphism.",
-        plainTitle: isEnglish ? "Preview" : "Vista previa",
-        plainDescription: isEnglish
-          ? "The gradient applies to the full background."
-          : "El gradiente se aplica al fondo completo.",
+        glassTitle: "Vista del gradiente",
+        glassDescription: "Ajusta los valores para diseñar tarjetas con efecto glassmorphism.",
+        plainTitle: "Vista previa",
+        plainDescription: "El gradiente se aplica al fondo completo.",
       },
-      cssLabel: isEnglish ? "Generated CSS" : "CSS generado",
-      copyLabel: isEnglish ? "Copy" : "Copiar",
-      copiedLabel: isEnglish ? "Copied" : "Copiado",
+      cssLabel: "CSS generado",
+      copyLabel: "Copiar",
+      copiedLabel: "Copiado",
     }),
-    [isEnglish]
+    []
   );
 
   useEffect(() => {

@@ -58,7 +58,6 @@ export function Navbar() {
 }
 
 function HubMenu({ locale }: { locale: string }) {
-  const isEnglish = locale === "en";
   const [open, setOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -97,7 +96,7 @@ function HubMenu({ locale }: { locale: string }) {
         onClick={() => setOpen((prev) => !prev)}
       >
         <span className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-accent via-accent2 to-accent opacity-80" />
-        {isEnglish ? "Creator Hub" : "Hub para Creadores"}
+        Hub para Creadores
         <span className="text-xs opacity-80">▾</span>
       </button>
       {open && (
@@ -111,7 +110,7 @@ function HubMenu({ locale }: { locale: string }) {
             className="block px-4 py-2 text-sm text-content/70 hover:bg-white/5 hover:text-accent transition-colors"
             onClick={() => setOpen(false)}
           >
-            {isEnglish ? "Tools" : "Herramientas"}
+            Herramientas
           </Link>
           <Link
             href={`/${locale}/plugins`}

@@ -10,10 +10,6 @@ interface AnimatedNumberProps {
   suffix?: string;
 }
 
-interface HeroStatsProps {
-  locale: string;
-}
-
 function AnimatedNumber({ value, duration = 2000, prefix = "", suffix = "" }: AnimatedNumberProps) {
   const [displayValue, setDisplayValue] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
@@ -55,19 +51,12 @@ function AnimatedNumber({ value, duration = 2000, prefix = "", suffix = "" }: An
   );
 }
 
-export function HeroStats({ locale }: HeroStatsProps) {
-  const isEnglish = locale === 'en';
-  const stats = isEnglish
-    ? [
-        { label: "Projects delivered", value: 25, suffix: "+" },
-        { label: "Client satisfaction", value: 100, suffix: "%" },
-        { label: "Years of experience", value: 6, suffix: "+" },
-      ]
-    : [
-  { label: "Proyectos", value: 25, suffix: "+" },
-  { label: "Satisfacción", value: 100, suffix: "%" },
-  { label: "Años", value: 6, suffix: "+" },
-];
+export function HeroStats() {
+  const stats = [
+    { label: "Proyectos", value: 25, suffix: "+" },
+    { label: "Satisfacción", value: 100, suffix: "%" },
+    { label: "Años", value: 6, suffix: "+" },
+  ];
 
   return (
     <motion.div

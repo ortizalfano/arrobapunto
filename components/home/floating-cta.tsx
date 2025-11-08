@@ -4,14 +4,10 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useContactModal } from "@/components/contact/contact-modal-provider";
-import { usePathname } from "next/navigation";
 
 export function FloatingCTA() {
   const [show, setShow] = useState(false);
   const { open } = useContactModal();
-  const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'es';
-  const isEnglish = locale === 'en';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,7 +42,7 @@ export function FloatingCTA() {
             onClick={scrollToTop}
             size="icon"
             className="w-12 h-12 rounded-full shadow-glow bg-accent2 hover:bg-accent2/80"
-            aria-label={isEnglish ? "Scroll back to top" : "Volver arriba"}
+            aria-label="Volver arriba"
           >
             ↑
           </Button>
@@ -56,7 +52,7 @@ export function FloatingCTA() {
             className="shadow-glow"
             onClick={open}
           >
-            {isEnglish ? "Request a quote" : "Cotizar proyecto"}
+            Cotizar proyecto
           </Button>
         </motion.div>
       )}

@@ -4,30 +4,8 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { fadeUp, stagger, scaleIn } from "@/lib/motion";
 import { Quote } from "lucide-react";
-import { usePathname } from "next/navigation";
 
-const testimonialsEn = [
-  {
-    name: "María García",
-    role: "CEO, Tech Startup",
-    content:
-      "The ArrobaPunto team completely transformed our online presence. The outcome exceeded every expectation.",
-    rating: 5,
-    avatar: "MG",
-    gradient: "from-blue-500 to-cyan-500",
-  },
-  {
-    name: "Juan Pérez",
-    role: "Marketing Director",
-    content:
-      "Exceptional performance and impeccable attention to detail. The site loads incredibly fast and looks elegant.",
-    rating: 5,
-    avatar: "JP",
-    gradient: "from-emerald-500 to-teal-500",
-  },
-];
-
-const testimonialsEs = [
+const testimonials = [
   {
     name: "María García",
     role: "CEO, startup tecnológica",
@@ -49,14 +27,8 @@ const testimonialsEs = [
 ];
 
 export function Testimonials() {
-  const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'es';
-  const isEnglish = locale === 'en';
-  const testimonials = isEnglish ? testimonialsEn : testimonialsEs;
-  const heading = isEnglish ? "What our clients say" : "Lo que dicen nuestros clientes";
-  const subheading = isEnglish
-    ? "Real experiences from brands that trust us."
-    : "Experiencias reales de marcas que confían en nosotros.";
+  const heading = "Lo que dicen nuestros clientes";
+  const subheading = "Experiencias reales de marcas que confían en nosotros.";
 
   return (
     <section className="py-12 sm:py-16 bg-transparent text-white">

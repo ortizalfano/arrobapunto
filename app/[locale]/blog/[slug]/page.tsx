@@ -8,13 +8,10 @@ import { locales } from "@/lib/locales";
 type PageParams = Promise<{ locale: string; slug: string }>;
 
 export async function generateStaticParams() {
-  const locales = ["es", "en"];
-  return blogPosts.flatMap((post) =>
-    locales.map((locale) => ({
-      locale,
-      slug: post.slug,
-    }))
-  );
+  return blogPosts.map((post) => ({
+    locale: "es",
+    slug: post.slug,
+  }));
 }
 
 export async function generateMetadata({ params }: { params: PageParams }): Promise<Metadata> {
@@ -27,19 +24,18 @@ export async function generateMetadata({ params }: { params: PageParams }): Prom
     } satisfies Metadata;
   }
 
-  const isEnglish = locale === "en";
   const canonicalUrl = createCanonical(locale, `/blog/${slug}`);
 
   return {
-    title: isEnglish ? post.title.en : post.title.es,
-    description: isEnglish ? post.excerpt.en : post.excerpt.es,
+    title: post.title.es,
+    description: post.excerpt.es,
     alternates: {
       canonical: canonicalUrl,
       languages: buildAlternates(`/blog/${slug}`),
     },
     openGraph: {
-      title: isEnglish ? post.title.en : post.title.es,
-      description: isEnglish ? post.excerpt.en : post.excerpt.es,
+      title: post.title.es,
+      description: post.excerpt.es,
       url: canonicalUrl,
       type: "article",
       publishedTime: post.publishedAt,
@@ -48,7 +44,7 @@ export async function generateMetadata({ params }: { params: PageParams }): Prom
           url: `${SITE_URL}${post.image}`,
           width: 1200,
           height: 630,
-          alt: isEnglish ? post.imageAlt.en : post.imageAlt.es,
+          alt: post.imageAlt.es,
         },
       ],
     },
@@ -63,20 +59,19 @@ export default async function BlogArticlePage({ params }: { params: PageParams }
     notFound();
   }
 
-  const isEnglish = locale === "en";
-  const formatter = new Intl.DateTimeFormat(isEnglish ? "en-US" : "es-ES", {
+  const formatter = new Intl.DateTimeFormat("es-ES", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
   const canonicalUrl = createCanonical(locale, `/blog/${slug}`);
 
-  const title = isEnglish ? post.title.en : post.title.es;
-  const excerpt = isEnglish ? post.excerpt.en : post.excerpt.es;
-  const category = isEnglish ? post.category.en : post.category.es;
-  const readTime = isEnglish ? post.readTime.en : post.readTime.es;
-  const imageAlt = isEnglish ? post.imageAlt.en : post.imageAlt.es;
-  const conclusion = isEnglish ? post.conclusion.en : post.conclusion.es;
+  const title = post.title.es;
+  const excerpt = post.excerpt.es;
+  const category = post.category.es;
+  const readTime = post.readTime.es;
+  const imageAlt = post.imageAlt.es;
+  const conclusion = post.conclusion.es;
   const publishedDate = formatter.format(new Date(post.publishedAt));
 
   const articleSchema = {
@@ -100,7 +95,7 @@ export default async function BlogArticlePage({ params }: { params: PageParams }
       },
     },
     url: canonicalUrl,
-    inLanguage: isEnglish ? "en" : "es",
+    inLanguage: "es",
   };
 
   const breadcrumbSchema = {
@@ -110,7 +105,7 @@ export default async function BlogArticlePage({ params }: { params: PageParams }
       {
         "@type": "ListItem",
         position: 1,
-        name: isEnglish ? "Home" : "Inicio",
+        name: "Inicio",
         item: createCanonical(locale, ""),
       },
       {
@@ -156,15 +151,9 @@ export default async function BlogArticlePage({ params }: { params: PageParams }
 
         <div className="prose prose-invert prose-lg max-w-none space-y-12">
           {post.sections.map((section) => {
-            const heading = isEnglish ? section.heading.en : section.heading.es;
-            const paragraphs = section.paragraphs.map((paragraph) =>
-              isEnglish ? paragraph.en : paragraph.es
-            );
-            const bullets = section.bullets
-              ? isEnglish
-                ? section.bullets.en
-                : section.bullets.es
-              : undefined;
+            const heading = section.heading.es;
+            const paragraphs = section.paragraphs.map((paragraph) => paragraph.es);
+            const bullets = section.bullets ? section.bullets.es : undefined;
 
             return (
               <section key={heading}>
@@ -195,7 +184,7 @@ export default async function BlogArticlePage({ params }: { params: PageParams }
 
           <section>
             <h2 className="font-display text-2xl font-semibold text-white mb-4">
-              {isEnglish ? "In summary" : "En resumen"}
+              En resumen
             </h2>
             <p className="text-white/80 leading-relaxed">{conclusion}</p>
           </section>

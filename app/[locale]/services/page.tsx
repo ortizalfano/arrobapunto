@@ -76,23 +76,20 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const isEnglish = locale === "en";
   const canonicalUrl = createCanonical(locale, "/services");
 
   return {
-    title: isEnglish ? "Premium web services" : "Servicios premium de desarrollo web",
-    description: isEnglish
-      ? "Productized websites, ecommerce and custom builds crafted for performance and conversion."
-      : "Servicios boutique de desarrollo web, ecommerce y proyectos personalizados con foco en rendimiento y conversión.",
+    title: "Servicios premium de desarrollo web",
+    description:
+      "Servicios boutique de desarrollo web, ecommerce y proyectos personalizados con foco en rendimiento y conversión.",
     alternates: {
       canonical: canonicalUrl,
       languages: buildAlternates("/services"),
     },
     openGraph: {
-      title: isEnglish ? "Premium web services" : "Servicios premium de desarrollo web",
-      description: isEnglish
-        ? "Productized websites, ecommerce and custom builds crafted for performance and conversion."
-        : "Servicios boutique de desarrollo web, ecommerce y proyectos personalizados con foco en rendimiento y conversión.",
+      title: "Servicios premium de desarrollo web",
+      description:
+        "Servicios boutique de desarrollo web, ecommerce y proyectos personalizados con foco en rendimiento y conversión.",
       url: canonicalUrl,
     },
   };
@@ -104,9 +101,8 @@ export default async function ServicesPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const isEnglish = locale === "en";
-  const defaultCtaLabel = isEnglish ? "Request quote" : "Solicitar presupuesto";
-  const briefCtaLabel = isEnglish ? "Create Brief Express" : "Crear Brief Express";
+  const defaultCtaLabel = "Solicitar presupuesto";
+  const briefCtaLabel = "Crear Brief Express";
   const playHref = `/${locale}/play`;
 
   const servicesSchema = {

@@ -16,23 +16,20 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const isEnglish = locale === "en";
   const canonicalUrl = createCanonical(locale, "");
 
   return {
-    title: isEnglish ? "Premium web design & development" : "Diseño y desarrollo web premium",
-    description: isEnglish
-      ? "AI-assisted boutique studio creating high-performance websites, ecommerce and digital products."
-      : "Estudio boutique que crea webs de alto rendimiento, ecommerce y productos digitales impulsados por IA.",
+    title: "Diseño y desarrollo web premium",
+    description:
+      "Estudio boutique que crea webs de alto rendimiento, ecommerce y productos digitales impulsados por IA.",
     alternates: {
       canonical: canonicalUrl,
       languages: buildAlternates(""),
     },
     openGraph: {
-      title: isEnglish ? "Premium web design & development" : "Diseño y desarrollo web premium",
-      description: isEnglish
-        ? "Partner with ArrobaPunto.com for conversion-driven design, blazing performance and SEO."
-        : "Trabaja con ArrobaPunto.com para lograr diseño que convierte, rendimiento extremo y SEO técnico.",
+      title: "Diseño y desarrollo web premium",
+      description:
+        "Trabaja con ArrobaPunto.com para lograr diseño que convierte, rendimiento extremo y SEO técnico.",
       url: canonicalUrl,
     },
   };
@@ -49,7 +46,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     url: canonicalUrl,
     description:
       "Agencia boutique de diseño y desarrollo web premium especializada en rendimiento y SEO.",
-    inLanguage: locale === "en" ? "en" : "es",
+    inLanguage: "es",
   };
 
   return (
@@ -65,7 +62,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <WorkPreview />
         <ServicesPreview />
         <StatsSection />
-        <CalculatorSection locale={locale} />
+        <CalculatorSection />
         <TrustBar />
         <FloatingCTA />
       </div>
@@ -86,25 +83,21 @@ function buildAlternates(path: string) {
   return alternateMap;
 }
 
-function CalculatorSection({ locale }: { locale: string }) {
-  const isEnglish = locale === "en";
-
+function CalculatorSection() {
   return (
     <section id="calculadora" className="py-12 sm:py-16 bg-transparent text-white">
       <div className="container max-w-3xl">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-4">
             <span className="text-sm text-white">
-              {isEnglish ? "Project calculator" : "Calculadora de proyecto"}
+              Calculadora de proyecto
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4 bg-gradient-to-r from-white via-accent2 to-white bg-clip-text text-transparent">
-            {isEnglish ? "Estimate your budget" : "Calcula tu presupuesto"}
+            Calcula tu presupuesto
           </h2>
           <p className="text-lg text-white/70 max-w-2xl mx-auto">
-            {isEnglish
-              ? "Answer a few simple questions and get an instant estimate."
-              : "Responde unas preguntas simples y obtén una estimación instantánea."}
+            Responde unas preguntas simples y obtén una estimación instantánea.
           </p>
         </div>
 

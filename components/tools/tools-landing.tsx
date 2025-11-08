@@ -48,7 +48,7 @@ const baseTools = [
     icon: Wand2,
     title: "Paleta de Colores (Próximamente)",
     description: "Extrae colores dominantes de cualquier imagen y genera paletas automáticas.",
-    features: ["Extractor automático", "Exportar a CSS", "Formatos múltiples", "Coming soon"],
+    features: ["Extractor automático", "Exportar a CSS", "Formatos múltiples", "Próximamente"],
     slug: "tools/colors",
     gradient: "from-emerald-500/20 to-teal-500/20",
     emoji: "🌈",
@@ -58,7 +58,7 @@ const baseTools = [
     icon: Code,
     title: "Optimizador SVG (Próximamente)",
     description: "Optimiza archivos SVG removiendo código innecesario y reduciendo tamaño.",
-    features: ["Minificación", "Auto-cleanup", "Compresión", "Coming soon"],
+    features: ["Minificación", "Auto-cleanup", "Compresión", "Próximamente"],
     slug: "tools/svg",
     gradient: "from-amber-500/20 to-orange-500/20",
     emoji: "⚡",
@@ -67,21 +67,16 @@ const baseTools = [
 ];
 
 export function ToolsLanding({ locale }: ToolsLandingProps) {
-  const isEnglish = locale === "en";
   const [isCompressorOpen, setIsCompressorOpen] = useState(false);
   const [isFormatterOpen, setIsFormatterOpen] = useState(false);
   const [isGradientOpen, setIsGradientOpen] = useState(false);
 
-  const heroBadge = isEnglish ? "Free Tools" : "Herramientas Gratuitas";
-  const heroTitlePrimary = isEnglish ? "Hub for" : "Hub para";
-  const heroTitleAccent = isEnglish ? "creators" : "creadores";
-  const heroSubtitle = isEnglish
-    ? "Pro-grade utilities for designers and developers. Unlimited, free forever."
-    : "Herramientas profesionales gratis para diseñadores y desarrolladores. Úsalas sin límites.";
-  const infoTitle = isEnglish ? "100% free and privacy-first" : "100% gratuito y sin registros";
-  const infoDescription = isEnglish
-    ? "All tools are free to use. We do not store personal data."
-    : "Todas estas herramientas son completamente gratuitas. No guardamos tus datos personales.";
+  const heroBadge = "Herramientas gratuitas";
+  const heroTitlePrimary = "Hub para";
+  const heroTitleAccent = "creadores";
+  const heroSubtitle = "Herramientas profesionales gratis para diseñadores y desarrolladores. Úsalas sin límites.";
+  const infoTitle = "100% gratuito y sin registros";
+  const infoDescription = "Todas estas herramientas son completamente gratuitas. No guardamos tus datos personales.";
 
   return (
     <div className="min-h-screen">
@@ -126,7 +121,7 @@ export function ToolsLanding({ locale }: ToolsLandingProps) {
                     {tool.comingSoon && (
                       <div className="absolute top-4 right-4 z-10">
                         <span className="px-3 py-1 text-xs font-semibold rounded-full bg-accent2/20 text-accent2 border border-accent2/30">
-                          {isEnglish ? "Coming soon" : "Próximamente"}
+                          Próximamente
                         </span>
                       </div>
                     )}
@@ -162,25 +157,21 @@ export function ToolsLanding({ locale }: ToolsLandingProps) {
                       <div>
                         {tool.action === "compressor" && !tool.comingSoon ? (
                           <Button variant="gold" className="w-full" onClick={() => setIsCompressorOpen(true)}>
-                            {isEnglish ? "Open compressor" : "Abrir compresor"}
+                            Abrir compresor
                           </Button>
                         ) : tool.action === "formatter" && !tool.comingSoon ? (
                           <Button variant="gold" className="w-full" onClick={() => setIsFormatterOpen(true)}>
-                            {isEnglish ? "Open formatter" : "Abrir formatter"}
+                            Abrir formatter
                           </Button>
                         ) : tool.action === "gradient" && !tool.comingSoon ? (
                           <Button variant="gold" className="w-full" onClick={() => setIsGradientOpen(true)}>
-                            {isEnglish ? "Open gradient" : "Abrir generador"}
+                            Abrir generador
                           </Button>
                         ) : (
                           <Button asChild variant={tool.comingSoon ? "ghost" : "gold"} disabled={tool.comingSoon} className="w-full">
                             <Link href={href}>
                               {tool.comingSoon
-                                ? isEnglish
-                                  ? "Coming soon"
-                                  : "Próximamente"
-                                : isEnglish
-                                ? "Use tool"
+                                ? "Próximamente"
                                 : "Usar herramienta"}
                             </Link>
                           </Button>
@@ -207,15 +198,15 @@ export function ToolsLanding({ locale }: ToolsLandingProps) {
                 <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="text-center p-4 rounded-lg bg-bg-elev-2 border border/50">
                     <p className="text-3xl font-bold text-accent2 mb-1">100%</p>
-                    <p className="text-xs text-muted">{isEnglish ? "Free" : "Gratis"}</p>
+                    <p className="text-xs text-muted">Gratis</p>
                   </div>
                   <div className="text-center p-4 rounded-lg bg-bg-elev-2 border border/50">
                     <p className="text-3xl font-bold text-accent2 mb-1">0</p>
-                    <p className="text-xs text-muted">{isEnglish ? "Accounts" : "Registros"}</p>
+                    <p className="text-xs text-muted">Registros</p>
                   </div>
                   <div className="text-center p-4 rounded-lg bg-bg-elev-2 border border/50">
                     <p className="text-3xl font-bold text-accent2 mb-1">∞</p>
-                    <p className="text-xs text-muted">{isEnglish ? "Unlimited" : "Sin límites"}</p>
+                    <p className="text-xs text-muted">Sin límites</p>
                   </div>
                 </ul>
               </CardContent>

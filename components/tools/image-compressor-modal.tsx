@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 
@@ -30,37 +29,26 @@ const QUALITY_PRESETS = [
   {
     id: "high",
     quality: 75,
-    label: { en: "High", es: "Alta" },
-    helper: {
-      en: "Best quality · light savings (~30-40%)",
-      es: "Mejor calidad · ahorro ligero (~30-40%)",
-    },
+    label: "Alta (75%)",
+    helper: "Mejor calidad · ahorro ligero (~30-40%)",
   },
   {
     id: "medium",
     quality: 55,
-    label: { en: "Medium", es: "Media" },
-    helper: {
-      en: "Balanced · solid savings (~45-60%)",
-      es: "Equilibrada · buen ahorro (~45-60%)",
-    },
+    label: "Media (55%)",
+    helper: "Equilibrada · buen ahorro (~45-60%)",
   },
   {
     id: "low",
     quality: 35,
-    label: { en: "Low", es: "Baja" },
-    helper: {
-      en: "Aggressive · maximum savings (~65-75%)",
-      es: "Agresiva · máximo ahorro (~65-75%)",
-    },
+    label: "Baja (35%)",
+    helper: "Agresiva · máximo ahorro (~65-75%)",
   },
 ] as const;
 
 type QualityPresetId = (typeof QUALITY_PRESETS)[number]["id"] | "custom";
 
 export function ImageCompressorModal({ open, onClose }: ImageCompressorModalProps) {
-  const locale = useLocale();
-  const isEnglish = locale === "en";
   const [preset, setPreset] = useState<QualityPresetId>("medium");
   const [quality, setQuality] = useState<number>(
     QUALITY_PRESETS.find((item) => item.id === "medium")?.quality ?? 55
@@ -73,39 +61,34 @@ export function ImageCompressorModal({ open, onClose }: ImageCompressorModalProp
 
   const copy = useMemo(
     () => ({
-      title: isEnglish ? "Image Compressor" : "Compresor de Imágenes",
-      description: isEnglish
-        ? "Upload your images, adjust the quality and download optimised versions in seconds."
-        : "Sube tus imágenes, ajusta la calidad y descarga versiones optimizadas en segundos.",
-      selectLabel: isEnglish ? "Select images" : "Selecciona imágenes",
-      selectHelp: isEnglish
-        ? "Supported formats: PNG, JPG, JPEG, WEBP. Max file size per image: 20MB."
-        : "Formatos soportados: PNG, JPG, JPEG, WEBP. Tamaño máximo por archivo: 20MB.",
-      qualityLabel: isEnglish ? "Quality" : "Calidad",
-      qualityHint: isEnglish ? "Recommended: 50% - 70%" : "Recomendado: 50% - 70%",
-      outputLabel: isEnglish ? "Output format" : "Formato de salida",
-      previewTitle: isEnglish ? "Preview" : "Vista previa",
-      emptyList: isEnglish ? "No files yet. Upload one to start." : "Aún no subes archivos. Súbelos para comenzar.",
-      resultsTitle: isEnglish ? "Results" : "Resultados",
-      download: isEnglish ? "Download" : "Descargar",
-      downloadAll: isEnglish ? "Download all" : "Descargar todas",
-      compress: isEnglish ? "Compress images" : "Comprimir imágenes",
-      compressing: isEnglish ? "Compressing..." : "Comprimiendo...",
-      emptySelection: isEnglish
-        ? "Select at least one image to compress."
-        : "Selecciona al menos una imagen para comprimir.",
-      genericError: isEnglish ? "Error compressing images" : "Error al comprimir las imágenes",
-      savingsLabel: isEnglish ? "% savings" : "% de ahorro",
-      noSavings: isEnglish ? "No savings (kept original)" : "Sin ahorro (se mantiene el original)",
-      presetsTitle: isEnglish ? "Quick presets" : "Presets rápidos",
-      presetsCustom: isEnglish ? "Custom" : "Personalizada",
+      title: "Compresor de imágenes",
+      description: "Sube tus imágenes, ajusta la calidad y descarga versiones optimizadas en segundos.",
+      selectLabel: "Selecciona imágenes",
+      selectHelp: "Formatos soportados: PNG, JPG, JPEG, WEBP. Tamaño máximo por archivo: 20MB.",
+      qualityLabel: "Calidad",
+      qualityHint: "Recomendado: 50% - 70%",
+      outputLabel: "Formato de salida",
+      previewTitle: "Vista previa",
+      emptyList: "Aún no subes archivos. Súbelos para comenzar.",
+      resultsTitle: "Resultados",
+      download: "Descargar",
+      downloadAll: "Descargar todas",
+      compress: "Comprimir imágenes",
+      compressing: "Comprimiendo...",
+      emptySelection: "Selecciona al menos una imagen para comprimir.",
+      genericError: "Error al comprimir las imágenes",
+      savingsLabel: "% de ahorro",
+      noSavings: "Sin ahorro (se mantiene el original)",
+      presetsTitle: "Presets rápidos",
+      presetsCustom: "Personalizada",
+      presetsCustomHint: "Ajusta el slider manualmente para afinar la calidad.",
       errors: {
-        context: isEnglish ? "Unable to get canvas context" : "No fue posible obtener el contexto del canvas",
-        compress: isEnglish ? "Unable to compress the image" : "No fue posible comprimir la imagen",
-        process: isEnglish ? "Unable to process the file" : "No fue posible procesar el archivo",
+        context: "No fue posible obtener el contexto del canvas",
+        compress: "No fue posible comprimir la imagen",
+        process: "No fue posible procesar el archivo",
       },
     }),
-    [isEnglish]
+    []
   );
 
   const resetState = useCallback(() => {
@@ -312,12 +295,8 @@ export function ImageCompressorModal({ open, onClose }: ImageCompressorModalProp
                             : "border-white/10 bg-[#101823] text-white/70 hover:border-accent/40 hover:text-white"
                         }`}
                       >
-                        <span className="block text-sm font-semibold">
-                          {isEnglish ? item.label.en : item.label.es}
-                        </span>
-                        <span className="block text-xs text-white/60">
-                          {isEnglish ? item.helper.en : item.helper.es}
-                        </span>
+                        <span className="block text-sm font-semibold">{item.label}</span>
+                        <span className="block text-xs text-white/60">{item.helper}</span>
                       </button>
                     );
                   })}
@@ -331,11 +310,7 @@ export function ImageCompressorModal({ open, onClose }: ImageCompressorModalProp
                     }`}
                   >
                     <span className="block text-sm font-semibold">{copy.presetsCustom}</span>
-                    <span className="block text-xs text-white/60">
-                      {isEnglish
-                        ? "Adjust the slider manually to fine-tune the quality."
-                        : "Ajusta el slider manualmente para afinar la calidad."}
-                    </span>
+                    <span className="block text-xs text-white/60">{copy.presetsCustomHint}</span>
                   </button>
                 </div>
               </div>

@@ -44,8 +44,8 @@ export function buildAlternateLanguages(path?: string, siteUrl: string = SITE_UR
   }, {});
 }
 
-export function getLocalizedTitle(locale: string, es: string, en: string) {
-  return locale === "en" ? en : es;
+export function getLocalizedTitle(_locale: string, es: string) {
+  return es;
 }
 
 

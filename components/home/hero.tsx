@@ -2,7 +2,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
@@ -12,19 +11,15 @@ import { useEffect, useState } from "react";
 import { useContactModal } from "@/components/contact/contact-modal-provider";
 
 export function Hero() {
-  const pathname = usePathname();
-  const locale = pathname.split("/")[1] || "es";
-  const isEnglish = locale === "en";
+  const locale = "es";
+  const typedText = "Webs inteligentes impulsadas por IA.";
+  const fullText = typedText;
   const { open } = useContactModal();
 
-  const typedText = isEnglish ? "AI-powered smart websites." : "Webs inteligentes impulsadas por IA.";
-  const fullText = typedText;
   const [displayedText, setDisplayedText] = useState(fullText);
-  const subheading = isEnglish
-    ? "Design, speed, and SEO handled by one team."
-    : "Diseño, velocidad y SEO en un solo equipo.";
-  const primaryCta = isEnglish ? "Calculate project" : "Calcular proyecto";
-  const secondaryCta = isEnglish ? "Contact us" : "Contactar";
+  const subheading = "Diseño, velocidad y SEO en un solo equipo.";
+  const primaryCta = "Calcular proyecto";
+  const secondaryCta = "Contactar";
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -92,7 +87,7 @@ export function Hero() {
               </span>
             </span>{" "}
             <span className="bg-gradient-to-r from-accent via-accent2 to-accent bg-clip-text text-transparent">
-              {isEnglish ? "World-class performance." : "Rendimiento de clase mundial."}
+              Rendimiento de clase mundial.
             </span>
           </motion.h1>
 
@@ -117,7 +112,7 @@ export function Hero() {
             </Button>
           </motion.div>
 
-          <HeroStats locale={locale} />
+          <HeroStats />
         </motion.div>
       </div>
     </section>

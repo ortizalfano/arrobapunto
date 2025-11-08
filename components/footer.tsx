@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useLocale } from "next-intl";
 import { useContactModal } from "@/components/contact/contact-modal-provider";
 
 export function Footer() {
-  const locale = useLocale();
+  const locale = "es";
   const { open } = useContactModal();
 
   return (
@@ -68,7 +67,7 @@ export function Footer() {
                   onClick={open}
                   className="text-muted hover:text-accent transition-colors"
                 >
-                  {locale === "en" ? "Contact" : "Contacto"}
+                  Contacto
                 </button>
               </li>
             </ul>
@@ -76,7 +75,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border/50 text-center text-sm text-muted">
-          © {new Date().getFullYear()} ArrobaPunto. All rights reserved.
+          © {new Date().getFullYear()} ArrobaPunto. Todos los derechos reservados.
         </div>
       </div>
     </footer>

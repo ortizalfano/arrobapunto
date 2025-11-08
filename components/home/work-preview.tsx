@@ -3,55 +3,9 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink, TrendingUp, Zap, TrendingDown, Eye } from "lucide-react";
-import { usePathname } from "next/navigation";
 import { fadeUp, stagger, scaleIn } from "@/lib/motion";
 
-const featuredProjectsEn = [
-  {
-    id: 1,
-    title: "Premium Marketplace",
-    sector: "ARAP - Government of Panama",
-    description: "Marketplace connecting aquatic resource sellers and producers with buyers.",
-    image: "🎨",
-    metrics: [
-      { label: "Conversion", value: "+34%", icon: TrendingUp },
-      { label: "LCP", value: "0.8s", icon: Zap },
-      { label: "Bounce", value: "-22%", icon: TrendingDown },
-    ],
-    color: "from-purple-500/20 to-pink-500/20",
-    tags: ["PHP", "PagueloFacil", "MySQL"],
-  },
-  {
-    id: 2,
-    title: "B2B SaaS Platform",
-    sector: "Tech",
-    description: "Analytics dashboard with real-time data visualisations and insights.",
-    image: "🚀",
-    metrics: [
-      { label: "Users", value: "+125%", icon: TrendingUp },
-      { label: "Retention", value: "89%", icon: Eye },
-      { label: "Speed", value: "0.9s", icon: Zap },
-    ],
-    color: "from-blue-500/20 to-cyan-500/20",
-    tags: ["React", "GraphQL", "D3.js"],
-  },
-  {
-    id: 3,
-    title: "Boutique Digital Brand",
-    sector: "Design",
-    description: "Complete digital identity built on a modular design system.",
-    image: "✨",
-    metrics: [
-      { label: "Brand lift", value: "+67%", icon: TrendingUp },
-      { label: "Engagement", value: "4.2x", icon: Eye },
-      { label: "Recognition", value: "91%", icon: TrendingUp },
-    ],
-    color: "from-amber-500/20 to-orange-500/20",
-    tags: ["Figma", "Brand System", "Motion"],
-  },
-];
-
-const featuredProjectsEs = [
+const featuredProjects = [
   {
     id: 1,
     title: "Marketplace Premium",
@@ -97,16 +51,10 @@ const featuredProjectsEs = [
 ];
 
 export function WorkPreview() {
-  const pathname = usePathname();
-  const locale = pathname.split("/")[1] || "es";
-  const isEnglish = locale === "en";
-  const featuredProjects = isEnglish ? featuredProjectsEn : featuredProjectsEs;
-  const badgeText = isEnglish ? "Success stories" : "Casos de éxito";
-  const titleLead = isEnglish ? "Work that" : "Trabajos que";
-  const titleHighlight = isEnglish ? "transforms businesses" : "transforman negocios";
-  const subtitle = isEnglish
-    ? "Every project is a story of growth, innovation, and measurable impact."
-    : "Cada proyecto es una historia de crecimiento, innovación y resultados medibles.";
+  const badgeText = "Casos de éxito";
+  const titleLead = "Trabajos que";
+  const titleHighlight = "transforman negocios";
+  const subtitle = "Cada proyecto es una historia de crecimiento, innovación y resultados medibles.";
 
   return (
     <section className="w-full pt-0 pb-12 sm:pb-16 relative overflow-hidden">

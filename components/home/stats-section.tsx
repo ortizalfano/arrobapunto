@@ -1,24 +1,18 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-
 export function StatsSection() {
-  const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'es';
-  const isEnglish = locale === 'en';
-
   const stats = [
     {
       value: "98",
-      label: isEnglish ? "Pagespeed Score" : "Score de Pagespeed",
+      label: "Score de Pagespeed",
     },
     {
       value: "99",
-      label: isEnglish ? "SEO" : "SEO",
+      label: "SEO",
     },
     {
       value: "100%",
-      label: isEnglish ? "Satisfaction" : "Satisfacción",
+      label: "Satisfacción",
     },
   ];
 

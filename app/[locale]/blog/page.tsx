@@ -12,23 +12,18 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const isEnglish = locale === "en";
   const canonicalUrl = createCanonical(locale, "/blog");
 
   return {
-    title: isEnglish ? "Blog & resources" : "Blog y recursos",
-    description: isEnglish
-      ? "Insights on design, development, performance and AI workflows from ArrobaPunto.com."
-      : "Ideas sobre diseño, desarrollo, rendimiento e inteligencia artificial por ArrobaPunto.com.",
+    title: "Blog y recursos",
+    description: "Ideas sobre diseño, desarrollo, rendimiento e inteligencia artificial por ArrobaPunto.com.",
     alternates: {
       canonical: canonicalUrl,
       languages: buildAlternates("/blog"),
     },
     openGraph: {
-      title: isEnglish ? "Blog & resources" : "Blog y recursos",
-      description: isEnglish
-        ? "Articles for product teams covering UX, engineering, SEO and automation."
-        : "Artículos para equipos digitales sobre UX, ingeniería, SEO y automatización.",
+      title: "Blog y recursos",
+      description: "Artículos para equipos digitales sobre UX, ingeniería, SEO y automatización.",
       url: canonicalUrl,
     },
   };
@@ -40,8 +35,7 @@ export default async function BlogPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const isEnglish = locale === "en";
-  const formatter = new Intl.DateTimeFormat(isEnglish ? "en-US" : "es-ES", {
+  const formatter = new Intl.DateTimeFormat("es-ES", {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -56,13 +50,11 @@ export default async function BlogPage({
     "@type": "Blog",
     name: "ArrobaPunto.com Blog",
     url: canonicalUrl,
-    inLanguage: isEnglish ? "en" : "es",
-    description: isEnglish
-      ? "Insights on design, development, AI and digital strategy."
-      : "Ideas sobre diseño, desarrollo, inteligencia artificial y estrategia digital.",
+    inLanguage: "es",
+    description: "Ideas sobre diseño, desarrollo, inteligencia artificial y estrategia digital.",
     blogPost: sortedPosts.map((post) => ({
       "@type": "BlogPosting",
-      headline: isEnglish ? post.title.en : post.title.es,
+      headline: post.title.es,
       datePublished: post.publishedAt,
       url: createCanonical(locale, `/blog/${post.slug}`),
       author: {
@@ -82,23 +74,21 @@ export default async function BlogPage({
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4">
             <span className="bg-gradient-to-r from-content via-accent2 to-content bg-clip-text text-transparent">
-              {isEnglish ? "Blog" : "Blog"}
+              Blog
             </span>
           </h1>
           <p className="text-muted-foreground text-lg">
-            {isEnglish
-              ? "Articles on design, development and digital marketing"
-              : "Artículos sobre diseño, desarrollo y marketing digital"}
+            Artículos sobre diseño, desarrollo y marketing digital
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sortedPosts.map((post) => {
-            const title = isEnglish ? post.title.en : post.title.es;
-            const description = isEnglish ? post.excerpt.en : post.excerpt.es;
-            const category = isEnglish ? post.category.en : post.category.es;
-            const readTime = isEnglish ? post.readTime.en : post.readTime.es;
-            const imageAlt = isEnglish ? post.imageAlt.en : post.imageAlt.es;
+            const title = post.title.es;
+            const description = post.excerpt.es;
+            const category = post.category.es;
+            const readTime = post.readTime.es;
+            const imageAlt = post.imageAlt.es;
             const formattedDate = formatter.format(new Date(post.publishedAt));
 
             return (

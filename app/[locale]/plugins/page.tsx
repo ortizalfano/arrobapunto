@@ -32,23 +32,20 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const isEnglish = locale === 'en';
   const canonicalUrl = createCanonical(locale, "/plugins");
 
   return {
-    title: isEnglish ? "WordPress plugins & labs" : "Plugins de WordPress y laboratorio digital",
-    description: isEnglish
-      ? "Discover ArrobaPunto.com experimental WordPress plugins focused on automation, billing and branded experiences."
-      : "Descubre los plugins experimentales de ArrobaPunto.com para automatización, facturación y experiencias personalizadas en WordPress.",
+    title: "Plugins de WordPress y laboratorio digital",
+    description:
+      "Descubre los plugins experimentales de ArrobaPunto.com para automatización, facturación y experiencias personalizadas en WordPress.",
     alternates: {
       canonical: canonicalUrl,
       languages: buildAlternates("/plugins"),
     },
     openGraph: {
-      title: isEnglish ? "WordPress plugins & labs" : "Plugins de WordPress y laboratorio digital",
-      description: isEnglish
-        ? "Experimental plugins crafted for creators: invoicing, project dashboards and custom login flows."
-        : "Plugins experimentales para creadores: facturación inteligente, tableros de proyectos y flujos de login personalizados.",
+      title: "Plugins de WordPress y laboratorio digital",
+      description:
+        "Plugins experimentales para creadores: facturación inteligente, tableros de proyectos y flujos de login personalizados.",
       url: canonicalUrl,
     },
   };
@@ -59,15 +56,11 @@ export default async function PluginsPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-  const isEnglish = locale === 'en';
-
-  const badgeText = isEnglish ? "WordPress Plugins" : "Plugins de WordPress";
-  const titlePrimary = isEnglish ? "Plugins" : "Plugins";
-  const titleAccent = isEnglish ? "& Labs" : "& Labs";
-  const subtitle = isEnglish
-    ? "WordPress plugins, by developers for developers"
-    : "Plugins para WordPress, por desarrolladores para desarrolladores";
+  await params;
+  const badgeText = "Plugins de WordPress";
+  const titlePrimary = "Plugins";
+  const titleAccent = "& Labs";
+  const subtitle = "Plugins para WordPress, por desarrolladores para desarrolladores";
 
   const productsSchema = {
     "@context": "https://schema.org",
@@ -161,7 +154,7 @@ export default async function PluginsPage({
 
                     <CardContent className="mt-auto">
                       <p className="text-sm text-muted-foreground font-medium">
-                        {isEnglish ? "In development" : "En desarrollo"}
+                        En desarrollo
                       </p>
                     </CardContent>
                   </Card>
