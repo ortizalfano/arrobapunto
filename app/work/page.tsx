@@ -3,7 +3,6 @@ import { ExternalLink, TrendingUp, Eye, Zap, TrendingDown } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
 import { SITE_URL } from "@/lib/seo";
-import { locales } from "@/lib/locales";
 
 const projects = [
   {
@@ -18,7 +17,6 @@ const projects = [
       { label: "Rebote", value: "-22%", icon: TrendingDown },
     ],
     color: "from-purple-500/20 to-pink-500/20",
-    textColor: "text-purple-200",
     tags: ["Next.js", "Stripe", "Prisma"],
   },
   {
@@ -33,7 +31,6 @@ const projects = [
       { label: "Velocidad", value: "0.9s", icon: Zap },
     ],
     color: "from-blue-500/20 to-cyan-500/20",
-    textColor: "text-cyan-200",
     tags: ["React", "GraphQL", "D3.js"],
   },
   {
@@ -48,7 +45,6 @@ const projects = [
       { label: "Recordación", value: "91%", icon: TrendingUp },
     ],
     color: "from-amber-500/20 to-orange-500/20",
-    textColor: "text-orange-200",
     tags: ["Figma", "Brand System", "Motion"],
   },
   {
@@ -60,10 +56,9 @@ const projects = [
     metrics: [
       { label: "GMV", value: "$2.5M", icon: TrendingUp },
       { label: "Vendors", value: "+450", icon: TrendingUp },
-      { label: "Countries", value: "42", icon: Eye },
+      { label: "Países", value: "42", icon: Eye },
     ],
     color: "from-emerald-500/20 to-teal-500/20",
-    textColor: "text-emerald-200",
     tags: ["Platform", "Multi-tenant", "International"],
   },
   {
@@ -78,8 +73,7 @@ const projects = [
       { label: "Churn", value: "2.1%", icon: TrendingDown },
     ],
     color: "from-indigo-500/20 to-blue-500/20",
-    textColor: "text-indigo-200",
-    tags: ["React Native", "Real-time", "Blockchain"],
+    tags: ["React Native", "Tiempo real", "Blockchain"],
   },
   {
     id: 6,
@@ -93,42 +87,24 @@ const projects = [
       { label: "Tiempo", value: "2 min", icon: Zap },
     ],
     color: "from-violet-500/20 to-purple-500/20",
-    textColor: "text-violet-200",
-    tags: ["AI/ML", "GPT-4", "Automation"],
+    tags: ["AI/ML", "GPT-4", "Automatización"],
   },
 ];
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const canonicalUrl = createCanonical(locale, "/work");
-
-  return {
+export const metadata: Metadata = {
+  title: "Casos de éxito",
+  description: "Selección de ecommerce, SaaS y plataformas impulsadas por IA creadas por ArrobaPunto.com.",
+  alternates: {
+    canonical: `${SITE_URL}/work`,
+  },
+  openGraph: {
     title: "Casos de éxito",
-    description: "Selección de ecommerce, SaaS y plataformas impulsadas por IA creadas por ArrobaPunto.com.",
-    alternates: {
-      canonical: canonicalUrl,
-      languages: buildAlternates("/work"),
-    },
-    openGraph: {
-      title: "Casos de éxito",
-      description: "Proyectos que elevaron conversión, velocidad y retención para nuestros clientes.",
-      url: canonicalUrl,
-    },
-  };
-}
+    description: "Proyectos que elevaron conversión, velocidad y retención para nuestros clientes.",
+    url: `${SITE_URL}/work`,
+  },
+};
 
-export default async function WorkPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  const ctaHref = `/${locale}/play`;
-
+export default function WorkPage() {
   const projectsSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -142,11 +118,8 @@ export default async function WorkPage({
 
   return (
     <div className="min-h-screen">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsSchema) }}
-      />
-      {/* Hero Section */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsSchema) }} />
+
       <section className="relative py-8 sm:py-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-accent2/5 via-transparent to-accent/5" />
         <div className="container relative z-10">
@@ -172,17 +145,13 @@ export default async function WorkPage({
         </div>
       </section>
 
-      {/* Projects Grid */}
       <section className="py-8 sm:py-12 pattern-dots">
         <div className="container max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project) => (
               <div key={project.id}>
                 <Card className="h-full group overflow-hidden border-accent/10">
-                  {/* Image placeholder with gradient */}
-                  <div
-                    className={`aspect-video bg-gradient-to-br ${project.color} rounded-t-xl flex items-center justify-center text-6xl mb-4`}
-                  >
+                  <div className={`aspect-video bg-gradient-to-br ${project.color} rounded-t-xl flex items-center justify-center text-6xl mb-4`}>
                     {project.image}
                   </div>
 
@@ -196,14 +165,11 @@ export default async function WorkPage({
                       </div>
                       <ExternalLink className="h-5 w-5 text-muted group-hover:text-accent2 transition-colors" />
                     </div>
-                    <CardDescription className="leading-relaxed">
-                      {project.description}
-                    </CardDescription>
+                    <CardDescription className="leading-relaxed">{project.description}</CardDescription>
                   </CardHeader>
 
                   <CardContent className="space-y-4">
-                    {/* Metrics */}
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {project.metrics.map((metric, i) => {
                         const Icon = metric.icon;
                         return (
@@ -219,13 +185,9 @@ export default async function WorkPage({
                       })}
                     </div>
 
-                    {/* Tags */}
                     <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-1 text-xs rounded-full bg-bg-elev-2 border border/50 text-muted"
-                        >
+                        <span key={tag} className="px-2 py-1 text-xs rounded-full bg-bg-elev-2 border border/50 text-muted">
                           {tag}
                         </span>
                       ))}
@@ -236,7 +198,6 @@ export default async function WorkPage({
             ))}
           </div>
 
-          {/* CTA Section */}
           <div className="mt-20 text-center">
             <Card className="max-w-2xl mx-auto border-accent/20 bg-gradient-to-br from-bg-elev-1 to-bg-elev-2 relative overflow-hidden">
               <div className="absolute top-0 left-0 right-0 h-px bg-aurora-edge" />
@@ -250,15 +211,13 @@ export default async function WorkPage({
               </CardHeader>
               <CardContent>
                 <div className="flex gap-3 justify-center">
-                  <div>
-                    <Link
-                      href={ctaHref}
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-gold-ribbon text-accent-ink rounded-lg font-semibold hover:shadow-glow transition-all"
-                    >
-                      Empezar Brief Express
-                      <ExternalLink className="h-4 w-4" />
-                    </Link>
-                  </div>
+                  <Link
+                    href="/play"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-gold-ribbon text-accent-ink rounded-lg font-semibold hover:shadow-glow transition-all"
+                  >
+                    Empezar Brief Express
+                    <ExternalLink className="h-4 w-4" />
+                  </Link>
                 </div>
               </CardContent>
             </Card>
@@ -267,19 +226,6 @@ export default async function WorkPage({
       </section>
     </div>
   );
-}
-
-function createCanonical(locale: string, path: string) {
-  const cleanPath = path ? (path.startsWith("/") ? path : `/${path}`) : "";
-  return `${SITE_URL}/${locale}${cleanPath}`;
-}
-
-function buildAlternates(path: string) {
-  const alternateMap: Record<string, string> = {};
-  locales.forEach((locale) => {
-    alternateMap[locale] = createCanonical(locale, path);
-  });
-  return alternateMap;
 }
 
 

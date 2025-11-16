@@ -1,5 +1,3 @@
-import { locales } from "./locales";
-
 const FALLBACK_SITE_URL = "https://arrobapunto.com";
 
 const sanitizeUrl = (input?: string | null) => {
@@ -30,21 +28,19 @@ function normalizePath(path: string | undefined) {
   return path.startsWith("/") ? path : `/${path}`;
 }
 
-export function buildCanonicalUrl(locale: string, path?: string, siteUrl: string = SITE_URL) {
+export function buildCanonicalUrl(path?: string, siteUrl: string = SITE_URL) {
   const normalizedPath = normalizePath(path);
-  const localePrefix = `/${locale}`;
-  return `${siteUrl}${localePrefix}${normalizedPath}`;
+  return `${siteUrl}${normalizedPath}`;
 }
 
 export function buildAlternateLanguages(path?: string, siteUrl: string = SITE_URL) {
   const normalizedPath = normalizePath(path);
-  return locales.reduce<Record<string, string>>((acc, locale) => {
-    acc[locale] = `${siteUrl}/${locale}${normalizedPath}`;
-    return acc;
-  }, {});
+  return {
+    es: `${siteUrl}${normalizedPath}`,
+  };
 }
 
-export function getLocalizedTitle(_locale: string, es: string) {
+export function getLocalizedTitle(es: string) {
   return es;
 }
 

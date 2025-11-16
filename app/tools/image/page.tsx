@@ -1,13 +1,10 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { ImageProcessor } from "@/components/tools/image-processor";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ImageIcon } from "lucide-react";
 
 export default function ImageToolsPage() {
-  const t = useTranslations("Tools.image");
-
   return (
     <div className="container px-4 py-12">
       <div className="max-w-4xl mx-auto">
@@ -15,8 +12,8 @@ export default function ImageToolsPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
             <ImageIcon className="h-8 w-8 text-primary" />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">{t("title")}</h1>
-          <p className="text-muted-foreground text-lg">{t("description")}</p>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">Compresor y Convertidor de Imágenes</h1>
+          <p className="text-muted-foreground text-lg">Optimiza tus imágenes JPG, PNG o WEBP sin perder calidad. Procesa hasta 10 imágenes simultáneamente.</p>
         </div>
 
         <Card>

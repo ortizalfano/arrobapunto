@@ -88,7 +88,7 @@ export function WorkPreview() {
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-10">
           {featuredProjects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -123,7 +123,7 @@ export function WorkPreview() {
                   </CardHeader>
 
                   <CardContent className="space-y-4 flex flex-col flex-1">
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {project.metrics.map((metric, i) => {
                         const Icon = metric.icon;
                         return (

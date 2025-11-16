@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ContactModalProvider } from "@/components/contact/contact-modal-provider";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { Analytics } from "@/components/analytics";
 import { SITE_URL, METADATA_BASE } from "@/lib/seo";
 
@@ -117,12 +120,13 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body
-        suppressHydrationWarning
-        className={`${inter.variable} ${manrope.variable} font-sans antialiased dark`}
-      >
+      <body suppressHydrationWarning className={`${inter.variable} ${manrope.variable} font-sans antialiased dark`}>
         <ThemeProvider>
-          {children}
+          <ContactModalProvider>
+            <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+          </ContactModalProvider>
         </ThemeProvider>
         <Analytics />
       </body>

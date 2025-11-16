@@ -1,18 +1,37 @@
-import createMiddleware from "next-intl/middleware";
+import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const intlMiddleware = createMiddleware({
-  locales: ["es", "en"],
-  defaultLocale: "es",
-  localePrefix: "always",
-});
-
 export default function middleware(request: NextRequest) {
-  return intlMiddleware(request);
+  const { pathname } = request.nextUrl;
+
+  if (pathname === "/es" || pathname === "/es/") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+    return NextResponse.redirect(url, 308);
+  }
+
+  if (pathname.startsWith("/es/")) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.replace(/^\/es/, "") || "/";
+    return NextResponse.redirect(url, 308);
+  }
+
+  if (pathname === "/en" || pathname === "/en/") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+    return NextResponse.redirect(url, 308);
+  }
+
+  if (pathname.startsWith("/en/")) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.replace(/^\/en/, "") || "/";
+    return NextResponse.redirect(url, 308);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  // Match only internationalized pathnames
-  matcher: ["/", "/(es|en)/:path*"],
+  matcher: ["/((?!_next|api|favicon.ico).*)"],
 };
 

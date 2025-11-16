@@ -12,7 +12,7 @@ const clients = Array.from({ length: LOGO_COUNT }, (_, i) => ({
 
 export function TrustBar() {
   return (
-    <section className="py-12 bg-white text-black">
+    <section className="py-10 sm:py-12 bg-white text-black">
       <div className="container px-4">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -26,7 +26,7 @@ export function TrustBar() {
             en nosotros
           </span>
         </motion.h2>
-        <div className="flex flex-wrap items-center justify-center gap-12">
+        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12">
           {clients.map((client, index) => (
             <motion.div
               key={client.name}
@@ -40,7 +40,7 @@ export function TrustBar() {
                 alt={client.name}
                 width={120}
                 height={40}
-                className="h-10 w-auto object-contain"
+                className="h-8 sm:h-10 w-auto object-contain opacity-80"
               />
             </motion.div>
           ))}
