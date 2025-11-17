@@ -5,7 +5,6 @@ import { Sparkles, Zap, CheckCircle2, Code2, ShoppingCart, Wrench } from "lucide
 import { Calculator } from "@/components/services/calculator";
 import { Metadata } from "next";
 import { SITE_URL } from "@/lib/seo";
-import { locales } from "@/lib/locales";
 
 const services = [
   {
@@ -70,41 +69,22 @@ const services = [
   },
 ];
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const canonicalUrl = createCanonical(locale, "/services");
-
-  return {
+export const metadata: Metadata = {
+  title: "Servicios premium de desarrollo web",
+  description:
+    "Servicios boutique de desarrollo web, ecommerce y proyectos personalizados con foco en rendimiento y conversión.",
+  alternates: {
+    canonical: `${SITE_URL}/services`,
+  },
+  openGraph: {
     title: "Servicios premium de desarrollo web",
     description:
       "Servicios boutique de desarrollo web, ecommerce y proyectos personalizados con foco en rendimiento y conversión.",
-    alternates: {
-      canonical: canonicalUrl,
-      languages: buildAlternates("/services"),
-    },
-    openGraph: {
-      title: "Servicios premium de desarrollo web",
-      description:
-        "Servicios boutique de desarrollo web, ecommerce y proyectos personalizados con foco en rendimiento y conversión.",
-      url: canonicalUrl,
-    },
-  };
-}
+    url: `${SITE_URL}/services`,
+  },
+};
 
-export default async function ServicesPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  const defaultCtaLabel = "Solicitar presupuesto";
-  const briefCtaLabel = "Crear Brief Express";
-  const playHref = `/${locale}/play`;
-
+export default function ServicesPage() {
   const servicesSchema = {
     "@context": "https://schema.org",
     "@graph": services.map((service) => {
@@ -134,11 +114,8 @@ export default async function ServicesPage({
 
   return (
     <div className="min-h-screen">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
-      />
-      {/* Hero */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }} />
+
       <section className="relative py-8 sm:py-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-accent2/5 via-transparent to-accent/5" />
         <div className="container relative z-10">
@@ -164,7 +141,6 @@ export default async function ServicesPage({
         </div>
       </section>
 
-      {/* Services */}
       <section className="py-8 sm:py-12 bg-[#0D1217]">
         <div className="container max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -172,9 +148,9 @@ export default async function ServicesPage({
               const Icon = service.icon;
               return (
                 <div key={service.title}>
-                  <Card className={`h-full group border-accent/10 bg-gradient-to-br from-bg-elev-1 to-bg-elev-2 relative overflow-hidden`}>
+                  <Card className="h-full group border-accent/10 bg-gradient-to-br from-bg-elev-1 to-bg-elev-2 relative overflow-hidden">
                     <div className="absolute top-0 left-0 right-0 h-px bg-aurora-edge opacity-0 group-hover:opacity-100 transition-opacity" />
-                    
+
                     <CardHeader>
                       <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-4`}>
                         <Icon className="h-7 w-7 text-accent2" />
@@ -190,9 +166,7 @@ export default async function ServicesPage({
                         </div>
                       </div>
                       <div className="flex flex-wrap items-center gap-2 text-sm text-muted sm:gap-4">
-                        {service.price && (
-                          <p className="text-2xl font-bold text-accent2 text-left text-balance">{service.price}</p>
-                        )}
+                        {service.price && <p className="text-2xl font-bold text-accent2 text-left text-balance">{service.price}</p>}
                         {service.price && service.duration && <span>•</span>}
                         {service.duration && <p>{service.duration}</p>}
                       </div>
@@ -210,8 +184,8 @@ export default async function ServicesPage({
                       </div>
                       <div>
                         <Button asChild className="w-full" variant="gold">
-                          <Link href={playHref}>
-                            {service.cta === "brief" ? briefCtaLabel : defaultCtaLabel}
+                          <Link href={service.cta === "brief" ? "/play" : "/#calculadora"}>
+                            {service.cta === "brief" ? "Crear Brief Express" : "Solicitar presupuesto"}
                           </Link>
                         </Button>
                       </div>
@@ -224,7 +198,6 @@ export default async function ServicesPage({
         </div>
       </section>
 
-      {/* Calculator */}
       <section id="calculadora" className="py-8 sm:py-12 bg-gradient-accent pattern-lines">
         <div className="container max-w-3xl">
           <div className="text-center mb-8">
@@ -250,21 +223,7 @@ export default async function ServicesPage({
           <Calculator />
         </div>
       </section>
-
     </div>
   );
-}
-
-function createCanonical(locale: string, path: string) {
-  const cleanPath = path ? (path.startsWith("/") ? path : `/${path}`) : "";
-  return `${SITE_URL}/${locale}${cleanPath}`;
-}
-
-function buildAlternates(path: string) {
-  const alternateMap: Record<string, string> = {};
-  locales.forEach((locale) => {
-    alternateMap[locale] = createCanonical(locale, path);
-  });
-  return alternateMap;
 }
 

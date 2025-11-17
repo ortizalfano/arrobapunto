@@ -1,10 +1,9 @@
 import { MetadataRoute } from "next";
-import { locales } from "@/lib/locales";
+
+const baseUrl = "https://arrobapunto.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://arrobapunto.com";
-
-  const staticRoutes = [
+  const routes = [
     "",
     "/work",
     "/services",
@@ -12,30 +11,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/studio",
     "/blog",
     "/play",
+    "/tools",
     "/tools/image",
-    "/tools/shorten",
+    "/tools/gradients",
   ];
 
-  const routes: MetadataRoute.Sitemap = [];
-
-  locales.forEach((locale) => {
-    staticRoutes.forEach((route) => {
-      routes.push({
-        url: `${baseUrl}/${locale}${route}`,
-        lastModified: new Date(),
-        changeFrequency: "monthly",
-        priority: route === "" ? 1 : 0.8,
-        alternates: {
-          languages: {
-            es: `${baseUrl}/es${route}`,
-            en: `${baseUrl}/en${route}`,
-          },
-        },
-      });
-    });
-  });
-
-  return routes;
+  return routes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: route === "" ? 1 : 0.8,
+  }));
 }
 
 

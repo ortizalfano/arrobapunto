@@ -3,19 +3,17 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { blogPosts, getBlogPost } from "@/lib/blog-posts";
 import { SITE_URL } from "@/lib/seo";
-import { locales } from "@/lib/locales";
 
-type PageParams = Promise<{ locale: string; slug: string }>;
+type PageParams = Promise<{ slug: string }>;
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
-    locale: "es",
     slug: post.slug,
   }));
 }
 
 export async function generateMetadata({ params }: { params: PageParams }): Promise<Metadata> {
-  const { slug, locale } = await params;
+  const { slug } = await params;
   const post = getBlogPost(slug);
 
   if (!post) {
@@ -24,14 +22,13 @@ export async function generateMetadata({ params }: { params: PageParams }): Prom
     } satisfies Metadata;
   }
 
-  const canonicalUrl = createCanonical(locale, `/blog/${slug}`);
+  const canonicalUrl = `${SITE_URL}/blog/${slug}`;
 
   return {
     title: post.title.es,
     description: post.excerpt.es,
     alternates: {
       canonical: canonicalUrl,
-      languages: buildAlternates(`/blog/${slug}`),
     },
     openGraph: {
       title: post.title.es,
@@ -52,7 +49,7 @@ export async function generateMetadata({ params }: { params: PageParams }): Prom
 }
 
 export default async function BlogArticlePage({ params }: { params: PageParams }) {
-  const { slug, locale } = await params;
+  const { slug } = await params;
   const post = getBlogPost(slug);
 
   if (!post) {
@@ -64,7 +61,7 @@ export default async function BlogArticlePage({ params }: { params: PageParams }
     month: "long",
     year: "numeric",
   });
-  const canonicalUrl = createCanonical(locale, `/blog/${slug}`);
+  const canonicalUrl = `${SITE_URL}/blog/${slug}`;
 
   const title = post.title.es;
   const excerpt = post.excerpt.es;
@@ -106,13 +103,13 @@ export default async function BlogArticlePage({ params }: { params: PageParams }
         "@type": "ListItem",
         position: 1,
         name: "Inicio",
-        item: createCanonical(locale, ""),
+        item: SITE_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: createCanonical(locale, "/blog"),
+        item: `${SITE_URL}/blog`,
       },
       {
         "@type": "ListItem",
@@ -157,9 +154,7 @@ export default async function BlogArticlePage({ params }: { params: PageParams }
 
             return (
               <section key={heading}>
-                <h2 className="font-display text-2xl font-semibold text-white mb-4">
-                  {heading}
-                </h2>
+                <h2 className="font-display text-2xl font-semibold text-white mb-4">{heading}</h2>
                 {paragraphs.map((paragraph, index) => (
                   <p key={index} className="text-white/80 leading-relaxed">
                     {paragraph}
@@ -169,10 +164,7 @@ export default async function BlogArticlePage({ params }: { params: PageParams }
                   <ul className="mt-4 space-y-2 text-white/75">
                     {bullets.map((item) => (
                       <li key={item} className="flex items-start gap-3">
-                        <span
-                          className="mt-1 inline-block h-2 w-2 rounded-full bg-accent"
-                          aria-hidden="true"
-                        />
+                        <span className="mt-1 inline-block h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -183,27 +175,12 @@ export default async function BlogArticlePage({ params }: { params: PageParams }
           })}
 
           <section>
-            <h2 className="font-display text-2xl font-semibold text-white mb-4">
-              En resumen
-            </h2>
+            <h2 className="font-display text-2xl font-semibold text-white mb-4">En resumen</h2>
             <p className="text-white/80 leading-relaxed">{conclusion}</p>
           </section>
         </div>
       </article>
     </div>
   );
-}
-
-function createCanonical(locale: string, path: string) {
-  const cleanPath = path ? (path.startsWith("/") ? path : `/${path}`) : "";
-  return `${SITE_URL}/${locale}${cleanPath}`;
-}
-
-function buildAlternates(path: string) {
-  const alternateMap: Record<string, string> = {};
-  locales.forEach((locale) => {
-    alternateMap[locale] = createCanonical(locale, path);
-  });
-  return alternateMap;
 }
 

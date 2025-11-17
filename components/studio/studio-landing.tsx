@@ -109,7 +109,7 @@ const stats = [
   { label: "Países", value: "10+", icon: MapPin },
 ];
 
-export function StudioLanding({ locale }: { locale: string }) {
+export function StudioLanding() {
   const { open } = useContactModal();
 
   return (
@@ -258,13 +258,13 @@ export function StudioLanding({ locale }: { locale: string }) {
                 return (
                   <div
                     key={item.year}
-                    className={`relative flex items-start gap-6 ${isEven ? "md:flex-row" : "md:flex-row-reverse md:pr-0"}`}
+                    className={`relative group flex flex-col gap-4 md:gap-6 md:items-start ${isEven ? "md:flex-row" : "md:flex-row-reverse md:pr-0"}`}
                   >
-                    <div className="relative z-10 flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-accent2/20 to-accent2/10 border-2 border-accent2/30 flex items-center justify-center group-hover:border-accent2/50 transition-colors">
+                    <div className="relative z-10 flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-accent2/20 to-accent2/10 border-2 border-accent2/30 flex items-center justify-center mx-auto md:mx-0 transition-colors group-hover:border-accent2/50">
                       <Icon className="h-6 w-6 md:h-8 md:w-8 text-accent2" />
                     </div>
 
-                    <div className={`flex-1 ${isEven ? "md:pr-8" : "md:pl-8"}`}>
+                    <div className={`flex-1 w-full ${isEven ? "md:pr-8" : "md:pl-8"}`}>
                       <Card className="border-accent/10 bg-gradient-to-br from-bg-elev-1 to-bg-elev-2 relative overflow-hidden group">
                         <div className="absolute top-0 left-0 right-0 h-px bg-aurora-edge opacity-0 group-hover:opacity-100 transition-opacity" />
                         <CardHeader>
@@ -346,7 +346,7 @@ export function StudioLanding({ locale }: { locale: string }) {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <div>
                   <Link
-                    href={`/${locale}/play`}
+                    href={`/es/play`}
                     className="inline-flex items-center gap-2 px-6 py-3 bg-gold-ribbon text-accent-ink rounded-lg font-semibold hover:shadow-glow transition-all"
                   >
                     Empezar Brief Express

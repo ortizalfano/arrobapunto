@@ -56,7 +56,7 @@ export function Hero() {
   }, [fullText]);
 
   return (
-    <section className="relative flex min-h-[92vh] flex-col items-center justify-center overflow-hidden px-4 py-12">
+    <section className="relative flex min-h-[80vh] sm:min-h-[90vh] lg:min-h-[92vh] flex-col items-center justify-center overflow-hidden px-4 py-12 sm:py-16">
       <div className="absolute inset-0 -z-10 bg-noir-mist" />
 
       <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent2/20 rounded-full blur-3xl pointer-events-none z-[2]" />
@@ -69,8 +69,8 @@ export function Hero() {
           variants={stagger}
           className="max-w-4xl mx-auto"
         >
-          <motion.div variants={fadeUp} className="mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent/10 mb-6">
+          <motion.div variants={fadeUp} className="mb-6 sm:mb-8">
+            <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-accent/10 mb-6">
               <Sparkles className="h-8 w-8 text-accent2" />
             </div>
           </motion.div>
@@ -100,14 +100,14 @@ export function Hero() {
 
           <motion.div
             variants={fadeUp}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center w-full sm:w-auto"
           >
-            <Button asChild variant="gold" size="lg">
+            <Button asChild variant="gold" size="lg" className="w-full sm:w-auto">
               <Link href={`/${locale}#calculadora`}>
                 {primaryCta}
               </Link>
             </Button>
-            <Button variant="ghost" size="lg" type="button" onClick={open}>
+            <Button variant="ghost" size="lg" type="button" onClick={open} className="w-full sm:w-auto">
               {secondaryCta}
             </Button>
           </motion.div>

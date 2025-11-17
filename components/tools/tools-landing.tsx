@@ -9,17 +9,13 @@ import { ImageCompressorModal } from "@/components/tools/image-compressor-modal"
 import { FormatterModal } from "@/components/tools/formatter-modal";
 import { GradientModal } from "@/components/tools/gradient-modal";
 
-type ToolsLandingProps = {
-  locale: string;
-};
-
 const baseTools = [
   {
     icon: ImageIcon,
     title: "Compresor de Imágenes",
     description: "Optimiza y convierte tus imágenes en segundos. Reduce peso sin perder calidad.",
     features: ["JPG, PNG, WEBP", "Batch processing", "ZIP download", "100% gratuito"],
-    slug: "tools/image",
+    href: "/tools/image",
     gradient: "from-purple-500/20 to-pink-500/20",
     emoji: "🎨",
     action: "compressor" as const,
@@ -29,7 +25,7 @@ const baseTools = [
     title: "Formatter Express",
     description: "Formatea y minifica JSON, CSS o JS usando Prettier en segundos.",
     features: ["JSON, CSS, JS", "Modo minify", "Detección automática", "Copiar resultado"],
-    slug: "tools/format",
+    href: "/tools/format",
     gradient: "from-indigo-500/20 to-purple-500/20",
     emoji: "🧹",
     action: "formatter" as const,
@@ -39,7 +35,7 @@ const baseTools = [
     title: "Generador de Gradients",
     description: "Diseña gradientes y glassmorphism con previsualización y código listo.",
     features: ["Lineales y radiales", "Glassmorphism", "Copiar CSS", "Random presets"],
-    slug: "tools/gradients",
+    href: "/tools/gradients",
     gradient: "from-purple-500/20 via-pink-500/20 to-blue-500/20",
     emoji: "🪄",
     action: "gradient" as const,
@@ -49,7 +45,7 @@ const baseTools = [
     title: "Paleta de Colores (Próximamente)",
     description: "Extrae colores dominantes de cualquier imagen y genera paletas automáticas.",
     features: ["Extractor automático", "Exportar a CSS", "Formatos múltiples", "Próximamente"],
-    slug: "tools/colors",
+    href: "/tools/colors",
     gradient: "from-emerald-500/20 to-teal-500/20",
     emoji: "🌈",
     comingSoon: true,
@@ -59,14 +55,14 @@ const baseTools = [
     title: "Optimizador SVG (Próximamente)",
     description: "Optimiza archivos SVG removiendo código innecesario y reduciendo tamaño.",
     features: ["Minificación", "Auto-cleanup", "Compresión", "Próximamente"],
-    slug: "tools/svg",
+    href: "/tools/svg",
     gradient: "from-amber-500/20 to-orange-500/20",
     emoji: "⚡",
     comingSoon: true,
   },
 ];
 
-export function ToolsLanding({ locale }: ToolsLandingProps) {
+export function ToolsLanding() {
   const [isCompressorOpen, setIsCompressorOpen] = useState(false);
   const [isFormatterOpen, setIsFormatterOpen] = useState(false);
   const [isGradientOpen, setIsGradientOpen] = useState(false);
@@ -80,7 +76,6 @@ export function ToolsLanding({ locale }: ToolsLandingProps) {
 
   return (
     <div className="min-h-screen">
-      {/* Hero */}
       <section className="relative py-8 sm:py-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-accent2/5 via-transparent to-accent/5" />
         <div className="container relative z-10">
@@ -104,14 +99,12 @@ export function ToolsLanding({ locale }: ToolsLandingProps) {
         </div>
       </section>
 
-      {/* Tools Grid */}
       <section className="py-8 sm:py-12 bg-[#0D1217]">
         <div className="container max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {baseTools.map((tool) => {
               const Icon = tool.icon;
-              const href = `/${locale}/${tool.slug}`;
-      return (
+              return (
                 <div key={tool.title}>
                   <Card
                     className={`h-full group border-accent/10 bg-gradient-to-br from-bg-elev-1 to-bg-elev-2 relative overflow-hidden ${
@@ -140,7 +133,9 @@ export function ToolsLanding({ locale }: ToolsLandingProps) {
                           <CardTitle className="text-2xl mb-2 group-hover:text-accent2 transition-colors">
                             {tool.title}
                           </CardTitle>
-                          <CardDescription className="text-base leading-relaxed">{tool.description}</CardDescription>
+                          <CardDescription className="text-base leading-relaxed">
+                            {tool.description}
+                          </CardDescription>
                         </div>
                       </div>
                     </CardHeader>
@@ -168,12 +163,13 @@ export function ToolsLanding({ locale }: ToolsLandingProps) {
                             Abrir generador
                           </Button>
                         ) : (
-                          <Button asChild variant={tool.comingSoon ? "ghost" : "gold"} disabled={tool.comingSoon} className="w-full">
-                            <Link href={href}>
-                              {tool.comingSoon
-                                ? "Próximamente"
-                                : "Usar herramienta"}
-                            </Link>
+                          <Button
+                            asChild
+                            variant={tool.comingSoon ? "ghost" : "gold"}
+                            disabled={tool.comingSoon}
+                            className="w-full"
+                          >
+                            <Link href={tool.href}>{tool.comingSoon ? "Próximamente" : "Usar herramienta"}</Link>
                           </Button>
                         )}
                       </div>
@@ -184,7 +180,6 @@ export function ToolsLanding({ locale }: ToolsLandingProps) {
             })}
           </div>
 
-          {/* Info Card */}
           <div className="mt-12">
             <Card className="max-w-3xl mx-auto border-accent/20 bg-gradient-to-br from-bg-elev-1 to-bg-elev-2 relative overflow-hidden">
               <div className="absolute top-0 left-0 right-0 h-px bg-aurora-edge" />

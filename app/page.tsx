@@ -8,53 +8,34 @@ import { AnimatedStars } from "@/components/home/animated-stars";
 import Calculator from "@/components/services/calculator";
 import { Metadata } from "next";
 import { SITE_URL } from "@/lib/seo";
-import { locales } from "@/lib/locales";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const canonicalUrl = createCanonical(locale, "");
-
-  return {
+export const metadata: Metadata = {
+  title: "Diseño y desarrollo web premium",
+  description:
+    "Estudio boutique que crea webs de alto rendimiento, ecommerce y productos digitales impulsados por IA.",
+  alternates: {
+    canonical: SITE_URL,
+  },
+  openGraph: {
     title: "Diseño y desarrollo web premium",
-    description:
-      "Estudio boutique que crea webs de alto rendimiento, ecommerce y productos digitales impulsados por IA.",
-    alternates: {
-      canonical: canonicalUrl,
-      languages: buildAlternates(""),
-    },
-    openGraph: {
-      title: "Diseño y desarrollo web premium",
-      description:
-        "Trabaja con ArrobaPunto.com para lograr diseño que convierte, rendimiento extremo y SEO técnico.",
-      url: canonicalUrl,
-    },
-  };
-}
+    description: "Trabaja con ArrobaPunto.com para lograr diseño que convierte, rendimiento extremo y SEO técnico.",
+    url: SITE_URL,
+  },
+};
 
-export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  const canonicalUrl = createCanonical(locale, "");
-
+export default function Home() {
   const homeSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: "ArrobaPunto.com",
-    url: canonicalUrl,
-    description:
-      "Agencia boutique de diseño y desarrollo web premium especializada en rendimiento y SEO.",
+    url: SITE_URL,
+    description: "Agencia boutique de diseño y desarrollo web premium especializada en rendimiento y SEO.",
     inLanguage: "es",
   };
 
   return (
     <div className="relative overflow-hidden">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchema) }} />
       <div className="absolute inset-0 -z-20 bg-noir-mist" />
       <AnimatedStars />
       <div className="relative flex flex-col">
@@ -70,28 +51,13 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   );
 }
 
-function createCanonical(locale: string, path: string) {
-  const cleanPath = path ? (path.startsWith("/") ? path : `/${path}`) : "";
-  return `${SITE_URL}/${locale}${cleanPath}`;
-}
-
-function buildAlternates(path: string) {
-  const alternateMap: Record<string, string> = {};
-  locales.forEach((locale) => {
-    alternateMap[locale] = createCanonical(locale, path);
-  });
-  return alternateMap;
-}
-
 function CalculatorSection() {
   return (
     <section id="calculadora" className="py-12 sm:py-16 bg-transparent text-white">
       <div className="container max-w-3xl">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-4">
-            <span className="text-sm text-white">
-              Calculadora de proyecto
-            </span>
+            <span className="text-sm text-white">Calculadora de proyecto</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4 bg-gradient-to-r from-white via-accent2 to-white bg-clip-text text-transparent">
             Calcula tu presupuesto

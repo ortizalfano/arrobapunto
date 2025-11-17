@@ -4,59 +4,43 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { blogPosts } from "@/lib/blog-posts";
 import { Metadata } from "next";
 import { SITE_URL } from "@/lib/seo";
-import { locales } from "@/lib/locales";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const canonicalUrl = createCanonical(locale, "/blog");
-
-  return {
+export const metadata: Metadata = {
+  title: "Blog y recursos",
+  description: "Ideas sobre diseño, desarrollo, rendimiento e inteligencia artificial por ArrobaPunto.com.",
+  alternates: {
+    canonical: `${SITE_URL}/blog`,
+  },
+  openGraph: {
     title: "Blog y recursos",
-    description: "Ideas sobre diseño, desarrollo, rendimiento e inteligencia artificial por ArrobaPunto.com.",
-    alternates: {
-      canonical: canonicalUrl,
-      languages: buildAlternates("/blog"),
-    },
-    openGraph: {
-      title: "Blog y recursos",
-      description: "Artículos para equipos digitales sobre UX, ingeniería, SEO y automatización.",
-      url: canonicalUrl,
-    },
-  };
-}
+    description: "Artículos para equipos digitales sobre UX, ingeniería, SEO y automatización.",
+    url: `${SITE_URL}/blog`,
+  },
+};
 
-export default async function BlogPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
+export default function BlogPage() {
   const formatter = new Intl.DateTimeFormat("es-ES", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
+
   const sortedPosts = [...blogPosts].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );
-  const canonicalUrl = createCanonical(locale, "/blog");
 
   const blogSchema = {
     "@context": "https://schema.org",
     "@type": "Blog",
     name: "ArrobaPunto.com Blog",
-    url: canonicalUrl,
+    url: `${SITE_URL}/blog`,
     inLanguage: "es",
     description: "Ideas sobre diseño, desarrollo, inteligencia artificial y estrategia digital.",
     blogPost: sortedPosts.map((post) => ({
       "@type": "BlogPosting",
       headline: post.title.es,
       datePublished: post.publishedAt,
-      url: createCanonical(locale, `/blog/${post.slug}`),
+      url: `${SITE_URL}/blog/${post.slug}`,
       author: {
         "@type": "Organization",
         name: "ArrobaPunto.com",
@@ -67,10 +51,7 @@ export default async function BlogPage({
   return (
     <div className="container px-4 py-12">
       <div className="max-w-6xl mx-auto">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }} />
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4">
             <span className="bg-gradient-to-r from-content via-accent2 to-content bg-clip-text text-transparent">
@@ -96,7 +77,7 @@ export default async function BlogPage({
                 key={post.slug}
                 className="hover:shadow-xl transition-shadow bg-bg-elev-2 border border-white/10 overflow-hidden"
               >
-                <Link href={`/${locale}/blog/${post.slug}`} className="flex h-full flex-col">
+                <Link href={`/blog/${post.slug}`} className="flex h-full flex-col">
                   <div className="relative aspect-video overflow-hidden">
                     <Image
                       src={post.image}
@@ -112,9 +93,7 @@ export default async function BlogPage({
                       {category} • {formattedDate}
                     </span>
                     <CardTitle className="text-xl text-white">{title}</CardTitle>
-                    <CardDescription className="text-white/70">
-                      {description}
-                    </CardDescription>
+                    <CardDescription className="text-white/70">{description}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-white/60">{readTime}</p>
@@ -127,18 +106,5 @@ export default async function BlogPage({
       </div>
     </div>
   );
-}
-
-function createCanonical(locale: string, path: string) {
-  const cleanPath = path ? (path.startsWith("/") ? path : `/${path}`) : "";
-  return `${SITE_URL}/${locale}${cleanPath}`;
-}
-
-function buildAlternates(path: string) {
-  const alternateMap: Record<string, string> = {};
-  locales.forEach((locale) => {
-    alternateMap[locale] = createCanonical(locale, path);
-  });
-  return alternateMap;
 }
 
