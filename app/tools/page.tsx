@@ -5,16 +5,25 @@ import { ToolsLanding } from "@/components/tools/tools-landing";
 export const metadata: Metadata = {
   title: "Herramientas gratuitas para creadores",
   description:
-    "Compresor de imágenes, formatter, generador de gradientes y más utilidades diseñadas para diseñadores y desarrolladores.",
+    "Compresor de imágenes, generador de códigos QR, formatter, generador de gradientes y más utilidades diseñadas para diseñadores y desarrolladores. 100% gratuito y sin registros.",
   alternates: {
     canonical: `${SITE_URL}/tools`,
   },
   openGraph: {
     title: "Herramientas gratuitas para creadores",
     description:
-      "Utilidades gratuitas para tu flujo de trabajo: optimiza imágenes, formatea código y prototipa gradientes.",
+      "Utilidades gratuitas para tu flujo de trabajo: optimiza imágenes, genera códigos QR, formatea código y prototipa gradientes.",
     url: `${SITE_URL}/tools`,
   },
+  keywords: [
+    "herramientas gratuitas",
+    "generador QR",
+    "compresor imágenes",
+    "formatter código",
+    "generador gradientes",
+    "utilidades desarrolladores",
+    "herramientas diseño",
+  ],
 };
 
 export default function ToolsPage() {
@@ -39,6 +48,12 @@ export default function ToolsPage() {
         position: 3,
         name: "Generador de Gradients",
         description: "Crea gradientes y glassmorphism listos para usar.",
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: "Generador de Códigos QR",
+        description: "Crea códigos QR personalizados para URLs o texto. Descarga en PNG o SVG.",
       },
     ],
   };
