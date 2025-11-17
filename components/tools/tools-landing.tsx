@@ -4,10 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ImageIcon, Sparkles, Wand2, Zap, Code, AlignJustify } from "lucide-react";
+import { ImageIcon, Sparkles, QrCode, Zap, Code, AlignJustify } from "lucide-react";
 import { ImageCompressorModal } from "@/components/tools/image-compressor-modal";
 import { FormatterModal } from "@/components/tools/formatter-modal";
 import { GradientModal } from "@/components/tools/gradient-modal";
+import { QRGeneratorModal } from "@/components/tools/qr-generator-modal";
 
 const baseTools = [
   {
@@ -41,14 +42,14 @@ const baseTools = [
     action: "gradient" as const,
   },
   {
-    icon: Wand2,
-    title: "Paleta de Colores (Próximamente)",
-    description: "Extrae colores dominantes de cualquier imagen y genera paletas automáticas.",
-    features: ["Extractor automático", "Exportar a CSS", "Formatos múltiples", "Próximamente"],
-    href: "/tools/colors",
+    icon: QrCode,
+    title: "Generador de Códigos QR",
+    description: "Crea códigos QR personalizados para URLs, texto o cualquier contenido. Descarga en PNG o SVG.",
+    features: ["PNG y SVG", "Múltiples tamaños", "Descarga instantánea", "100% gratuito"],
+    href: "/tools/qr",
     gradient: "from-emerald-500/20 to-teal-500/20",
-    emoji: "🌈",
-    comingSoon: true,
+    emoji: "📱",
+    action: "qr" as const,
   },
   {
     icon: Code,
@@ -66,6 +67,7 @@ export function ToolsLanding() {
   const [isCompressorOpen, setIsCompressorOpen] = useState(false);
   const [isFormatterOpen, setIsFormatterOpen] = useState(false);
   const [isGradientOpen, setIsGradientOpen] = useState(false);
+  const [isQROpen, setIsQROpen] = useState(false);
 
   const heroBadge = "Herramientas gratuitas";
   const heroTitlePrimary = "Hub para";
@@ -162,6 +164,10 @@ export function ToolsLanding() {
                           <Button variant="gold" className="w-full" onClick={() => setIsGradientOpen(true)}>
                             Abrir generador
                           </Button>
+                        ) : tool.action === "qr" && !tool.comingSoon ? (
+                          <Button variant="gold" className="w-full" onClick={() => setIsQROpen(true)}>
+                            Generar QR
+                          </Button>
                         ) : (
                           <Button
                             asChild
@@ -213,6 +219,7 @@ export function ToolsLanding() {
       <ImageCompressorModal open={isCompressorOpen} onClose={() => setIsCompressorOpen(false)} />
       <FormatterModal open={isFormatterOpen} onClose={() => setIsFormatterOpen(false)} />
       <GradientModal open={isGradientOpen} onClose={() => setIsGradientOpen(false)} />
+      <QRGeneratorModal open={isQROpen} onClose={() => setIsQROpen(false)} />
     </div>
   );
 }
