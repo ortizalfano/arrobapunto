@@ -21,9 +21,9 @@ const projects = [
   },
   {
     id: 2,
-    title: "Plataforma SaaS B2B",
-    sector: "Tech",
-    description: "Dashboard de analytics con visualizaciones en tiempo real",
+    title: "E-Commerce Corporativo",
+    sector: "Healthinfoods",
+    description: "Plataforma E-commerce para la visualización y reserva de productos",
     image: "🚀",
     metrics: [
       { label: "Usuarios", value: "+125%", icon: TrendingUp },
@@ -31,13 +31,13 @@ const projects = [
       { label: "Velocidad", value: "0.9s", icon: Zap },
     ],
     color: "from-blue-500/20 to-cyan-500/20",
-    tags: ["React", "GraphQL", "D3.js"],
+    tags: ["PHP", "HTML y CSS", "MySQL", "JavaScript"],
   },
   {
     id: 3,
-    title: "Marca Digital Boutique",
-    sector: "Design",
-    description: "Identidad visual completa con sistema de diseño modular",
+    title: "Cotizador Online de Seguros",
+    sector: "Travel Guardian Assist",
+    description: "Plataforma de Seguros con Cotizador, Calculadora Online y Pasarela de Pagos",
     image: "✨",
     metrics: [
       { label: "Reconocimiento de marca", value: "+67%", icon: TrendingUp },
@@ -45,7 +45,7 @@ const projects = [
       { label: "Recordación", value: "91%", icon: TrendingUp },
     ],
     color: "from-amber-500/20 to-orange-500/20",
-    tags: ["Figma", "Brand System", "Motion"],
+    tags: ["MySQL", "PHP y JavaScript", "Integraciones de API"],
   },
   {
     id: 4,
