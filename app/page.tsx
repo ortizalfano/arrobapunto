@@ -6,7 +6,6 @@ import { SITE_URL } from "@/lib/seo";
 
 // Lazy load componentes pesados (no críticos para LCP)
 const AnimatedStars = dynamic(() => import("@/components/home/animated-stars").then((mod) => ({ default: mod.AnimatedStars })), {
-  ssr: false,
   loading: () => null,
 });
 
@@ -23,7 +22,7 @@ const Calculator = dynamic(() => import("@/components/services/calculator"), {
 });
 
 const FloatingCTA = dynamic(() => import("@/components/home/floating-cta").then((mod) => ({ default: mod.FloatingCTA })), {
-  ssr: false,
+  loading: () => null,
 });
 
 const TrustBar = dynamic(() => import("@/components/home/trust-bar").then((mod) => ({ default: mod.TrustBar })), {

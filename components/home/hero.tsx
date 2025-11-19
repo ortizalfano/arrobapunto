@@ -34,7 +34,6 @@ export function Hero() {
 
     // Usar requestAnimationFrame para mejor rendimiento
     let animationFrameId: number | null = null;
-    let timeoutId: ReturnType<typeof setTimeout> | null = null;
     let currentIndex = 0;
     let lastTime = 0;
     const interval = 85;
@@ -57,9 +56,6 @@ export function Hero() {
     animationFrameId = requestAnimationFrame(type);
 
     return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
       if (animationFrameId !== null) {
         cancelAnimationFrame(animationFrameId);
       }
