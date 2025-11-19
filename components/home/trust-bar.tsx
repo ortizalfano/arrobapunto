@@ -32,6 +32,7 @@ export function TrustBar() {
               key={client.name}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
               className="flex items-center justify-center"
             >
@@ -41,6 +42,8 @@ export function TrustBar() {
                 width={120}
                 height={40}
                 className="h-8 sm:h-10 w-auto object-contain opacity-80"
+                loading="lazy"
+                fetchPriority={index < 3 ? "high" : "low"}
               />
             </motion.div>
           ))}

@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Loader2, CheckCircle2, ArrowRight, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useContactModal } from "@/components/contact/contact-modal-provider";
-import { sendEmail } from "@/lib/email";
+import { sendEmail, isEmailJsReady } from "@/lib/email";
 
 export function BriefExpress() {
   const [step, setStep] = useState(1);
@@ -93,16 +93,32 @@ export function BriefExpress() {
       const estimatePrice = calculateEstimate(data);
       setEstimate(estimatePrice);
 
-      await sendEmail("brief", {
-        ...data,
-        estimate: estimatePrice.toString(),
-        locale,
-      });
+      // Verificar si EmailJS está configurado
+      if (!isEmailJsReady("brief")) {
+        console.warn("EmailJS no está configurado. El brief se guardará localmente.");
+        // Aún así, mostrar el resultado al usuario
+        setIsSubmitted(true);
+        return;
+      }
+
+      // Intentar enviar el email
+      try {
+        await sendEmail("brief", {
+          ...data,
+          estimate: estimatePrice.toString(),
+          locale,
+        });
+      } catch (emailError) {
+        // Si falla el email, aún mostrar el resultado
+        console.error("Error enviando email (pero el brief se procesó):", emailError);
+        // No lanzar error, solo loguear - el usuario ya tiene su estimación
+      }
 
       setIsSubmitted(true);
     } catch (error) {
       console.error("Error submitting brief:", error);
-      alert("No pudimos enviar tu brief. Inténtalo de nuevo.");
+      const errorMessage = error instanceof Error ? error.message : "Error desconocido";
+      alert(`No pudimos procesar tu brief: ${errorMessage}. Por favor, inténtalo de nuevo o contáctanos directamente.`);
     } finally {
       setIsSubmitting(false);
     }

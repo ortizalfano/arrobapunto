@@ -1,13 +1,34 @@
 import { Hero } from "@/components/home/hero";
-import { TrustBar } from "@/components/home/trust-bar";
 import { WorkPreview } from "@/components/home/work-preview";
-import { ServicesPreview } from "@/components/home/services-preview";
-import { StatsSection } from "@/components/home/stats-section";
-import { FloatingCTA } from "@/components/home/floating-cta";
-import { AnimatedStars } from "@/components/home/animated-stars";
-import Calculator from "@/components/services/calculator";
+import dynamic from "next/dynamic";
 import { Metadata } from "next";
 import { SITE_URL } from "@/lib/seo";
+
+// Lazy load componentes pesados (no críticos para LCP)
+const AnimatedStars = dynamic(() => import("@/components/home/animated-stars").then((mod) => ({ default: mod.AnimatedStars })), {
+  ssr: false,
+  loading: () => null,
+});
+
+const ServicesPreview = dynamic(() => import("@/components/home/services-preview").then((mod) => ({ default: mod.ServicesPreview })), {
+  loading: () => <div className="py-12 sm:py-16" style={{ minHeight: "400px" }} />,
+});
+
+const StatsSection = dynamic(() => import("@/components/home/stats-section").then((mod) => ({ default: mod.StatsSection })), {
+  loading: () => <div className="py-12 sm:py-16" style={{ minHeight: "200px" }} />,
+});
+
+const Calculator = dynamic(() => import("@/components/services/calculator"), {
+  loading: () => <div className="py-12 sm:py-16" style={{ minHeight: "600px" }} />,
+});
+
+const FloatingCTA = dynamic(() => import("@/components/home/floating-cta").then((mod) => ({ default: mod.FloatingCTA })), {
+  ssr: false,
+});
+
+const TrustBar = dynamic(() => import("@/components/home/trust-bar").then((mod) => ({ default: mod.TrustBar })), {
+  loading: () => <div className="py-10 sm:py-12" style={{ minHeight: "200px" }} />,
+});
 
 export const metadata: Metadata = {
   title: "Diseño y desarrollo web premium",

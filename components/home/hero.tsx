@@ -32,25 +32,36 @@ export function Hero() {
       return;
     }
 
+    // Usar requestAnimationFrame para mejor rendimiento
+    let animationFrameId: number | null = null;
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
     let currentIndex = 0;
+    let lastTime = 0;
+    const interval = 85;
 
-    const type = () => {
-      timeoutId = setTimeout(() => {
+    const type = (timestamp: number) => {
+      if (timestamp - lastTime >= interval) {
         currentIndex += 1;
         setDisplayedText(fullText.slice(0, currentIndex));
+        lastTime = timestamp;
+        
         if (currentIndex < fullText.length) {
-          type();
+          animationFrameId = requestAnimationFrame(type);
         }
-      }, 85);
+      } else {
+        animationFrameId = requestAnimationFrame(type);
+      }
     };
 
     setDisplayedText("");
-    type();
+    animationFrameId = requestAnimationFrame(type);
 
     return () => {
       if (timeoutId) {
         clearTimeout(timeoutId);
+      }
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
       }
     };
   }, [fullText]);
@@ -62,7 +73,7 @@ export function Hero() {
       <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent2/20 rounded-full blur-3xl pointer-events-none z-[2]" />
       <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/20 rounded-full blur-3xl pointer-events-none z-[2]" />
 
-      <div className="container relative z-[5] text-center">
+      <div className="container relative z-[5] text-center" style={{ minHeight: "400px" }}>
         <motion.div
           initial="initial"
           animate="animate"
@@ -78,6 +89,7 @@ export function Hero() {
           <motion.h1
             variants={fadeUp}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold tracking-tight mb-6 sm:mb-8"
+            style={{ minHeight: "1.2em", contain: "layout style paint" }}
           >
             <span className="relative inline-flex items-center justify-center">
               <span className="sr-only">{fullText}</span>

@@ -41,14 +41,22 @@ export function AnimatedStars() {
   }, []);
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({
-        x: e.clientX,
-        y: e.clientY,
-      });
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setMousePos({
+            x: e.clientX,
+            y: e.clientY,
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 

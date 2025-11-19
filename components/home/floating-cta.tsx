@@ -10,15 +10,23 @@ export function FloatingCTA() {
   const { open } = useContactModal();
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      const scrollPercent = 
-        (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-      
-      // Mostrar después del 30% del scroll
-      setShow(scrollPercent > 30 && scrollPercent < 95);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollPercent = 
+            (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+          
+          // Mostrar después del 30% del scroll
+          setShow(scrollPercent > 30 && scrollPercent < 95);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // Check initial position
 
     return () => window.removeEventListener("scroll", handleScroll);

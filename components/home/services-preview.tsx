@@ -58,7 +58,7 @@ export function ServicesPreview() {
   const { open } = useContactModal();
   
   return (
-    <section className="py-12 sm:py-16 bg-transparent relative text-white">
+    <section className="py-12 sm:py-16 bg-transparent relative text-white" style={{ contain: "layout style" }}>
       <div className="container max-w-6xl relative z-10">
         <motion.div
           initial="initial"
@@ -97,10 +97,11 @@ export function ServicesPreview() {
                 key={service.title}
                 initial="initial"
                 whileInView="animate"
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-100px" }}
                 variants={scaleIn}
                 custom={index}
                 className="relative p-[2px] rounded-[16px] bg-gradient-to-br from-[#90F3E6]/60 via-[#E8DCC7]/40 to-[#D7B980]/60 bg-[length:200%_200%] animate-gradient-shift group"
+                style={{ minHeight: "350px", contain: "layout style" }}
               >
                 <Card className={`h-full relative z-10 border border-white/10 bg-white/5 rounded-[14px] shadow-lg backdrop-blur-sm`}>
                   <CardHeader>

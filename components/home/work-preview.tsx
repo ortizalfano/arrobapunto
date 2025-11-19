@@ -57,7 +57,7 @@ export function WorkPreview() {
   const subtitle = "Cada proyecto es una historia de crecimiento, innovación y resultados medibles.";
 
   return (
-    <section className="w-full pt-0 pb-12 sm:pb-16 relative overflow-hidden">
+    <section className="w-full pt-0 pb-12 sm:pb-16 relative overflow-hidden" style={{ contain: "layout style" }}>
       <div className="container px-4 sm:px-8 mx-auto relative z-[5]">
         <motion.div
           initial="initial"
@@ -94,10 +94,11 @@ export function WorkPreview() {
               key={project.id}
               initial="initial"
               whileInView="animate"
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
               variants={scaleIn}
               custom={index}
               className="relative"
+              style={{ minHeight: "400px", contain: "layout style" }}
             >
               <div className="relative p-[2px] rounded-[16px] bg-gradient-to-br from-[#90F3E6] via-[#E8DCC7] to-[#D7B980] bg-[length:200%_200%] animate-gradient-shift h-full">
                 <Card className="h-full relative z-10 border-0 bg-[#1A1A1A] rounded-[14px] shadow-lg backdrop-blur-sm overflow-hidden group flex flex-col">

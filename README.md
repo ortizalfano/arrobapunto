@@ -252,10 +252,27 @@ Abre [http://localhost:3000](http://localhost:3000)
 ### Variables de Entorno Requeridas
 
 ```env
+# Base de datos
 DATABASE_URL="postgresql://..."
+
+# App
 NEXT_PUBLIC_APP_URL="https://arrobapunto.com"
+NEXT_PUBLIC_BASE_URL="https://arrobapunto.com"
+
+# EmailJS (Obligatorias para Brief Express)
+NEXT_PUBLIC_EMAILJS_SERVICE_ID="service_xxxxx"
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY="xxxxxxxxxxxxx"
+NEXT_PUBLIC_EMAILJS_TEMPLATE_BRIEF="template_xxxxx"
+
+# EmailJS (Opcionales para otros formularios)
+NEXT_PUBLIC_EMAILJS_TEMPLATE_CONTACT="template_xxxxx"
+NEXT_PUBLIC_EMAILJS_TEMPLATE_CALCULATOR="template_xxxxx"
+
+# Analytics (opcional)
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN="arrobapunto.com"
 ```
+
+> 📖 **Guía completa:** Ver [VERCEL-ENV-VARIABLES.md](./VERCEL-ENV-VARIABLES.md) para instrucciones detalladas de configuración en Vercel.
 
 ### Build Command
 ```bash
