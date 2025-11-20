@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sparkles, Download } from "lucide-react";
 import { Metadata } from "next";
 import { SITE_URL } from "@/lib/seo";
 
@@ -9,16 +10,22 @@ const products = [
     title: "xInvoice",
     description: "Sistema de facturación inteligente para freelancers y pequeñas empresas",
     image: "/img/xInvoice-Plugin.jpg",
+    downloadUrl: "/plugins/xinvoice.zip",
+    version: "1.0.0",
   },
   {
     title: "xProjects",
     description: "Gestión de proyectos con Kanban y herramientas colaborativas",
     image: "/img/xProjects-Plugin.jpg",
+    downloadUrl: "/plugins/xprojects.zip",
+    version: "1.0.0",
   },
   {
     title: "xLogin",
     description: "Plugin para rediseñar y personalizar la página de inicio de sesión de WordPress",
     image: "/img/xLogin-Plugin.jpg",
+    // downloadUrl: undefined, // En desarrollo
+    // version: undefined, // En desarrollo
   },
 ];
 
@@ -75,7 +82,7 @@ export default function PluginsPage() {
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
               <span className="bg-gradient-to-r from-content via-accent2 to-content bg-clip-text text-transparent">
-                Plugins
+                Plugins 
               </span>
               <span className="bg-gradient-to-r from-accent via-accent2 to-accent bg-clip-text text-transparent">
                 &amp; Labs
@@ -119,8 +126,23 @@ export default function PluginsPage() {
                   </div>
                 </CardHeader>
 
-                <CardContent className="mt-auto">
-                  <p className="text-sm text-muted-foreground font-medium">En desarrollo</p>
+                <CardContent className="mt-auto space-y-3">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm text-muted-foreground font-medium">
+                      {product.version ? `Versión ${product.version}` : "En desarrollo"}
+                    </p>
+                  </div>
+                  {product.downloadUrl && (
+                    <Button
+                      asChild
+                      className="w-full bg-gradient-to-r from-accent via-accent2 to-accent hover:shadow-lg hover:shadow-accent2/30"
+                    >
+                      <a href={product.downloadUrl} download>
+                        <Download className="mr-2 h-4 w-4" />
+                        Descargar ZIP
+                      </a>
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             ))}
