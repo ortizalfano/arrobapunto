@@ -1,9 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
-import { Metadata } from "next";
-import { SITE_URL } from "@/lib/seo";
+import { DownloadModalProvider, useDownloadModal } from "@/components/plugins/download-modal";
 
 const products = [
   {
@@ -29,22 +30,9 @@ const products = [
   },
 ];
 
-export const metadata: Metadata = {
-  title: "Plugins de WordPress y laboratorio digital",
-  description:
-    "Descubre los plugins experimentales de ArrobaPunto.com para automatización, facturación y experiencias personalizadas en WordPress.",
-  alternates: {
-    canonical: `${SITE_URL}/plugins`,
-  },
-  openGraph: {
-    title: "Plugins de WordPress y laboratorio digital",
-    description:
-      "Plugins experimentales para creadores: facturación inteligente, tableros de proyectos y flujos de login personalizados.",
-    url: `${SITE_URL}/plugins`,
-  },
-};
+function PluginsContent() {
+  const { open } = useDownloadModal();
 
-export default function PluginsPage() {
   const productsSchema = {
     "@context": "https://schema.org",
     "@graph": products.map((product) => ({
@@ -82,9 +70,8 @@ export default function PluginsPage() {
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
               <span className="bg-gradient-to-r from-content via-accent2 to-content bg-clip-text text-transparent">
-                Plugins 
+                Plugins
               </span>
-              
             </h1>
             <p className="text-xl text-muted max-w-2xl mx-auto leading-relaxed">
               Plugins para WordPress, por desarrolladores para desarrolladores.
@@ -132,12 +119,10 @@ export default function PluginsPage() {
                   </div>
                   {product.downloadUrl ? (
                     <Button
-                      asChild
+                      onClick={() => open(product.title, product.downloadUrl)}
                       className="w-full bg-gradient-to-r from-accent via-accent2 to-accent hover:shadow-lg hover:shadow-accent2/30"
                     >
-                      <a href={product.downloadUrl} download>
-                        Descargar ZIP
-                      </a>
+                      Descargar ZIP
                     </Button>
                   ) : (
                     <Button
@@ -157,8 +142,10 @@ export default function PluginsPage() {
   );
 }
 
-
-
-
-
-
+export default function PluginsPage() {
+  return (
+    <DownloadModalProvider>
+      <PluginsContent />
+    </DownloadModalProvider>
+  );
+}
