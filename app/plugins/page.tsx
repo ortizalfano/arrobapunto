@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Download } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { Metadata } from "next";
 import { SITE_URL } from "@/lib/seo";
 
@@ -84,9 +84,7 @@ export default function PluginsPage() {
               <span className="bg-gradient-to-r from-content via-accent2 to-content bg-clip-text text-transparent">
                 Plugins 
               </span>
-              <span className="bg-gradient-to-r from-accent via-accent2 to-accent bg-clip-text text-transparent">
-                &amp; Labs
-              </span>
+              
             </h1>
             <p className="text-xl text-muted max-w-2xl mx-auto leading-relaxed">
               Plugins para WordPress, por desarrolladores para desarrolladores.
@@ -132,15 +130,21 @@ export default function PluginsPage() {
                       {product.version ? `Versión ${product.version}` : "En desarrollo"}
                     </p>
                   </div>
-                  {product.downloadUrl && (
+                  {product.downloadUrl ? (
                     <Button
                       asChild
                       className="w-full bg-gradient-to-r from-accent via-accent2 to-accent hover:shadow-lg hover:shadow-accent2/30"
                     >
                       <a href={product.downloadUrl} download>
-                        <Download className="mr-2 h-4 w-4" />
                         Descargar ZIP
                       </a>
+                    </Button>
+                  ) : (
+                    <Button
+                      disabled
+                      className="w-full bg-muted text-muted-foreground cursor-not-allowed opacity-60"
+                    >
+                      En desarrollo
                     </Button>
                   )}
                 </CardContent>
