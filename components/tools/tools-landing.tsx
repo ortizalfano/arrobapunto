@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ImageIcon, Sparkles, QrCode, Zap, Code, AlignJustify } from "lucide-react";
+import { ImageIcon, Sparkles, QrCode, Zap, Code, AlignJustify, FileText } from "lucide-react";
 import { ImageCompressorModal } from "@/components/tools/image-compressor-modal";
 import { FormatterModal } from "@/components/tools/formatter-modal";
 import { GradientModal } from "@/components/tools/gradient-modal";
@@ -20,6 +20,16 @@ const baseTools = [
     gradient: "from-purple-500/20 to-pink-500/20",
     emoji: "🎨",
     action: "compressor" as const,
+  },
+  {
+    icon: FileText,
+    title: "Compresor de PDFs",
+    description: "Optimiza y reduce el tamaño de tus PDFs sin perder calidad. Procesado 100% en tu navegador.",
+    features: ["Reduce tamaño", "Remueve metadatos", "100% privado", "Sin límites"],
+    href: "/tools/pdf",
+    gradient: "from-blue-500/20 to-cyan-500/20",
+    emoji: "📄",
+    action: "pdf" as const,
   },
   {
     icon: AlignJustify,
@@ -167,6 +177,10 @@ export function ToolsLanding() {
                         ) : tool.action === "qr" && !tool.comingSoon ? (
                           <Button variant="gold" className="w-full" onClick={() => setIsQROpen(true)}>
                             Generar QR
+                          </Button>
+                        ) : tool.action === "pdf" && !tool.comingSoon ? (
+                          <Button variant="gold" className="w-full" asChild>
+                            <Link href={tool.href}>Abrir compresor PDF</Link>
                           </Button>
                         ) : (
                           <Button

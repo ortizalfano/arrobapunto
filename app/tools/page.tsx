@@ -55,6 +55,12 @@ export default function ToolsPage() {
         name: "Generador de Códigos QR",
         description: "Crea códigos QR personalizados para URLs o texto. Descarga en PNG o SVG.",
       },
+      {
+        "@type": "ListItem",
+        position: 5,
+        name: "Compresor de PDFs",
+        description: "Optimiza y reduce el tamaño de tus PDFs sin perder calidad.",
+      },
     ],
   };
 
