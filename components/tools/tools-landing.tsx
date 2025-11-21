@@ -9,6 +9,7 @@ import { ImageCompressorModal } from "@/components/tools/image-compressor-modal"
 import { FormatterModal } from "@/components/tools/formatter-modal";
 import { GradientModal } from "@/components/tools/gradient-modal";
 import { QRGeneratorModal } from "@/components/tools/qr-generator-modal";
+import { PdfCompressorModal } from "@/components/tools/pdf-compressor-modal";
 
 const baseTools = [
   {
@@ -78,6 +79,7 @@ export function ToolsLanding() {
   const [isFormatterOpen, setIsFormatterOpen] = useState(false);
   const [isGradientOpen, setIsGradientOpen] = useState(false);
   const [isQROpen, setIsQROpen] = useState(false);
+  const [isPdfOpen, setIsPdfOpen] = useState(false);
 
   const heroBadge = "Herramientas gratuitas";
   const heroTitlePrimary = "Hub para";
@@ -179,8 +181,8 @@ export function ToolsLanding() {
                             Generar QR
                           </Button>
                         ) : tool.action === "pdf" && !tool.comingSoon ? (
-                          <Button variant="gold" className="w-full" asChild>
-                            <Link href={tool.href}>Abrir compresor PDF</Link>
+                          <Button variant="gold" className="w-full" onClick={() => setIsPdfOpen(true)}>
+                            Abrir compresor PDF
                           </Button>
                         ) : (
                           <Button
@@ -234,6 +236,7 @@ export function ToolsLanding() {
       <FormatterModal open={isFormatterOpen} onClose={() => setIsFormatterOpen(false)} />
       <GradientModal open={isGradientOpen} onClose={() => setIsGradientOpen(false)} />
       <QRGeneratorModal open={isQROpen} onClose={() => setIsQROpen(false)} />
+      <PdfCompressorModal open={isPdfOpen} onClose={() => setIsPdfOpen(false)} />
     </div>
   );
 }
