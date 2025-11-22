@@ -25,9 +25,6 @@ const FloatingCTA = dynamic(() => import("@/components/home/floating-cta").then(
   loading: () => null,
 });
 
-const TrustBar = dynamic(() => import("@/components/home/trust-bar").then((mod) => ({ default: mod.TrustBar })), {
-  loading: () => <div className="py-10 sm:py-12" style={{ minHeight: "200px" }} />,
-});
 
 export const metadata: Metadata = {
   title: "Diseño y desarrollo web premium",
@@ -64,7 +61,6 @@ export default function Home() {
         <ServicesPreview />
         <StatsSection />
         <CalculatorSection />
-        <TrustBar />
         <FloatingCTA />
       </div>
     </div>

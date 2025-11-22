@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Award, Users, MapPin, TrendingUp, Heart, Sparkles, Target, Zap } from "lucide-react";
 import { useContactModal } from "@/components/contact/contact-modal-provider";
 import Link from "next/link";
+import { TrustBar } from "@/components/home/trust-bar";
 
 const timeline = [
   {
@@ -330,6 +331,9 @@ export function StudioLanding() {
           </div>
         </div>
       </section>
+
+      {/* Trust Bar */}
+      <TrustBar />
 
       {/* CTA */}
       <section className="py-8 sm:py-12">
