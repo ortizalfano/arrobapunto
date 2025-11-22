@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ImageIcon, Sparkles, QrCode, Zap, Code, AlignJustify } from "lucide-react";
@@ -18,7 +19,7 @@ const baseTools = [
     features: ["JPG, PNG, WEBP", "Batch processing", "ZIP download", "100% gratuito"],
     href: "/tools/image",
     gradient: "from-purple-500/20 to-pink-500/20",
-    emoji: "🎨",
+    image: "/img/tools/image-compressor.svg",
     action: "compressor" as const,
   },
   {
@@ -28,7 +29,7 @@ const baseTools = [
     features: ["JSON, CSS, JS", "Modo minify", "Detección automática", "Copiar resultado"],
     href: "/tools/format",
     gradient: "from-indigo-500/20 to-purple-500/20",
-    emoji: "🧹",
+    image: "/img/tools/formatter.svg",
     action: "formatter" as const,
   },
   {
@@ -38,7 +39,7 @@ const baseTools = [
     features: ["Lineales y radiales", "Glassmorphism", "Copiar CSS", "Random presets"],
     href: "/tools/gradients",
     gradient: "from-purple-500/20 via-pink-500/20 to-blue-500/20",
-    emoji: "🪄",
+    image: "/img/tools/gradient-generator.svg",
     action: "gradient" as const,
   },
   {
@@ -48,7 +49,7 @@ const baseTools = [
     features: ["PNG y SVG", "Múltiples tamaños", "Descarga instantánea", "100% gratuito"],
     href: "/tools/qr",
     gradient: "from-emerald-500/20 to-teal-500/20",
-    emoji: "📱",
+    image: "/img/tools/qr-generator.svg",
     action: "qr" as const,
   },
   {
@@ -59,6 +60,7 @@ const baseTools = [
     href: "/tools/svg",
     gradient: "from-amber-500/20 to-orange-500/20",
     emoji: "⚡",
+    image: undefined,
     comingSoon: true,
   },
 ];
@@ -122,8 +124,18 @@ export function ToolsLanding() {
                     )}
                     <div className="absolute top-0 left-0 right-0 h-px bg-aurora-edge opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                    <div className={`aspect-video bg-gradient-to-br ${tool.gradient} flex items-center justify-center text-8xl`}>
-                      {tool.emoji}
+                    <div className={`aspect-video bg-gradient-to-br ${tool.gradient} flex items-center justify-center overflow-hidden relative`}>
+                      {tool.image ? (
+                        <Image
+                          src={tool.image}
+                          alt={tool.title}
+                          fill
+                          className="object-cover opacity-80"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <span className="text-8xl">{tool.emoji}</span>
+                      )}
                     </div>
 
                     <CardHeader>
