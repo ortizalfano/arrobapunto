@@ -106,8 +106,31 @@ export function PdfCompressorModal({ open, onClose }: PdfCompressorModalProps) {
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.error || "Error al comprimir PDF en el servidor");
+      // Manejar diferentes tipos de errores
+      if (response.status === 413) {
+        throw new Error(
+          "El archivo es demasiado grande para procesar en el servidor. " +
+          "Intenta procesar PDFs más pequeños (<5MB) que se optimizan en tu navegador."
+        );
+      }
+      
+      if (response.status === 429) {
+        throw new Error(
+          "Límite de uso excedido. Espera un momento antes de intentar de nuevo."
+        );
+      }
+
+      // Intentar parsear error JSON, si falla mostrar mensaje genérico
+      let errorMessage = "Error al comprimir PDF en el servidor";
+      try {
+        const error = await response.json();
+        errorMessage = error.error || errorMessage;
+      } catch {
+        // Si la respuesta no es JSON, usar el status text
+        errorMessage = response.statusText || errorMessage;
+      }
+      
+      throw new Error(errorMessage);
     }
 
     return await response.blob();
@@ -124,13 +147,14 @@ export function PdfCompressorModal({ open, onClose }: PdfCompressorModalProps) {
       let compressedBlob: Blob;
       let processingMode: "client" | "server";
 
-      // Estrategia híbrida: client-side para <5MB, server para 5-15MB
-      if (fileSizeMB < 5) {
-        // Client-side: rápido y gratis
+      // Estrategia híbrida: client-side para <5MB, server para PDFs medianos
+      // Nota: Vercel tiene límite de ~4.5MB para request body, así que usamos client-side hasta 10MB
+      if (fileSizeMB < 10) {
+        // Client-side: procesamiento en navegador (sin límites de servidor)
         processingMode = "client";
         compressedBlob = await compressPdfClient(pdfFile.file);
       } else {
-        // Server-side: mejor compresión para PDFs con imágenes
+        // Server-side: solo para PDFs grandes (10-15MB) si el servidor lo permite
         processingMode = "server";
         compressedBlob = await compressPdfServer(pdfFile.file);
       }
@@ -223,7 +247,7 @@ export function PdfCompressorModal({ open, onClose }: PdfCompressorModalProps) {
                   Arrastra un PDF aquí o haz clic para seleccionar
                 </p>
                 <p className="text-xs text-white/50">
-                  Máximo 15MB • PDFs pequeños se procesan en tu navegador (100% privado)
+                  Máximo 15MB • PDFs hasta 10MB se procesan en tu navegador (100% privado)
                 </p>
               </div>
             ) : (
@@ -331,8 +355,8 @@ export function PdfCompressorModal({ open, onClose }: PdfCompressorModalProps) {
           <div className="rounded-xl border border-white/10 bg-[#101823] p-4 space-y-2">
             <p className="text-sm font-medium text-white">ℹ️ ¿Cómo funciona?</p>
             <ul className="space-y-1 text-xs text-white/70 list-disc list-inside">
-              <li>PDFs pequeños (&lt;5MB): se procesan en tu navegador (100% privado)</li>
-              <li>PDFs medianos (5-15MB): se optimizan en el servidor con compresión avanzada de imágenes</li>
+              <li>PDFs hasta 10MB: se procesan en tu navegador (100% privado, sin límites)</li>
+              <li>PDFs grandes (10-15MB): se optimizan en el servidor cuando es posible</li>
               <li>Remueve metadatos innecesarios y optimiza la estructura del documento</li>
               <li>Todo es gratuito y sin límites de uso</li>
             </ul>
