@@ -23,7 +23,8 @@ export function AnimatedStars() {
     
     const baseCount =
       typeof window !== "undefined" && window.innerWidth > 1600 ? 260 : 200;
-    const totalStars = Math.round(baseCount * 1.15);
+    // Aumentar 20% más de estrellas: baseCount * 1.15 * 1.20 = baseCount * 1.38
+    const totalStars = Math.round(baseCount * 1.38);
 
     for (let i = 0; i < totalStars; i++) {
       const color = colors[Math.floor(Math.random() * colors.length)];
