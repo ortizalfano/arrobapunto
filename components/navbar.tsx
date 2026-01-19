@@ -86,7 +86,7 @@ export function Navbar() {
 
       {/* Menú lateral móvil */}
       <div
-        className={`fixed top-0 right-0 z-[70] h-full w-80 max-w-[85vw] transform bg-bg-elev-1 border-l border/50 shadow-2xl transition-transform duration-300 ease-out md:hidden ${
+        className={`fixed top-0 right-0 z-[70] h-full w-80 max-w-[85vw] transform bg-[#0E141B] border-l border-white/20 shadow-2xl transition-transform duration-300 ease-out md:hidden ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{ pointerEvents: mobileMenuOpen ? "auto" : "none" }}
