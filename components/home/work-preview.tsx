@@ -2,15 +2,24 @@
 
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ExternalLink, TrendingUp, Zap, TrendingDown, Eye } from "lucide-react";
+import { ExternalLink, TrendingUp, Zap, TrendingDown, Eye, Play } from "lucide-react";
 import { fadeUp, stagger, scaleIn } from "@/lib/motion";
+import { useState } from "react";
+import { ProjectModal, type ProjectData } from "./project-modal";
 
-const featuredProjects = [
+const featuredProjects: ProjectData[] = [
   {
     id: 1,
     title: "Marketplace Premium",
     sector: "ARAP - Gobierno de Panamá",
-    description: "Marketplace para conectar vendedores y productores de recursos acuáticos con compradores.",
+    description: "Marketplace para conectar vendedores y productores de recursos acuáticos.",
+    fullDescription: "Una solución integral para la Autoridad de los Recursos Acuáticos de Panamá que digitaliza la comercialización de productos del mar. La plataforma conecta directamente a pescadores artesanales con consumidores finales y restaurantes, eliminando intermediarios y garantizando precios justos.",
+    features: [
+      "Autenticación segura con verificación de identidad",
+      "Dashboard en tiempo real para vendedores",
+      "Integración con pasarela de pagos PagueloFacil",
+      "Sistema de geolocalización de productos"
+    ],
     image: "🎨",
     metrics: [
       { label: "Conversión", value: "+34%", icon: TrendingUp },
@@ -24,7 +33,14 @@ const featuredProjects = [
     id: 2,
     title: "E-Commerce Corporativo",
     sector: "Healthinfoods",
-    description: "Plataforma E-commerce para la visualización y reserva de productos",
+    description: "Plataforma E-commerce para la visualización y reserva de productos.",
+    fullDescription: "Rediseño completo de la experiencia de compra digital para una marca líder en suplementos. Se implementó una arquitectura headless para lograr tiempos de carga instantáneos y una experiencia de usuario fluida que maximiza la conversión.",
+    features: [
+      "Búsqueda predictiva con IA",
+      "Sistema de suscripciones recurrentes",
+      "Integración con ERP SAP",
+      "Personalización de recomendaciones"
+    ],
     image: "🚀",
     metrics: [
       { label: "Usuarios", value: "+125%", icon: TrendingUp },
@@ -38,7 +54,14 @@ const featuredProjects = [
     id: 3,
     title: "Cotizador Online de Seguros",
     sector: "Travel Guardian Assist",
-    description: "Plataforma de Seguros con Cotizador, Calculadora Online y Pasarela de Pagos",
+    description: "Plataforma de Seguros con Cotizador, Calculadora Online y Pasarela de Pagos.",
+    fullDescription: "Herramienta de cotización instantánea que simplifica la venta de seguros de viaje. Los usuarios pueden comparar planes, personalizar coberturas y emitir pólizas en menos de 3 minutos, todo desde una interfaz intuitiva y mobile-first.",
+    features: [
+      "Motor de cotización en tiempo real",
+      "Emisión automática de pólizas PDF",
+      "Pasarela de pagos multidivisa",
+      "Panel de administración para brokers"
+    ],
     image: "✨",
     metrics: [
       { label: "Reconocimiento", value: "+67%", icon: TrendingUp },
@@ -51,115 +74,141 @@ const featuredProjects = [
 ];
 
 export function WorkPreview() {
+  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (project: ProjectData) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
   const badgeText = "Casos de éxito";
   const titleLead = "Trabajos que";
   const titleHighlight = "transforman negocios";
   const subtitle = "Cada proyecto es una historia de crecimiento, innovación y resultados medibles.";
 
   return (
-    <section className="w-full pt-0 pb-12 sm:pb-16 relative overflow-hidden" style={{ contain: "layout style" }}>
-      <div className="container px-4 sm:px-8 mx-auto relative z-[5]">
-        <motion.div
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-          variants={stagger}
-          className="text-center mb-12"
-        >
-          <motion.div variants={fadeUp}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent2/10 border border-accent2/20 mb-6 backdrop-blur-sm">
-              <TrendingUp className="h-4 w-4 text-accent2" />
-              <span className="text-sm text-accent2">{badgeText}</span>
-            </div>
-          </motion.div>
-
-          <motion.h2
-            variants={fadeUp}
-            className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4"
+    <>
+      <section className="w-full pt-0 pb-12 sm:pb-16 relative overflow-hidden" style={{ contain: "layout style" }}>
+        <div className="container px-4 sm:px-8 mx-auto relative z-[5]">
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="text-center mb-12"
           >
-            <span className="text-white">{titleLead} </span>
-            <span className="bg-gradient-to-r from-white via-accent2 to-white bg-clip-text text-transparent">
-              {titleHighlight}
-            </span>
-          </motion.h2>
-
-          <motion.p variants={fadeUp} className="text-lg text-white/70 max-w-2xl mx-auto mb-12">
-            {subtitle}
-          </motion.p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-10">
-          {featuredProjects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={scaleIn}
-              custom={index}
-              className="relative"
-              style={{ minHeight: "400px", contain: "layout style" }}
-            >
-              <div className="relative p-[2px] rounded-[16px] bg-gradient-to-br from-[#90F3E6] via-[#E8DCC7] to-[#D7B980] bg-[length:200%_200%] animate-gradient-shift h-full">
-                <Card className="h-full relative z-10 border-0 bg-[#1A1A1A] rounded-[14px] shadow-lg backdrop-blur-sm overflow-hidden group flex flex-col">
-                  <div
-                    className={`aspect-video bg-gradient-to-br ${project.color} flex items-center justify-center text-6xl`}
-                  >
-                    {project.image}
-                  </div>
-
-                  <CardHeader>
-                    <div className="flex items-start justify-between mb-2">
-                      <div>
-                        <CardTitle className="text-xl text-white group-hover:text-accent2 transition-colors">
-                          {project.title}
-                        </CardTitle>
-                        <p className="text-xs text-gray-400 font-medium mt-1">{project.sector}</p>
-                      </div>
-                      <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-accent2 transition-colors" />
-                    </div>
-                    <CardDescription className="leading-relaxed text-white">
-                      {project.description}
-                    </CardDescription>
-                  </CardHeader>
-
-                  <CardContent className="space-y-4 flex flex-col flex-1">
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {project.metrics.map((metric, i) => {
-                        const Icon = metric.icon;
-                        return (
-                          <div
-                            key={i}
-                            className="p-3 rounded-lg bg-transparent border border-white/20 group-hover:border-accent2/30 transition-colors flex items-start gap-2"
-                          >
-                            <Icon className="h-4 w-4 text-white mt-0.5 flex-shrink-0" />
-                            <div>
-                              <p className="text-sm font-bold text-white leading-tight">{metric.value}</p>
-                              <p className="text-xs text-white/70">{metric.label}</p>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mt-auto">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-1 text-xs rounded-full bg-transparent border border-white/20 text-white/70"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+            <motion.div variants={fadeUp}>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent2/10 border border-accent2/20 mb-6 backdrop-blur-sm">
+                <TrendingUp className="h-4 w-4 text-accent2" />
+                <span className="text-sm text-accent2">{badgeText}</span>
               </div>
             </motion.div>
-          ))}
+
+            <motion.h2
+              variants={fadeUp}
+              className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4"
+            >
+              <span className="text-white">{titleLead} </span>
+              <span className="bg-gradient-to-r from-white via-accent2 to-white bg-clip-text text-transparent">
+                {titleHighlight}
+              </span>
+            </motion.h2>
+
+            <motion.p variants={fadeUp} className="text-lg text-white/70 max-w-2xl mx-auto mb-12">
+              {subtitle}
+            </motion.p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-10">
+            {featuredProjects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={scaleIn}
+                custom={index}
+                className="relative cursor-pointer group"
+                onClick={() => openModal(project)}
+                style={{ minHeight: "400px", contain: "layout style" }}
+              >
+                <div className="relative p-[2px] rounded-[16px] bg-gradient-to-br from-[#90F3E6] via-[#E8DCC7] to-[#D7B980] bg-[length:200%_200%] animate-gradient-shift h-full transition-transform duration-300 group-hover:scale-[1.02]">
+                  <Card className="h-full relative z-10 border-0 bg-[#1A1A1A] rounded-[14px] shadow-lg backdrop-blur-sm overflow-hidden flex flex-col transition-colors group-hover:bg-[#222]">
+                    <div
+                      className={`aspect-video bg-gradient-to-br ${project.color} flex items-center justify-center text-6xl relative overflow-hidden`}
+                    >
+                      <span className="group-hover:scale-110 transition-transform duration-500">
+                        {project.image}
+                      </span>
+
+                      {/* Overlay para indicar que es 'clickable' o tiene video */}
+                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div className="bg-white/10 backdrop-blur-md p-3 rounded-full border border-white/20">
+                          <Play className="h-8 w-8 text-white fill-white" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <CardHeader>
+                      <div className="flex items-start justify-between mb-2">
+                        <div>
+                          <CardTitle className="text-xl text-white group-hover:text-accent2 transition-colors">
+                            {project.title}
+                          </CardTitle>
+                          <p className="text-xs text-gray-400 font-medium mt-1">{project.sector}</p>
+                        </div>
+                        <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-accent2 transition-colors" />
+                      </div>
+                      <CardDescription className="leading-relaxed text-white">
+                        {project.description}
+                      </CardDescription>
+                    </CardHeader>
+
+                    <CardContent className="space-y-4 flex flex-col flex-1">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        {project.metrics.map((metric, i) => {
+                          const Icon = metric.icon;
+                          return (
+                            <div
+                              key={i}
+                              className="p-3 rounded-lg bg-transparent border border-white/20 group-hover:border-accent2/30 transition-colors flex items-start gap-2"
+                            >
+                              <Icon className="h-4 w-4 text-white mt-0.5 flex-shrink-0" />
+                              <div>
+                                <p className="text-sm font-bold text-white leading-tight">{metric.value}</p>
+                                <p className="text-xs text-white/70">{metric.label}</p>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 mt-auto">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-1 text-xs rounded-full bg-transparent border border-white/20 text-white/70"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <ProjectModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        project={selectedProject}
+      />
+    </>
   );
 }
 
