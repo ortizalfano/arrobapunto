@@ -113,11 +113,9 @@ const ProjectCard = ({ project, index, openModal }: { project: ProjectData, inde
             className={`aspect-video bg-gradient-to-br ${project.color} flex items-center justify-center text-6xl relative overflow-hidden`}
           >
             {/* Video Background */}
-            {project.videoUrl && (
-              <div
-                className={`absolute inset-0 z-0 transition-opacity duration-500 ${isVideoPlaying ? "opacity-100" : "opacity-0"
-                  }`}
-              >
+            {/* Video Background */}
+            {project.videoUrl ? (
+              <div className="absolute inset-0 z-0">
                 <video
                   ref={videoRef}
                   src={project.videoUrl}
@@ -129,18 +127,20 @@ const ProjectCard = ({ project, index, openModal }: { project: ProjectData, inde
                 {/* Overlay to ensure text readability if needed */}
                 <div className="absolute inset-0 bg-black/20" />
               </div>
+            ) : (
+              <span className="group-hover:scale-110 transition-transform duration-500 relative z-10">
+                {project.image}
+              </span>
             )}
 
-            <span className={`group-hover:scale-110 transition-transform duration-500 relative z-10 ${isVideoPlaying && project.videoUrl ? 'opacity-0' : 'opacity-100'}`}>
-              {project.image}
-            </span>
-
-            {/* Overlay para indicar que es 'clickable' o tiene video */}
-            <div className={`absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20 ${isVideoPlaying && project.videoUrl ? 'hidden' : ''}`}>
-              <div className="bg-white/10 backdrop-blur-md p-3 rounded-full border border-white/20">
-                <Play className="h-8 w-8 text-white fill-white" />
+            {/* Overlay para indicar que es 'clickable' o tiene video - Solo mostrar si NO hay video, o cambiar lógica */}
+            {!project.videoUrl && (
+              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20">
+                <div className="bg-white/10 backdrop-blur-md p-3 rounded-full border border-white/20">
+                  <Play className="h-8 w-8 text-white fill-white" />
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           <CardHeader className="relative z-10">
