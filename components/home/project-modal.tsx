@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { X, ExternalLink, Zap, CheckCircle2 } from "lucide-react";
+import { X, ExternalLink, Zap, CheckCircle2, Sparkles } from "lucide-react";
+import { useContactModal } from "@/components/contact/contact-modal-provider";
 import { Button } from "@/components/ui/button";
 
 export type ProjectData = {
@@ -25,6 +26,7 @@ type ProjectModalProps = {
 };
 
 export function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
+    const { open: openContact } = useContactModal();
     if (!project) return null;
 
     return (
@@ -160,14 +162,23 @@ export function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
                                     </div>
                                 )}
 
-                                <div className="pt-4">
+                                <div className="pt-4 flex flex-col sm:flex-row gap-3">
                                     {project.link && (
-                                        <Button className="w-full gap-2" asChild>
+                                        <Button className="flex-1 gap-2 bg-white/10 hover:bg-white/20 text-white border-0" asChild>
                                             <a href={project.link} target="_blank" rel="noopener noreferrer">
                                                 Visitar sitio web <ExternalLink className="h-4 w-4" />
                                             </a>
                                         </Button>
                                     )}
+                                    <Button
+                                        className={`flex-1 gap-2 bg-gradient-to-r from-accent via-accent2 to-accent hover:shadow-lg hover:shadow-accent2/20 text-primary-foreground border-0 ${!project.link ? 'w-full' : ''}`}
+                                        onClick={() => {
+                                            onClose();
+                                            openContact(`Hola, me interesa un proyecto similar a: ${project.title}`);
+                                        }}
+                                    >
+                                        Quiero algo similar <Sparkles className="h-4 w-4" />
+                                    </Button>
                                 </div>
                             </div>
                         </div>

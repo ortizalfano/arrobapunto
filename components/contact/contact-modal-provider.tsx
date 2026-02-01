@@ -10,7 +10,7 @@ import { X } from "lucide-react";
 import { sendEmail } from "@/lib/email";
 
 type ContactModalContextValue = {
-  open: () => void;
+  open: (initialMessage?: string) => void;
   close: () => void;
 };
 
@@ -29,8 +29,13 @@ const serviceOptions = [
 
 export function ContactModalProvider({ children }: ContactModalProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [initialMessage, setInitialMessage] = useState("");
 
-  const open = useCallback(() => setIsOpen(true), []);
+  const open = useCallback((msg?: string) => {
+    setInitialMessage(msg || "");
+    setIsOpen(true);
+  }, []);
+
   const close = useCallback(() => setIsOpen(false), []);
 
   const contextValue = useMemo(() => ({ open, close }), [open, close]);
@@ -38,7 +43,7 @@ export function ContactModalProvider({ children }: ContactModalProviderProps) {
   return (
     <ContactModalContext.Provider value={contextValue}>
       {children}
-      <ContactModal isOpen={isOpen} onClose={close} />
+      <ContactModal isOpen={isOpen} onClose={close} initialMessage={initialMessage} />
     </ContactModalContext.Provider>
   );
 }
@@ -54,9 +59,10 @@ export function useContactModal() {
 type ContactModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  initialMessage: string;
 };
 
-function ContactModal({ isOpen, onClose }: ContactModalProps) {
+function ContactModal({ isOpen, onClose, initialMessage }: ContactModalProps) {
   const locale = "es";
   const [service, setService] = useState<string>(serviceOptions[0]?.value ?? "web");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -251,6 +257,7 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     name="message"
                     required
                     placeholder="¿Qué te gustaría construir?"
+                    defaultValue={initialMessage}
                     className="bg-white/5 border-white/10 text-white placeholder:text-white/40"
                   />
                 </div>

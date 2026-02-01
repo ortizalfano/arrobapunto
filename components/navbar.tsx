@@ -48,7 +48,7 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
-            <Button size="sm" onClick={open} className="hidden sm:inline-flex">
+            <Button size="sm" onClick={() => open()} className="hidden sm:inline-flex">
               Contacto
             </Button>
             <button
@@ -86,9 +86,8 @@ export function Navbar() {
 
       {/* Menú lateral móvil */}
       <div
-        className={`fixed top-0 right-0 z-[70] h-full w-80 max-w-[85vw] transform bg-[#0E141B] border-l border-white/20 shadow-2xl transition-transform duration-300 ease-out md:hidden ${
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 z-[70] h-full w-80 max-w-[85vw] transform bg-[#0E141B] border-l border-white/20 shadow-2xl transition-transform duration-300 ease-out md:hidden ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
         style={{ pointerEvents: mobileMenuOpen ? "auto" : "none" }}
       >
         <div className="flex h-full flex-col">
