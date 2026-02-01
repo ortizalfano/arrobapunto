@@ -359,7 +359,7 @@ export function StudioLanding() {
                 <div>
                   <button
                     type="button"
-                    onClick={open}
+                    onClick={() => open()}
                     className="inline-flex items-center gap-2 px-6 py-3 bg-accent2/10 hover:bg-accent2/20 text-accent2 font-semibold rounded-lg transition-all border border-accent2/20 hover:border-accent2/40"
                   >
                     Contactar

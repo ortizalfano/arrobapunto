@@ -155,7 +155,7 @@ export function BriefExpress() {
               Estimación orientativa calculada
             </p>
           </div>
-          <Button variant="gold" className="w-full" size="lg" type="button" onClick={open}>
+          <Button variant="gold" className="w-full" size="lg" type="button" onClick={() => open()}>
             Contactar con nosotros
           </Button>
         </CardContent>
@@ -197,29 +197,29 @@ export function BriefExpress() {
               </Label>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {sectorOptions.map((opt) => (
-                <button
+                  <button
                     key={opt.value}
-                  type="button"
-                  onClick={() => {
+                    type="button"
+                    onClick={() => {
                       setValue("sector", opt.value, { shouldValidate: true });
                       setTimeout(nextStep, 300);
-                  }}
-                  className={cn(
+                    }}
+                    className={cn(
                       "p-4 border-2 rounded-lg text-left transition-all hover:border-accent2/30",
                       sector === opt.value && "border-accent2 bg-accent2/10"
-                  )}
-                >
+                    )}
+                  >
                     <span className="font-medium">{opt.label}</span>
-                </button>
-              ))}
-            </div>
+                  </button>
+                ))}
+              </div>
               {errors.sector && <p className="text-sm text-red-500">{errors.sector.message}</p>}
-          </div>
+            </div>
           )}
 
           {/* Step 2: Priority */}
           {step === 2 && (
-          <div className="space-y-4">
+            <div className="space-y-4">
               <Label className="text-base">
                 ¿Qué necesitas exactamente?
               </Label>
@@ -274,48 +274,48 @@ export function BriefExpress() {
             </div>
           )}
 
-        {/* Step 4: Contact Info */}
-        {step === 4 && (
-          <div className="space-y-4">
-            <Label className="text-base">
-              ¿Cómo podemos contactarte?
-            </Label>
+          {/* Step 4: Contact Info */}
+          {step === 4 && (
             <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Nombre completo *</Label>
-                <Input
-                  id="name"
-                  placeholder="Tu nombre"
-                  {...register("name")}
-                  className={cn(errors.name && "border-red-500")}
-                />
-                {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
-              </div>
+              <Label className="text-base">
+                ¿Cómo podemos contactarte?
+              </Label>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Nombre completo *</Label>
+                  <Input
+                    id="name"
+                    placeholder="Tu nombre"
+                    {...register("name")}
+                    className={cn(errors.name && "border-red-500")}
+                  />
+                  {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
+                </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="email">Email *</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="tu@email.com"
-                  {...register("email")}
-                  className={cn(errors.email && "border-red-500")}
-                />
-                {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
-              </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="tu@email.com"
+                    {...register("email")}
+                    className={cn(errors.email && "border-red-500")}
+                  />
+                  {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+                </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="phone">Teléfono (opcional)</Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="+34 600 000 000"
-                  {...register("phone")}
-                />
+                <div className="space-y-2">
+                  <Label htmlFor="phone">Teléfono (opcional)</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="+34 600 000 000"
+                    {...register("phone")}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
           {/* Step 5: Project Description */}
           {step === 5 && (
@@ -370,18 +370,18 @@ export function BriefExpress() {
             )}
             {step === 5 && (
               <Button type="submit" className="flex-1 bg-accent2 hover:bg-accent2/90" disabled={isSubmitting}>
-            {isSubmitting ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Calculando...
-              </>
-            ) : (
+                  </>
+                ) : (
                   <>
                     Calcular estimación
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </>
-            )}
-          </Button>
+                )}
+              </Button>
             )}
           </div>
         </form>
