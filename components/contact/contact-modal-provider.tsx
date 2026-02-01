@@ -236,20 +236,23 @@ function ContactModal({ isOpen, onClose, initialMessage, initialService }: Conta
                   {hasBudget && (
                     <select
                       name="budgetRange"
-                      defaultValue="500-800"
+                      defaultValue="less-1000"
                       className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-accent2/50"
                     >
-                      <option value="500-800" className="bg-[#0B0F14] text-white">
-                        $500 - $800 USD
+                      <option value="less-1000" className="bg-[#0B0F14] text-white">
+                        Menos de $1,000
                       </option>
-                      <option value="800-1200" className="bg-[#0B0F14] text-white">
-                        $800 - $1,200 USD
+                      <option value="1000-2000" className="bg-[#0B0F14] text-white">
+                        $1,000 a $2,000
                       </option>
-                      <option value="1200-1800" className="bg-[#0B0F14] text-white">
-                        $1,200 - $1,800 USD
+                      <option value="2000-4000" className="bg-[#0B0F14] text-white">
+                        $2,000 a $4,000
                       </option>
-                      <option value="1800-3000" className="bg-[#0B0F14] text-white">
-                        $1,800 - $3,000 USD
+                      <option value="4000-6000" className="bg-[#0B0F14] text-white">
+                        $4,000 a $6,000
+                      </option>
+                      <option value="more-6000" className="bg-[#0B0F14] text-white">
+                        Más de $6,000
                       </option>
                     </select>
                   )}
