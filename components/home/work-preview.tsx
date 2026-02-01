@@ -4,30 +4,31 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink, TrendingUp, Zap, TrendingDown, Eye, Play } from "lucide-react";
 import { fadeUp, stagger, scaleIn } from "@/lib/motion";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ProjectModal, type ProjectData } from "./project-modal";
 
 const featuredProjects: ProjectData[] = [
   {
     id: 1,
-    title: "Marketplace Premium",
-    sector: "ARAP - Gobierno de Panamá",
-    description: "Marketplace para conectar vendedores y productores de recursos acuáticos.",
-    fullDescription: "Una solución integral para la Autoridad de los Recursos Acuáticos de Panamá que digitaliza la comercialización de productos del mar. La plataforma conecta directamente a pescadores artesanales con consumidores finales y restaurantes, eliminando intermediarios y garantizando precios justos.",
+    title: "Sistema de Chatbots (Saas)",
+    sector: "Kônsul Digital",
+    description: "Desarrollo y Diseño de Sistema de Creación e Integración de Chatbot con Inteligencia Artificial.",
+    fullDescription: "Plataforma SaaS integral que permite a las empresas diseñar, entrenar y desplegar asistentes virtuales inteligentes. Utiliza modelos de lenguaje avanzados para comprender la intención del usuario y automatizar procesos complejos de atención al cliente las 24 horas.",
     features: [
-      "Autenticación segura con verificación de identidad",
-      "Dashboard en tiempo real para vendedores",
-      "Integración con pasarela de pagos PagueloFacil",
-      "Sistema de geolocalización de productos"
+      "Constructor de flujos visual (No-Code)",
+      "Entrenamiento con documentos y URLs",
+      "Integración nativa con WhatsApp y Web",
+      "Panel de analíticas y sentimientos"
     ],
-    image: "🎨",
+    image: "🤖",
+    videoUrl: "/videos/chatbot-video.mp4",
     metrics: [
-      { label: "Conversión", value: "+34%", icon: TrendingUp },
-      { label: "LCP", value: "0.8s", icon: Zap },
-      { label: "Rebote", value: "-22%", icon: TrendingDown },
+      { label: "Automatización", value: "95%", icon: Zap },
+      { label: "T. Respuesta", value: "< 0.5s", icon: TrendingUp },
+      { label: "Retención", value: "+40%", icon: Eye },
     ],
-    color: "from-purple-500/20 to-pink-500/20",
-    tags: ["PHP", "PagueloFacil", "MySQL"],
+    color: "from-purple-500/20 to-blue-500/20",
+    tags: ["TypeScript", "Node.js", "PostgreSQL", "OpenAI"],
   },
   {
     id: 2,
@@ -121,84 +122,125 @@ export function WorkPreview() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-10">
-            {featuredProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: true, margin: "-100px" }}
-                variants={scaleIn}
-                custom={index}
-                className="relative cursor-pointer group"
-                onClick={() => openModal(project)}
-                style={{ minHeight: "400px", contain: "layout style" }}
-              >
-                <div className="relative p-[2px] rounded-[16px] bg-gradient-to-br from-[#90F3E6] via-[#E8DCC7] to-[#D7B980] bg-[length:200%_200%] animate-gradient-shift h-full transition-transform duration-300 group-hover:scale-[1.02]">
-                  <Card className="h-full relative z-10 border-0 bg-[#1A1A1A] rounded-[14px] shadow-lg backdrop-blur-sm overflow-hidden flex flex-col transition-colors group-hover:bg-[#222]">
-                    <div
-                      className={`aspect-video bg-gradient-to-br ${project.color} flex items-center justify-center text-6xl relative overflow-hidden`}
-                    >
-                      <span className="group-hover:scale-110 transition-transform duration-500">
-                        {project.image}
-                      </span>
+            {featuredProjects.map((project, index) => {
+              const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+              const videoRef = useRef<HTMLVideoElement>(null);
 
-                      {/* Overlay para indicar que es 'clickable' o tiene video */}
-                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <div className="bg-white/10 backdrop-blur-md p-3 rounded-full border border-white/20">
-                          <Play className="h-8 w-8 text-white fill-white" />
-                        </div>
-                      </div>
-                    </div>
+              const handleMouseEnter = () => {
+                setIsVideoPlaying(true);
+                if (videoRef.current) {
+                  videoRef.current.play().catch((e: any) => console.log("Video play failed", e));
+                }
+              };
 
-                    <CardHeader>
-                      <div className="flex items-start justify-between mb-2">
-                        <div>
-                          <CardTitle className="text-xl text-white group-hover:text-accent2 transition-colors">
-                            {project.title}
-                          </CardTitle>
-                          <p className="text-xs text-gray-400 font-medium mt-1">{project.sector}</p>
-                        </div>
-                        <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-accent2 transition-colors" />
-                      </div>
-                      <CardDescription className="leading-relaxed text-white">
-                        {project.description}
-                      </CardDescription>
-                    </CardHeader>
+              const handleMouseLeave = () => {
+                setIsVideoPlaying(false);
+                if (videoRef.current) {
+                  videoRef.current.pause();
+                  videoRef.current.currentTime = 0;
+                }
+              };
 
-                    <CardContent className="space-y-4 flex flex-col flex-1">
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                        {project.metrics.map((metric, i) => {
-                          const Icon = metric.icon;
-                          return (
-                            <div
-                              key={i}
-                              className="p-3 rounded-lg bg-transparent border border-white/20 group-hover:border-accent2/30 transition-colors flex items-start gap-2"
-                            >
-                              <Icon className="h-4 w-4 text-white mt-0.5 flex-shrink-0" />
-                              <div>
-                                <p className="text-sm font-bold text-white leading-tight">{metric.value}</p>
-                                <p className="text-xs text-white/70">{metric.label}</p>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      <div className="flex flex-wrap gap-2 mt-auto">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-1 text-xs rounded-full bg-transparent border border-white/20 text-white/70"
+              return (
+                <motion.div
+                  key={project.id}
+                  initial="initial"
+                  whileInView="animate"
+                  viewport={{ once: true, margin: "-100px" }}
+                  variants={scaleIn}
+                  custom={index}
+                  className="relative cursor-pointer group"
+                  onClick={() => openModal(project)}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                  style={{ minHeight: "400px", contain: "layout style" }}
+                >
+                  <div className="relative p-[2px] rounded-[16px] bg-gradient-to-br from-[#90F3E6] via-[#E8DCC7] to-[#D7B980] bg-[length:200%_200%] animate-gradient-shift h-full transition-transform duration-300 group-hover:scale-[1.02]">
+                    <Card className="h-full relative z-10 border-0 bg-[#1A1A1A] rounded-[14px] shadow-lg backdrop-blur-sm overflow-hidden flex flex-col transition-colors group-hover:bg-[#222]">
+                      <div
+                        className={`aspect-video bg-gradient-to-br ${project.color} flex items-center justify-center text-6xl relative overflow-hidden`}
+                      >
+                        {/* Video Background */}
+                        {project.videoUrl && (
+                          <div
+                            className={`absolute inset-0 z-0 transition-opacity duration-500 ${isVideoPlaying ? "opacity-100" : "opacity-0"
+                              }`}
                           >
-                            {tag}
-                          </span>
-                        ))}
+                            <video
+                              ref={videoRef}
+                              src={project.videoUrl}
+                              className="w-full h-full object-cover"
+                              muted
+                              loop
+                              playsInline
+                            />
+                            {/* Overlay to ensure text readability if needed */}
+                            <div className="absolute inset-0 bg-black/20" />
+                          </div>
+                        )}
+
+                        <span className={`group-hover:scale-110 transition-transform duration-500 relative z-10 ${isVideoPlaying && project.videoUrl ? 'opacity-0' : 'opacity-100'}`}>
+                          {project.image}
+                        </span>
+
+                        {/* Overlay para indicar que es 'clickable' o tiene video */}
+                        <div className={`absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20 ${isVideoPlaying && project.videoUrl ? 'hidden' : ''}`}>
+                          <div className="bg-white/10 backdrop-blur-md p-3 rounded-full border border-white/20">
+                            <Play className="h-8 w-8 text-white fill-white" />
+                          </div>
+                        </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </motion.div>
-            ))}
+
+                      <CardHeader className="relative z-10">
+                        <div className="flex items-start justify-between mb-2">
+                          <div>
+                            <CardTitle className="text-xl text-white group-hover:text-accent2 transition-colors">
+                              {project.title}
+                            </CardTitle>
+                            <p className="text-xs text-gray-400 font-medium mt-1">{project.sector}</p>
+                          </div>
+                          <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-accent2 transition-colors" />
+                        </div>
+                        <CardDescription className="leading-relaxed text-white">
+                          {project.description}
+                        </CardDescription>
+                      </CardHeader>
+
+                      <CardContent className="space-y-4 flex flex-col flex-1 relative z-10">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                          {project.metrics.map((metric, i) => {
+                            const Icon = metric.icon;
+                            return (
+                              <div
+                                key={i}
+                                className="p-3 rounded-lg bg-transparent border border-white/20 group-hover:border-accent2/30 transition-colors flex items-start gap-2"
+                              >
+                                <Icon className="h-4 w-4 text-white mt-0.5 flex-shrink-0" />
+                                <div>
+                                  <p className="text-sm font-bold text-white leading-tight">{metric.value}</p>
+                                  <p className="text-xs text-white/70">{metric.label}</p>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        <div className="flex flex-wrap gap-2 mt-auto">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-2 py-1 text-xs rounded-full bg-transparent border border-white/20 text-white/70"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
