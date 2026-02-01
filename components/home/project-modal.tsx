@@ -15,6 +15,7 @@ export type ProjectData = {
     color: string;
     tags: string[];
     link?: string;
+    estimatedCost?: string;
 };
 
 type ProjectModalProps = {
@@ -144,6 +145,18 @@ export function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
                                                 </li>
                                             ))}
                                         </ul>
+                                    </div>
+                                )}
+
+                                {project.estimatedCost && (
+                                    <div className="mt-6 p-4 rounded-xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 flex items-center justify-between group/cost hover:border-emerald-500/40 transition-colors">
+                                        <div>
+                                            <p className="text-sm font-medium text-emerald-400">Inversión Estimada</p>
+                                            <p className="text-xs text-white/40 mt-0.5">Precio de referencia para un sistema similar</p>
+                                        </div>
+                                        <div className="text-2xl font-bold text-white tracking-tight tabular-nums group-hover/cost:text-emerald-400 transition-colors">
+                                            {project.estimatedCost}
+                                        </div>
                                     </div>
                                 )}
 
