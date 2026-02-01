@@ -56,7 +56,7 @@ export function ServicesPreview() {
   const titleAccent = "que escalan";
   const subtitle = "Cada servicio está diseñado para impulsar resultados medibles.";
   const { open } = useContactModal();
-  
+
   return (
     <section className="py-12 sm:py-16 bg-transparent relative text-white" style={{ contain: "layout style" }}>
       <div className="container max-w-6xl relative z-10">
@@ -135,18 +135,18 @@ export function ServicesPreview() {
                         {service.price ? (
                           <button
                             type="button"
-                            onClick={open}
+                            onClick={() => open()}
                             className="w-full px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-all border border-white/20 hover:border-white/40"
                           >
                             Solicitar presupuesto
                           </button>
                         ) : (
-                        <Link
+                          <Link
                             href={`/${locale}/play`}
                             className="block text-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-all border border-white/20 hover:border-white/40"
-                        >
+                          >
                             Crear Brief Express
-                        </Link>
+                          </Link>
                         )}
                       </motion.div>
                     </div>

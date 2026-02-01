@@ -43,7 +43,7 @@ export function Hero() {
         currentIndex += 1;
         setDisplayedText(fullText.slice(0, currentIndex));
         lastTime = timestamp;
-        
+
         if (currentIndex < fullText.length) {
           animationFrameId = requestAnimationFrame(type);
         }
@@ -115,7 +115,7 @@ export function Hero() {
                 {primaryCta}
               </Link>
             </Button>
-            <Button variant="ghost" size="lg" type="button" onClick={open} className="w-full sm:w-auto">
+            <Button variant="ghost" size="lg" type="button" onClick={() => open()} className="w-full sm:w-auto">
               {secondaryCta}
             </Button>
           </motion.div>

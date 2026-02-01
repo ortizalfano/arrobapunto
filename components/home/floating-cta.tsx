@@ -11,13 +11,13 @@ export function FloatingCTA() {
 
   useEffect(() => {
     let ticking = false;
-    
+
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const scrollPercent = 
+          const scrollPercent =
             (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-          
+
           // Mostrar después del 30% del scroll
           setShow(scrollPercent > 30 && scrollPercent < 95);
           ticking = false;
@@ -58,7 +58,7 @@ export function FloatingCTA() {
           <Button
             variant="gold"
             className="shadow-glow w-full sm:w-auto justify-center"
-            onClick={open}
+            onClick={() => open()}
           >
             Cotizar proyecto
           </Button>

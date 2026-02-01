@@ -64,7 +64,7 @@ export function Footer() {
               <li>
                 <button
                   type="button"
-                  onClick={open}
+                  onClick={() => open()}
                   className="text-muted hover:text-accent transition-colors"
                 >
                   Contacto
