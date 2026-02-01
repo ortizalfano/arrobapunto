@@ -75,18 +75,15 @@ const featuredProjects: ProjectData[] = [
 ];
 
 const ProjectCard = ({ project, index, openModal }: { project: ProjectData, index: number, openModal: (project: ProjectData) => void }) => {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleMouseEnter = () => {
-    setIsVideoPlaying(true);
     if (videoRef.current) {
       videoRef.current.play().catch((e: any) => console.log("Video play failed", e));
     }
   };
 
   const handleMouseLeave = () => {
-    setIsVideoPlaying(false);
     if (videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
