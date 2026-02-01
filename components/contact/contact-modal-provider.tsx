@@ -10,7 +10,7 @@ import { X } from "lucide-react";
 import { sendEmail } from "@/lib/email";
 
 type ContactModalContextValue = {
-  open: (initialMessage?: string) => void;
+  open: (initialMessage?: string, initialService?: string) => void;
   close: () => void;
 };
 
@@ -30,9 +30,11 @@ const serviceOptions = [
 export function ContactModalProvider({ children }: ContactModalProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [initialMessage, setInitialMessage] = useState("");
+  const [initialService, setInitialService] = useState("web");
 
-  const open = useCallback((msg?: string) => {
+  const open = useCallback((msg?: string, service?: string) => {
     setInitialMessage(msg || "");
+    setInitialService(service || "web");
     setIsOpen(true);
   }, []);
 
@@ -43,7 +45,7 @@ export function ContactModalProvider({ children }: ContactModalProviderProps) {
   return (
     <ContactModalContext.Provider value={contextValue}>
       {children}
-      <ContactModal isOpen={isOpen} onClose={close} initialMessage={initialMessage} />
+      <ContactModal isOpen={isOpen} onClose={close} initialMessage={initialMessage} initialService={initialService} />
     </ContactModalContext.Provider>
   );
 }
@@ -60,23 +62,29 @@ type ContactModalProps = {
   isOpen: boolean;
   onClose: () => void;
   initialMessage: string;
+  initialService: string;
 };
 
-function ContactModal({ isOpen, onClose, initialMessage }: ContactModalProps) {
+function ContactModal({ isOpen, onClose, initialMessage, initialService }: ContactModalProps) {
   const locale = "es";
-  const [service, setService] = useState<string>(serviceOptions[0]?.value ?? "web");
+  const [service, setService] = useState<string>(initialService || "web");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasBudget, setHasBudget] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   useEffect(() => {
-    if (!isOpen) {
-      setService(serviceOptions[0]?.value ?? "web");
+    if (isOpen) {
+      // When opening, verify if initialService is valid, otherwise use default
+      const isValidService = serviceOptions.some(opt => opt.value === initialService);
+      setService(isValidService ? initialService : "web");
+    } else {
+      // Reset on close
+      setService("web");
       setIsSubmitting(false);
       setHasBudget(false);
       setSubmitStatus("idle");
     }
-  }, [isOpen]);
+  }, [isOpen, initialService]);
 
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
