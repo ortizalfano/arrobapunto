@@ -29,7 +29,7 @@ const featuredProjects: ProjectData[] = [
     ],
     color: "from-purple-500/20 to-blue-500/20",
     tags: ["TypeScript", "Node.js", "PostgreSQL", "OpenAI"],
-    estimatedCost: "$7,500 USD",
+    estimatedCost: "$7,500",
   },
   {
     id: 2,

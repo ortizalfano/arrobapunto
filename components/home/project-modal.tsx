@@ -171,7 +171,7 @@ export function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
                                         </Button>
                                     )}
                                     <Button
-                                        className={`flex-1 gap-2 bg-gradient-to-r from-accent via-accent2 to-accent hover:shadow-lg hover:shadow-accent2/20 text-primary-foreground border-0 ${!project.link ? 'w-full' : ''}`}
+                                        className={`flex-1 gap-2 bg-gradient-to-r from-accent via-accent2 to-accent hover:shadow-lg hover:shadow-accent2/20 text-[#0E141B] font-semibold border-0 ${!project.link ? 'w-full' : ''}`}
                                         onClick={() => {
                                             onClose();
                                             openContact(`Hola, me interesa un proyecto similar a: ${project.title}`);
