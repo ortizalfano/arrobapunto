@@ -32,28 +32,7 @@ const featuredProjects: ProjectData[] = [
     estimatedCost: "$7,500",
     serviceType: "custom",
   },
-  {
-    id: 2,
-    title: "E-Commerce Corporativo",
-    sector: "Healthinfoods",
-    description: "Plataforma E-commerce para la visualización y reserva de productos.",
-    fullDescription: "Rediseño completo de la experiencia de compra digital para una marca líder en suplementos. Se implementó una arquitectura headless para lograr tiempos de carga instantáneos y una experiencia de usuario fluida que maximiza la conversión.",
-    features: [
-      "Búsqueda predictiva con IA",
-      "Sistema de suscripciones recurrentes",
-      "Integración con ERP SAP",
-      "Personalización de recomendaciones"
-    ],
-    image: "🚀",
-    metrics: [
-      { label: "Usuarios", value: "+125%", icon: TrendingUp },
-      { label: "Retención", value: "89%", icon: Eye },
-      { label: "Velocidad", value: "0.9s", icon: Zap },
-    ],
-    color: "from-blue-500/20 to-cyan-500/20",
-    tags: ["PHP", "HTML y CSS", "MySQL", "JavaScript"],
-    serviceType: "ecommerce",
-  },
+
   {
     id: 3,
     title: "Cotizador Online de Seguros",
