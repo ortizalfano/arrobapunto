@@ -35,25 +35,27 @@ const featuredProjects: ProjectData[] = [
 
   {
     id: 3,
-    title: "Cotizador Online de Seguros",
-    sector: "Travel Guardian Assist",
-    description: "Plataforma de Seguros con Cotizador, Calculadora Online y Pasarela de Pagos.",
-    fullDescription: "Herramienta de cotización instantánea que simplifica la venta de seguros de viaje. Los usuarios pueden comparar planes, personalizar coberturas y emitir pólizas en menos de 3 minutos, todo desde una interfaz intuitiva y mobile-first.",
+    title: "Sitio Web Corporativo",
+    sector: "2Ble (Luxury Real Estate)",
+    description: "Sitio web corporativo del sector inmobiliario de lujo con herramientas financieras.",
+    fullDescription: "Plataforma digital premium desarrollada para el sector inmobiliario. Integra soluciones avanzadas como un Cotizador Online, Calculadora Inmobiliaria (Krêdit) y asistentes de IA para maximizar la captación de leads cualificados.",
     features: [
-      "Motor de cotización en tiempo real",
-      "Emisión automática de pólizas PDF",
-      "Pasarela de pagos multidivisa",
-      "Panel de administración para brokers"
+      "Calculadora Inmobiliaria (Krêdit)",
+      "Cotizador Online Integrado",
+      "Asistentes de IA",
+      "Diseño UX/UI Premium"
     ],
-    image: "✨",
+    image: "🏛️",
+    videoUrl: "/videos/video-invierte.mp4",
     metrics: [
-      { label: "Reconocimiento", value: "+67%", icon: TrendingUp },
-      { label: "Engagement", value: "4.2x", icon: Eye },
-      { label: "Memorabilidad", value: "91%", icon: TrendingUp },
+      { label: "Leads", value: "+210%", icon: TrendingUp },
+      { label: "Conversión", value: "4.8%", icon: Zap },
+      { label: "Retención", value: "3m+", icon: Eye },
     ],
-    color: "from-amber-500/20 to-orange-500/20",
-    tags: ["MySQL", "PHP y JavaScript", "Integraciones de API"],
-    serviceType: "custom",
+    color: "from-amber-500/20 to-yellow-500/20",
+    tags: ["TypeScript", "JavaScript", "Node.js", "PostgreSQL"],
+    estimatedCost: "$8,000",
+    serviceType: "web",
   },
   {
     id: 4,
