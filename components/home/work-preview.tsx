@@ -76,6 +76,30 @@ const featuredProjects: ProjectData[] = [
     tags: ["MySQL", "PHP y JavaScript", "Integraciones de API"],
     serviceType: "custom",
   },
+  {
+    id: 4,
+    title: "Sistema de Ticketing (Help Desk)",
+    sector: "Next Step Financial",
+    description: "Sistema automatizado de gestión de tickets con IA para soporte financiero.",
+    fullDescription: "Plataforma inteligente que centraliza y automatiza la resolución de incidencias para una firma financiera. Integra la API de Gemini para clasificar tickets, sugerir respuestas y detectar urgencias en tiempo real, reduciendo drásticamente los tiempos de espera.",
+    features: [
+      "Clasificación automática con Gemini",
+      "Base de datos vectorizada (Neon)",
+      "Dashboard de métricas en tiempo real",
+      "Respuestas sugeridas por IA"
+    ],
+    image: "⚡️",
+    videoUrl: "/videos/video-nextstep.mp4",
+    metrics: [
+      { label: "T. Resolución", value: "-80%", icon: Zap },
+      { label: "Soporte", value: "24/7", icon: TrendingUp },
+      { label: "Precisión", value: "92%", icon: Eye },
+    ],
+    color: "from-emerald-500/20 to-teal-500/20",
+    tags: ["TypeScript", "Neon (Postgres)", "Gemini API"],
+    estimatedCost: "$6,500",
+    serviceType: "custom",
+  },
 ];
 
 const ProjectCard = ({ project, index, openModal }: { project: ProjectData, index: number, openModal: (project: ProjectData) => void }) => {
