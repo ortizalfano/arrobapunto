@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2, Sparkles, Zap, TrendingUp } from "lucide-react";
-import Link from "next/link";
+
 import { fadeUp, stagger, scaleIn } from "@/lib/motion";
 import { useContactModal } from "@/components/contact/contact-modal-provider";
 
@@ -20,6 +20,7 @@ const services = [
     ],
     price: "Desde $1,500",
     gradient: "from-blue-500/10 to-cyan-500/10",
+    serviceId: "web",
   },
   {
     title: "E-commerce",
@@ -33,6 +34,7 @@ const services = [
     ],
     price: "Desde $2,200",
     gradient: "from-emerald-500/10 to-teal-500/10",
+    serviceId: "ecommerce",
   },
   {
     title: "Desarrollo personalizado",
@@ -46,11 +48,11 @@ const services = [
     ],
     price: null,
     gradient: "from-amber-500/10 to-orange-500/10",
+    serviceId: "custom",
   },
 ];
 
 export function ServicesPreview() {
-  const locale = "es";
   const badgeText = "Nuestros servicios";
   const titlePrimary = "Soluciones";
   const titleAccent = "que escalan";
@@ -128,26 +130,24 @@ export function ServicesPreview() {
                       ))}
                     </ul>
                     <div className="pt-4 border-t border-white/10">
-                      {service.price && (
+                      {service.price ? (
                         <p className="text-2xl font-bold text-accent mb-3">{service.price}</p>
+                      ) : (
+                        // Spacer for alignment if needed, or just nothing.
+                        // But the previous layout had price: null for "Desarrollo personalizado".
+                        // Let's keep the marginBottom consistent if we want, or just omit.
+                        // The previous code rendered `{service.price && <p...}` so if null nothing rendered.
+                        null
                       )}
+
                       <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                        {service.price ? (
-                          <button
-                            type="button"
-                            onClick={() => open()}
-                            className="w-full px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-all border border-white/20 hover:border-white/40"
-                          >
-                            Solicitar presupuesto
-                          </button>
-                        ) : (
-                          <Link
-                            href={`/${locale}/play`}
-                            className="block text-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-all border border-white/20 hover:border-white/40"
-                          >
-                            Crear Brief Express
-                          </Link>
-                        )}
+                        <button
+                          type="button"
+                          onClick={() => open(`Hola, estoy interesado en: ${service.title}`, service.serviceId)}
+                          className="w-full px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-all border border-white/20 hover:border-white/40"
+                        >
+                          {service.price ? "Solicitar presupuesto" : "Crear Brief Express"}
+                        </button>
                       </motion.div>
                     </div>
                   </CardContent>
