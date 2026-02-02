@@ -54,7 +54,7 @@ const featuredProjects: ProjectData[] = [
     ],
     color: "from-amber-500/20 to-yellow-500/20",
     tags: ["TypeScript", "JavaScript", "Node.js", "PostgreSQL"],
-    estimatedCost: "$8,000",
+    estimatedCost: "$1,200",
     serviceType: "web",
   },
   {
