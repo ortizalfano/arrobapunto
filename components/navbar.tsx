@@ -12,11 +12,6 @@ export function Navbar() {
   const { open } = useContactModal();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // No mostrar navbar en landing pages para maximizar conversión
-  if (pathname?.startsWith("/lp")) {
-    return null;
-  }
-
   // Prevenir scroll del body cuando el menú está abierto
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -28,6 +23,11 @@ export function Navbar() {
       document.body.style.overflow = "";
     };
   }, [mobileMenuOpen]);
+
+  // No mostrar navbar en landing pages para maximizar conversión
+  if (pathname?.startsWith("/lp")) {
+    return null;
+  }
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);

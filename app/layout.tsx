@@ -189,10 +189,6 @@ export default function RootLayout({
         <link rel="apple-touch-icon" sizes="167x167" href="/icon-192.png" />
 
         {/* Preconnect para recursos críticos */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         {/* Preconnect para analytics (si se usa) */}
         <link rel="dns-prefetch" href="https://plausible.io" />
         {/* Preload de fuentes críticas */}
