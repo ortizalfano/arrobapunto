@@ -16,10 +16,6 @@ import { useContactModal } from "@/components/contact/contact-modal-provider";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
-// Lazy load heavy components
-const Calculator = dynamic(() => import("@/components/services/calculator"), {
-  loading: () => <div className="py-12 sm:py-16" style={{ minHeight: "600px" }} />,
-});
 
 const AnimatedStars = dynamic(() => import("@/components/home/animated-stars").then((mod) => ({ default: mod.AnimatedStars })), {
   loading: () => null,
@@ -112,8 +108,8 @@ export default function LandingPage() {
               <Button size="lg" onClick={() => open()} className="text-lg px-10 h-14">
                 Empezar mi proyecto <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="lg" asChild className="text-lg h-14">
-                <Link href="#calculadora">Calcular presupuesto</Link>
+              <Button variant="ghost" size="lg" onClick={() => open()} className="text-lg h-14">
+                Consultoría Gratuita
               </Button>
             </motion.div>
           </motion.div>
@@ -185,16 +181,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Calculator Section */}
-      <section id="calculadora" className="py-24 bg-accent/5">
-        <div className="container max-w-3xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">Calcula tu inversión</h2>
-            <p className="text-white/60 text-lg">Obtén una estimación instantánea para tu proyecto web o móvil.</p>
-          </div>
-          <Calculator />
-        </div>
-      </section>
 
       {/* Final CTA */}
       <section className="py-24 relative overflow-hidden">
