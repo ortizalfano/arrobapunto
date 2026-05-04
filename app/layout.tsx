@@ -26,12 +26,23 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    default: "ArrobaPunto.com - Diseño y Desarrollo Web Premium",
+    default: "ArrobaPunto.com - Diseño y Desarrollo Web Premium en España y Panamá",
     template: "%s | ArrobaPunto.com",
   },
   applicationName: "ArrobaPunto.com",
-  description: "Agencia de diseño y desarrollo web premium. Webs que venden con rendimiento de clase mundial.",
-  keywords: ["diseño web", "desarrollo web", "SEO", "ecommerce", "branding"],
+  description: "Agencia boutique de diseño y desarrollo web premium. Especialistas en páginas web de alto rendimiento, aplicaciones móviles y SEO técnico en España y Panamá. Webs que venden con diseño de clase mundial.",
+  keywords: [
+    "diseño web", 
+    "desarrollo web", 
+    "páginas web España", 
+    "páginas web Panamá", 
+    "cómo hacer una página web", 
+    "diseño aplicaciones móviles", 
+    "desarrollo de apps",
+    "SEO técnico", 
+    "ecommerce premium", 
+    "branding digital"
+  ],
   authors: [{ name: "ArrobaPunto" }],
   creator: "ArrobaPunto",
   publisher: "ArrobaPunto.com",
@@ -39,6 +50,10 @@ export const metadata: Metadata = {
   metadataBase: METADATA_BASE,
   alternates: {
     canonical: SITE_URL,
+    languages: {
+      "es-ES": SITE_URL,
+      "es-PA": SITE_URL,
+    },
   },
   openGraph: {
     type: "website",
@@ -46,7 +61,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "ArrobaPunto",
     title: "ArrobaPunto.com - Diseño y Desarrollo Web Premium",
-    description: "Webs que venden. Diseño boutique con rendimiento de clase mundial.",
+    description: "Creamos las mejores páginas web y aplicaciones móviles en España y Panamá. Rendimiento extremo y SEO para dominar Google y buscadores de IA.",
     images: [
       {
         url: "/og-image.svg",
@@ -59,7 +74,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "ArrobaPunto.com - Diseño y Desarrollo Web Premium",
-    description: "Webs que venden. Diseño boutique con rendimiento de clase mundial.",
+    description: "Diseño boutique, rendimiento de clase mundial y SEO estratégico para tu negocio en España y Panamá.",
     images: ["/og-image.svg"],
   },
   robots: {
@@ -89,26 +104,71 @@ export default function RootLayout({
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "ArrobaPunto.com",
-    url: SITE_URL,
-    logo: `${SITE_URL}/logos/logo1.png`,
-    contactPoint: [
+    "name": "ArrobaPunto.com",
+    "alternateName": "ArrobaPunto",
+    "url": SITE_URL,
+    "logo": `${SITE_URL}/logos/logo1.png`,
+    "sameAs": [
+      "https://www.instagram.com/arrobapunto",
+      "https://www.linkedin.com/company/arrobapunto"
+    ],
+    "contactPoint": [
       {
         "@type": "ContactPoint",
-        contactType: "sales",
-        email: "hola@arrobapunto.com",
-        areaServed: ["ES", "PA", "US"],
-        availableLanguage: ["es", "en"],
+        "contactType": "sales",
+        "email": "hola@arrobapunto.com",
+        "areaServed": ["ES", "PA", "US"],
+        "availableLanguage": ["es", "en"],
       },
     ],
+  };
+
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "ArrobaPunto - Diseño y Desarrollo Web",
+    "image": `${SITE_URL}/og-image.svg`,
+    "url": SITE_URL,
+    "telephone": "",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Madrid",
+      "addressCountry": "ES"
+    },
+    "geo": {
+      "@type": "GeoShape",
+      "addressCountry": ["ES", "PA"]
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "priceRange": "$$$",
+    "description": "Expertos en diseño y desarrollo de páginas web premium y aplicaciones móviles en España y Panamá."
   };
 
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "ArrobaPunto.com",
-    url: SITE_URL,
-    inLanguage: "es",
+    "name": "ArrobaPunto.com",
+    "url": SITE_URL,
+    "inLanguage": "es",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `${SITE_URL}/search?q={search_term_string}`
+      },
+      "query-input": "required name=search_term_string"
+    }
   };
 
   return (
@@ -116,7 +176,18 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#0B0F14" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="ArrobaPunto" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="msapplication-TileColor" content="#0B0F14" />
+        <meta name="msapplication-tap-highlight" content="no" />
+
         <link rel="apple-touch-icon" href="/icon-192.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/icon-192.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/icon-192.png" />
+        <link rel="apple-touch-icon" sizes="167x167" href="/icon-192.png" />
+
         {/* Preconnect para recursos críticos */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -135,7 +206,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify([organizationJsonLd, websiteJsonLd]),
+            __html: JSON.stringify([organizationJsonLd, websiteJsonLd, serviceJsonLd]),
           }}
         />
       </head>

@@ -333,5 +333,5 @@ Proprietary - ArrobaPunto © 2024
 
 - Website: [arrobapunto.com](https://arrobapunto.com)
 - Email: contacto@arrobapunto.com
-- Sedes: Panamá 🇵🇦 | Madrid 🇪🇸 | Portugal 🇵🇹
+- Sedes: Panamá 🇵🇦 | Madrid 🇪🇸
 

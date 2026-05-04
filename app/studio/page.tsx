@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Conoce nuestro estudio boutique",
-    description: "Cultura, valores e hitos de nuestro estudio distribuido en España, Panamá y Portugal.",
+    description: "Cultura, valores e hitos de nuestro estudio distribuido en España y Panamá.",
     url: `${SITE_URL}/studio`,
   },
 };

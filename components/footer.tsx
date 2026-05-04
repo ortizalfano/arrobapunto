@@ -14,7 +14,7 @@ export function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4 text-content">ArrobaPunto</h3>
             <p className="text-sm text-muted leading-relaxed">
-              Diseño y desarrollo web premium con rendimiento de clase mundial.
+              Agencia boutique líder en diseño de páginas web y desarrollo de aplicaciones móviles en España y Panamá. Especialistas en alto rendimiento y SEO.
             </p>
           </div>
 
@@ -23,7 +23,6 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li className="text-muted">Panamá 🇵🇦</li>
               <li className="text-muted">Madrid 🇪🇸</li>
-              <li className="text-muted">Portugal 🇵🇹</li>
             </ul>
           </div>
 

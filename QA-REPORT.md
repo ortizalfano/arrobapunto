@@ -114,7 +114,7 @@ npm run test
 
 ### Schemas JSON-LD
 - ✅ Organization (global)
-- ✅ LocalBusiness (3 sedes: Panamá, Madrid, Portugal)
+- ✅ LocalBusiness (2 sedes: Panamá, España)
 - ✅ BreadcrumbList (todas las páginas)
 - ✅ FAQPage (en /services)
 - ✅ Product (planes de pricing)

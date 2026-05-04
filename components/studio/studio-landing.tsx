@@ -75,31 +75,24 @@ const values = [
 
 const locations = [
   {
-    city: "Madrid",
-    country: "España",
-    address: "Calle Gran Vía, 28",
-    phone: "+34 910 123 456",
-    timezone: "GMT+1",
-    icon: "🇪🇸",
-    color: "from-blue-500/20 to-indigo-500/20",
-  },
-  {
     city: "Panamá",
     country: "Panamá",
-    address: "Calle 50, Torre B",
+    address: "Bella Vista, Federico Boyd y Calle 51, Edificio Scotiaplaza, Piso 7, Oficina 21",
     phone: "+507 6334 5678",
     timezone: "GMT-5",
     icon: "🇵🇦",
+    image: "https://images.unsplash.com/photo-1599388147551-76cba945c589?w=800&q=80",
     color: "from-emerald-500/20 to-teal-500/20",
   },
   {
-    city: "Lisboa",
-    country: "Portugal",
-    address: "Rua Augusta, 123",
-    phone: "+351 910 123 456",
-    timezone: "GMT+0",
-    icon: "🇵🇹",
-    color: "from-amber-500/20 to-orange-500/20",
+    city: "Madrid",
+    country: "España",
+    address: "Madrid, Aluche, Calle Illescas 145, 28024",
+    phone: "+34 910 123 456",
+    timezone: "GMT+1",
+    icon: "🇪🇸",
+    image: "https://images.unsplash.com/photo-1539037116277-4db20d0f509e?w=800&q=80",
+    color: "from-blue-500/20 to-indigo-500/20",
   },
 ];
 
@@ -289,41 +282,35 @@ export function StudioLanding() {
       </section>
 
       {/* Locations */}
-      <section className="py-8 sm:py-12 bg-gradient-gold">
+      <section className="py-8 sm:py-12 bg-gradient-gold text-left">
         <div className="container max-w-6xl">
-          <div className="text-center mb-8">
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent2/10 border border-accent2/20 mb-4">
-                <MapPin className="h-4 w-4 text-accent2" />
-                <span className="text-sm text-accent2">Nuestras Sedes</span>
-              </div>
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold">
-              <span className="bg-gradient-to-r from-content to-accent2 bg-clip-text text-transparent">Oficinas Globales</span>
+          <div className="mb-6">
+            <h2 className="text-xl sm:text-2xl font-semibold text-muted font-display">
+              Nuestras Sedes
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {locations.map((location) => (
-              <div key={location.city}>
-                <Card className="h-full group border-accent/10 bg-gradient-to-br from-bg-elev-1 to-bg-elev-2 relative overflow-hidden text-center">
+              <div key={location.country}>
+                <Card
+                  className="relative overflow-hidden group h-48 md:h-56 border-accent/20 rounded-2xl bg-bg-elev-1"
+                  style={{
+                    backgroundImage: `url('${location.image}')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                >
+                  <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors" />
+
                   <div className="absolute top-0 left-0 right-0 h-px bg-aurora-edge opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                  <div className={`aspect-video bg-gradient-to-br ${location.color} flex items-center justify-center text-6xl mb-4`}>
-                    {location.icon}
-                  </div>
-
-                  <CardHeader>
-                    <CardTitle className="text-2xl mb-2 group-hover:text-accent2 transition-colors">{location.city}</CardTitle>
-                    <CardDescription className="text-base">{location.country}</CardDescription>
-                  </CardHeader>
-
-                  <CardContent className="space-y-3">
-                    <div className="flex items-center gap-2 text-sm text-muted justify-center">
-                      <MapPin className="h-4 w-4 text-accent2" />
-                      {location.address}
+                  <CardContent className="absolute bottom-0 left-0 p-6 flex flex-col justify-end h-full text-left w-full">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-2xl">{location.icon}</span>
+                      <h3 className="text-xl md:text-2xl font-bold text-white tracking-wide">{location.country}</h3>
                     </div>
-                    <div className="text-sm text-muted">{location.timezone}</div>
+                    <p className="text-sm md:text-base text-gray-300 leading-relaxed font-medium">{location.address}</p>
                   </CardContent>
                 </Card>
               </div>

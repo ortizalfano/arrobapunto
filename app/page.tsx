@@ -27,15 +27,23 @@ const FloatingCTA = dynamic(() => import("@/components/home/floating-cta").then(
 
 
 export const metadata: Metadata = {
-  title: "Diseño y desarrollo web premium",
+  title: "Páginas Web Premium | Diseño y Desarrollo en España y Panamá",
   description:
-    "Estudio boutique que crea webs de alto rendimiento, ecommerce y productos digitales impulsados por IA.",
+    "Especialistas en cómo hacer una página web que convierte. Diseño boutique de sitios web de alto rendimiento, ecommerce y aplicaciones móviles impulsadas por IA.",
+  keywords: [
+    "como hacer una pagina web",
+    "diseño de paginas web",
+    "desarrollo de aplicaciones moviles",
+    "paginas web españa",
+    "paginas web panama",
+    "agencia seo tecnico"
+  ],
   alternates: {
     canonical: SITE_URL,
   },
   openGraph: {
-    title: "Diseño y desarrollo web premium",
-    description: "Trabaja con ArrobaPunto.com para lograr diseño que convierte, rendimiento extremo y SEO técnico.",
+    title: "Páginas Web Premium | ArrobaPunto.com",
+    description: "Trabaja con ArrobaPunto.com para lograr el mejor diseño web, rendimiento extremo y SEO técnico en España y Panamá.",
     url: SITE_URL,
   },
 };
@@ -44,10 +52,39 @@ export default function Home() {
   const homeSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "ArrobaPunto.com",
-    url: SITE_URL,
-    description: "Agencia boutique de diseño y desarrollo web premium especializada en rendimiento y SEO.",
-    inLanguage: "es",
+    "name": "ArrobaPunto - Diseño Web Premium",
+    "url": SITE_URL,
+    "description": "Agencia boutique especializada en diseño y desarrollo de páginas web y aplicaciones móviles de alto rendimiento en España y Panamá.",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": SITE_URL
+        }
+      ]
+    },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Cómo hacer una página web profesional?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Para hacer una página web profesional se requiere un diseño enfocado en la experiencia de usuario (UX), un desarrollo técnico optimizado para velocidad y SEO, y una estrategia de conversión clara. En ArrobaPunto nos especializamos en crear sitios web de alto rendimiento en España y Panamá."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuál es el precio de una página web en España y Panamá?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El precio de una página web profesional varía según la complejidad, pero en ArrobaPunto ofrecemos soluciones premium desde $1,500, garantizando el mejor rendimiento y diseño del mercado."
+        }
+      }
+    ],
+    "inLanguage": "es",
   };
 
   return (
