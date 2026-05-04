@@ -28,6 +28,7 @@
     "@emailjs/browser": "^4.4.1",
     "@hookform/resolvers": "^3.9.1",
     "@types/qrcode": "^1.5.6",
+    "@vercel/analytics": "^2.0.1",
     "archiver": "^7.0.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
