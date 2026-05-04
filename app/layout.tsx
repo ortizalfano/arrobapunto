@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ContactModalProvider } from "@/components/contact/contact-modal-provider";
-import { Toaster } from "@/components/ui/toaster";
 import Script from "next/script";
 import { SITE_URL, METADATA_BASE } from "@/lib/seo";
 
@@ -230,7 +229,6 @@ export default function RootLayout({
           </ContactModalProvider>
         </ThemeProvider>
         <Analytics />
-        <Toaster />
       </body>
     </html>
   );
