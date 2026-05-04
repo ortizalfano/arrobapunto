@@ -65,7 +65,10 @@ type ContactModalProps = {
   initialService: string;
 };
 
+import { useRouter } from "next/navigation";
+
 function ContactModal({ isOpen, onClose, initialMessage, initialService }: ContactModalProps) {
+  const router = useRouter();
   const locale = "es";
   const [service, setService] = useState<string>(initialService || "web");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -113,10 +116,13 @@ function ContactModal({ isOpen, onClose, initialMessage, initialService }: Conta
         form.reset();
         setService(serviceOptions[0]?.value ?? "web");
         setHasBudget(false);
+        
+        // Redirigir a la página de gracias para Google Ads
         setTimeout(() => {
           onClose();
           setSubmitStatus("idle");
-        }, 1200);
+          router.push("/lp/gracias");
+        }, 800);
       } catch (error) {
         console.error("Error sending contact form:", error);
         setSubmitStatus("error");
@@ -124,7 +130,7 @@ function ContactModal({ isOpen, onClose, initialMessage, initialService }: Conta
         setIsSubmitting(false);
       }
     },
-    [hasBudget, locale, onClose, service]
+    [hasBudget, locale, onClose, router, service]
   );
 
   const serviceLabel = useMemo(() => "¿Qué servicio te interesa?", []);
