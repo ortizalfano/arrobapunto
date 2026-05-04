@@ -1,4 +1,8 @@
+"use client";
+
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { useContactModal } from "@/components/contact/contact-modal-provider";
 
 export function Footer() {
   const pathname = usePathname();

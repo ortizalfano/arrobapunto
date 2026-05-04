@@ -1,4 +1,11 @@
+"use client";
+
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import { useContactModal } from "@/components/contact/contact-modal-provider";
+import { useEffect, useRef, useState } from "react";
 
 export function Navbar() {
   const pathname = usePathname();
