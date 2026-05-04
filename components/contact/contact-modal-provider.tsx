@@ -100,6 +100,7 @@ function ContactModal({ isOpen, onClose, initialMessage, initialService }: Conta
       const payload = {
         name: String(formData.get("name") ?? ""),
         email: String(formData.get("email") ?? ""),
+        company: String(formData.get("company") ?? ""),
         service: selectedService?.label ?? service,
         message: String(formData.get("message") ?? ""),
         hasBudget: hasBudget ? "Sí" : "No",
@@ -206,6 +207,18 @@ function ContactModal({ isOpen, onClose, initialMessage, initialService }: Conta
                       className="bg-white/5 border-white/10 text-white placeholder:text-white/40"
                     />
                   </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="contact-company" className="text-white/80">
+                    Empresa o Proyecto
+                  </Label>
+                  <Input
+                    id="contact-company"
+                    name="company"
+                    placeholder="Nombre de tu empresa"
+                    className="bg-white/5 border-white/10 text-white placeholder:text-white/40"
+                  />
                 </div>
 
                 <div className="space-y-2">
