@@ -1,11 +1,13 @@
-"use client";
-
-import Link from "next/link";
-import { useContactModal } from "@/components/contact/contact-modal-provider";
+import { usePathname } from "next/navigation";
 
 export function Footer() {
+  const pathname = usePathname();
   const locale = "es";
   const { open } = useContactModal();
+
+  if (pathname?.startsWith("/lp")) {
+    return null;
+  }
 
   return (
     <footer className="border-t border/50 bg-bg-elev-2">

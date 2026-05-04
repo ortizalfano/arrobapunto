@@ -1,14 +1,14 @@
-"use client";
-
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { useContactModal } from "@/components/contact/contact-modal-provider";
-import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export function Navbar() {
+  const pathname = usePathname();
   const { open } = useContactModal();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // No mostrar navbar en landing pages para maximizar conversión
+  if (pathname?.startsWith("/lp")) {
+    return null;
+  }
 
   // Prevenir scroll del body cuando el menú está abierto
   useEffect(() => {
