@@ -109,10 +109,10 @@ export default function LandingPage() {
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="xl" onClick={() => open()} className="text-lg px-10 h-14">
+              <Button size="lg" onClick={() => open()} className="text-lg px-10 h-14">
                 Empezar mi proyecto <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="xl" asChild className="text-lg h-14">
+              <Button variant="ghost" size="lg" asChild className="text-lg h-14">
                 <Link href="#calculadora">Calcular presupuesto</Link>
               </Button>
             </motion.div>
@@ -207,7 +207,7 @@ export default function LandingPage() {
               Estamos en España y Panamá. Hablemos hoy mismo sobre tu visión.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="xl" onClick={() => open()} className="text-lg px-10 h-14 shadow-[0_0_20px_rgba(215,185,128,0.3)]">
+              <Button size="lg" onClick={() => open()} className="text-lg px-10 h-14 shadow-[0_0_20px_rgba(215,185,128,0.3)]">
                 Agendar Consultoría Gratuita
               </Button>
             </div>
