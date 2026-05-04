@@ -230,6 +230,7 @@ export default function RootLayout({
           </ContactModalProvider>
         </ThemeProvider>
         <Analytics />
+        <Toaster />
       </body>
     </html>
   );
