@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ContactModalProvider } from "@/components/contact/contact-modal-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { Analytics } from "@/components/analytics";
+import { ContactModalProvider } from "@/components/contact/contact-modal-provider";
+import { Toaster } from "@/components/ui/toaster";
+import Script from "next/script";
 import { SITE_URL, METADATA_BASE } from "@/lib/seo";
 
 const inter = Inter({
@@ -205,6 +207,19 @@ export default function RootLayout({
             __html: JSON.stringify([organizationJsonLd, websiteJsonLd, serviceJsonLd]),
           }}
         />
+        {/* Google Tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-736336184"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-736336184');
+          `}
+        </Script>
       </head>
       <body suppressHydrationWarning className={`${inter.variable} ${manrope.variable} font-sans antialiased dark`}>
         <ThemeProvider>
